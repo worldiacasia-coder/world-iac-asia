@@ -1,0 +1,234 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@keyframes fade-in {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes fade-in-slow {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+@keyframes zoom-in {
+  from { transform: scale(1); }
+  to   { transform: scale(1.06); }
+}
+@keyframes slide-left {
+  from { transform: translateX(40px); opacity: 0; }
+  to   { transform: translateX(0); opacity: 1; }
+}
+@keyframes partner-scroll {
+  from { transform: translateX(0); }
+  to   { transform: translateX(var(--scroll-dist, -50%)); }
+}
+
+:root {
+  /* Pastel Italian tricolor — visible but soft */
+  --italy-green: #a8cfc0;
+  --italy-white: #ffffff;
+  --italy-red: #ddb0a8;
+  /* Khung nội dung — dải màu 2 bên khít mép form, không lem */
+  --content-inner: 71rem;
+  --content-half: min(calc(var(--content-inner) / 2), 50vw);
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    min-height: 100%;
+    background: #f7faf9;
+  }
+
+  body {
+    margin: 0;
+    min-height: 100vh;
+    background: #f7faf9;
+    @apply font-sans text-gray-900 antialiased;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply font-display text-gray-900;
+  }
+}
+
+@layer components {
+  /* —— Glass / water-drop surfaces —— */
+  .glass {
+    @apply border border-white/50 bg-white/20 shadow-[inset_0_1px_1px_rgba(255,255,255,0.75),inset_0_-1px_0_rgba(255,255,255,0.15),0_8px_32px_rgba(15,23,42,0.05)] backdrop-blur-xl;
+  }
+
+  .glass-panel {
+    @apply glass rounded-3xl;
+  }
+
+  .glass-section {
+    @apply border-y border-white/40 bg-white/30 backdrop-blur-lg;
+  }
+
+  .glass-header {
+    @apply sticky top-0 z-50 border-b border-white/50 bg-white/35 backdrop-blur-2xl;
+  }
+
+  .glass-footer {
+    @apply border-t border-white/50 bg-white/30 backdrop-blur-2xl;
+  }
+
+  /* —— Buttons —— */
+  .btn-primary {
+    @apply inline-flex items-center justify-center rounded-full bg-brand-gold px-6 py-3 text-sm font-semibold tracking-wide text-white shadow-[0_8px_24px_rgba(197,160,89,0.35)] transition-all duration-300 hover:bg-brand-gold-hover focus:outline-none focus:ring-2 focus:ring-brand-gold/40 focus:ring-offset-2;
+  }
+
+  .btn-outline {
+    @apply inline-flex items-center justify-center rounded-full border border-white/60 bg-white/30 px-6 py-3 text-sm font-semibold tracking-wide text-brand-gold shadow-[inset_0_1px_0_rgba(255,255,255,0.7),0_4px_16px_rgba(15,23,42,0.06)] backdrop-blur-md transition-all duration-300 hover:bg-white/45 focus:outline-none focus:ring-2 focus:ring-brand-gold/30 focus:ring-offset-2;
+  }
+
+  .btn-sm {
+    @apply px-4 py-2 text-xs;
+  }
+
+  /* —— Typography —— */
+  .section-title {
+    @apply font-display text-3xl font-semibold tracking-tight text-gray-900 md:text-4xl;
+  }
+
+  .section-subtitle {
+    @apply mt-3 max-w-2xl text-base leading-relaxed text-gray-500;
+  }
+
+  .section-label {
+    @apply text-xs font-semibold uppercase tracking-[0.2em] text-brand-gold;
+  }
+
+  /* —— Layout —— */
+  .section {
+    @apply py-16 lg:py-20;
+  }
+
+  .section-alt {
+    @apply glass-section;
+  }
+
+  .container-main {
+    @apply mx-auto w-full px-4 lg:px-8;
+  }
+
+  /* Khung nội dung giữa — gradient căn giữa, dải xanh/đỏ khít mép form */
+  .site-shell {
+    @apply relative min-h-screen;
+    background: linear-gradient(
+      to right,
+      var(--italy-green) 0,
+      var(--italy-green) calc(50% - var(--content-half)),
+      #f7faf9 calc(50% - var(--content-half)),
+      #f7faf9 calc(50% + var(--content-half)),
+      var(--italy-red) calc(50% + var(--content-half)),
+      var(--italy-red) 100%
+    );
+  }
+
+  .site-canvas {
+    @apply relative z-10 mx-auto min-h-screen w-full;
+    max-width: var(--content-inner);
+    background: #f7faf9;
+  }
+
+  /* —— Cards —— */
+  .card {
+    @apply glass-panel p-8 transition-all duration-300 hover:bg-white/40 hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.75),0_12px_40px_rgba(15,23,42,0.08)];
+  }
+
+  .card-compact {
+    @apply glass-panel p-6 transition-all duration-300 hover:bg-white/40 hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.75),0_12px_40px_rgba(15,23,42,0.08)];
+  }
+
+  /* —— Navigation —— */
+  .nav-link {
+    @apply relative px-3 py-2 text-sm font-medium text-gray-700 transition-colors duration-200 hover:text-gray-900;
+  }
+
+  .nav-link::after {
+    @apply absolute bottom-0 left-3 right-3 h-0.5 origin-left scale-x-0 bg-brand-gold transition-transform duration-300 content-[''];
+  }
+
+  .nav-link:hover::after {
+    @apply scale-x-100;
+  }
+
+  /* —— Forms —— */
+  .input-field {
+    @apply w-full rounded-2xl border border-white/60 bg-white/40 px-4 py-2.5 text-sm text-gray-900 shadow-[inset_0_1px_0_rgba(255,255,255,0.7)] backdrop-blur-md transition-colors placeholder:text-gray-400 focus:border-brand-gold/60 focus:outline-none focus:ring-2 focus:ring-brand-gold/20;
+  }
+
+  .select-field {
+    @apply w-full rounded-2xl border border-white/60 bg-white/40 px-4 py-2.5 text-sm text-gray-900 shadow-[inset_0_1px_0_rgba(255,255,255,0.7)] backdrop-blur-md transition-colors focus:border-brand-gold/60 focus:outline-none focus:ring-2 focus:ring-brand-gold/20;
+  }
+
+  .divider {
+    @apply border-t border-white/50;
+  }
+
+  /* —— Stars —— */
+  .star-active {
+    color: #c5a059;
+  }
+
+  .star-inactive {
+    @apply text-gray-200;
+  }
+
+  /* —— Image utilities —— */
+  .img-zoom {
+    @apply overflow-hidden;
+  }
+  .img-zoom img,
+  .img-zoom > span > img {
+    transition: transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+  .img-zoom:hover img,
+  .img-zoom:hover > span > img {
+    transform: scale(1.06);
+  }
+
+  /* —— Overlay gradients —— */
+  .overlay-dark {
+    @apply absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-black/10;
+  }
+  .overlay-dark-side {
+    @apply absolute inset-0 bg-gradient-to-r from-black/60 via-black/30 to-transparent;
+  }
+  .overlay-light-bottom {
+    @apply absolute inset-0 bg-gradient-to-t from-white/80 to-transparent;
+  }
+
+  /* —— Animations —— */
+  .animate-fade-in {
+    animation: fade-in 0.7s ease-out both;
+  }
+  .animate-fade-in-slow {
+    animation: fade-in-slow 1.2s ease-out both;
+  }
+  .animate-slide-left {
+    animation: slide-left 0.6s ease-out both;
+  }
+  .animation-delay-200 { animation-delay: 200ms; }
+  .animation-delay-400 { animation-delay: 400ms; }
+  .animation-delay-600 { animation-delay: 600ms; }
+
+  /* —— Hero —— */
+  .hero-slide-img {
+    animation: zoom-in 8s ease-out both;
+  }
+
+  /* —— Page header with bg image —— */
+  .page-hero {
+    @apply relative overflow-hidden;
+    min-height: 320px;
+  }
+  .page-hero-content {
+    @apply relative z-10 container-main py-20 lg:py-28;
+  }
+}
