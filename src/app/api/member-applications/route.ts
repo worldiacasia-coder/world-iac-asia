@@ -70,7 +70,7 @@ export async function GET() {
   return NextResponse.json({ applications });
 }
 
-/* PATCH — admin duyệt / từ chối */
+/* PATCH — admin duyệt / từ chối — nếu duyệt thì TỰ ĐỘNG tạo Member */
 export async function PATCH(req: Request) {
   const session = await getSession();
   if (!isAdmin(session?.role)) {
@@ -80,9 +80,47 @@ export async function PATCH(req: Request) {
   if (!id || !["approved", "rejected"].includes(status)) {
     return NextResponse.json({ error: "Dữ liệu không hợp lệ." }, { status: 400 });
   }
+
+  /* Cập nhật trạng thái đơn */
   const app = await prisma.memberApplication.update({
     where: { id },
     data: { status, adminNote: adminNote ?? null },
   });
+
+  /* Nếu duyệt → tự động tạo Member trong danh mục */
+  if (status === "approved") {
+    /* Sinh mã hội viên: IAC-[2 ký tự quốc gia]-[năm][số thứ tự] */
+    const countryCode = (app.country ?? "XX").slice(0, 2).toUpperCase();
+    const year = new Date().getFullYear().toString().slice(2);
+    const count = await prisma.member.count();
+    const seq = String(count + 1).padStart(3, "0");
+    const memberCode = `IAC-${countryCode}-${year}${seq}`;
+
+    /* Avatar: dùng ảnh đã upload, nếu không có thì ảnh placeholder */
+    const avatarUrl =
+      app.avatarPath ??
+      `https://ui-avatars.com/api/?name=${encodeURIComponent(app.fullName)}&background=C5A059&color=fff&size=256`;
+
+    /* Ngày hết hạn: 1 năm kể từ hôm nay */
+    const expirationDate = new Date();
+    expirationDate.setFullYear(expirationDate.getFullYear() + 1);
+
+    /* Kiểm tra tránh trùng memberCode */
+    const existing = await prisma.member.findUnique({ where: { memberCode } });
+    if (!existing) {
+      await prisma.member.create({
+        data: {
+          memberCode,
+          name: app.fullName,
+          avatarUrl,
+          country: app.country,
+          membershipTier: "Standard",
+          expirationDate,
+          paymentStatus: "unpaid",
+        },
+      });
+    }
+  }
+
   return NextResponse.json({ application: app });
 }

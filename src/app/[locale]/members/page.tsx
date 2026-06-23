@@ -39,6 +39,18 @@ export default async function MembersPage({ params: { locale } }: Props) {
         </div>
       </div>
 
+      {/* Danh sách hội viên */}
+      <section className="section">
+        <div className="container-main">
+          <h2 className="section-title">{t("title")}</h2>
+          <div className="mt-4 h-0.5 w-12 bg-brand-gold" />
+          <p className="section-subtitle">{t("subtitle")}</p>
+          <div className="mt-10">
+            <MembersDirectory />
+          </div>
+        </div>
+      </section>
+
       {/* Đăng ký thành viên */}
       <section id="apply" className="section section-alt">
         <div className="container-main">
@@ -72,18 +84,6 @@ export default async function MembersPage({ params: { locale } }: Props) {
 
             {/* Form */}
             <MemberApplicationForm />
-          </div>
-        </div>
-      </section>
-
-      {/* Danh sách hội viên */}
-      <section className="section">
-        <div className="container-main">
-          <h2 className="section-title">{t("title")}</h2>
-          <div className="mt-4 h-0.5 w-12 bg-brand-gold" />
-          <p className="section-subtitle">{t("subtitle")}</p>
-          <div className="mt-10">
-            <MembersDirectory />
           </div>
         </div>
       </section>

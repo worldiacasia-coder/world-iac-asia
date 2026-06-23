@@ -29,8 +29,8 @@ export const iacMapPins: MapPin[] = [
     countryName: "Vietnam",
     label: "World IAC Asia - Viet Nam",
     flagUrl: "/flags/vietnam.png",
-    top: "56%",
-    left: "66%",
+    top: "55.5%",
+    left: "66.62%",
   },
   {
     id: "philippines",
