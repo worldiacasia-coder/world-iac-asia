@@ -86,61 +86,111 @@ export default function AdminMemberProfiles({ profiles }: { profiles: Profile[] 
 
       {/* Modal chi tiết hồ sơ */}
       {selected && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 p-4 backdrop-blur-sm">
-          <div className="glass-panel w-full max-w-2xl" style={{ display: "flex", flexDirection: "column", maxHeight: "90vh" }}>
-            <div className="flex shrink-0 items-center justify-between border-b border-white/40 px-6 py-4">
-              <h3 className="font-display text-xl font-semibold text-gray-900">{selected.fullName}</h3>
-              <button onClick={() => setSelected(null)}
-                className="flex h-9 w-9 items-center justify-center rounded-full bg-gray-100 text-gray-500 hover:bg-gray-200">✕</button>
-            </div>
+        <div
+          className="fixed inset-0 z-50 overflow-y-auto bg-black/60 backdrop-blur-sm"
+          onClick={(e) => { if (e.target === e.currentTarget) setSelected(null); }}
+        >
+          <div className="flex min-h-full items-start justify-center p-4 py-8">
+            <div className="w-full rounded-3xl bg-white shadow-2xl" style={{ maxWidth: 860 }}>
 
-            <div style={{ overflowY: "auto", flex: "1 1 0", minHeight: 0 }} className="px-6 py-5 space-y-5">
-              <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
-                <div className="rounded-xl bg-white/40 p-3"><p className="text-xs text-gray-400">Ngày sinh</p><p className="font-semibold">{selected.dob}</p></div>
-                <div className="rounded-xl bg-white/40 p-3"><p className="text-xs text-gray-400">Điện thoại</p><p className="font-semibold">{selected.phone}</p></div>
-                <div className="rounded-xl bg-white/40 p-3"><p className="text-xs text-gray-400">Quốc gia</p><p className="font-semibold">{selected.country}</p></div>
-                <div className="rounded-xl bg-green-100 p-3"><p className="text-xs text-gray-400">Trạng thái</p><p className="font-semibold text-green-700">✓ Đã duyệt</p></div>
-              </div>
-
-              <div>
-                <p className="mb-2 text-xs font-semibold uppercase tracking-wide text-gray-400">Kinh nghiệm</p>
-                <div className="rounded-xl bg-white/40 p-4 text-sm leading-relaxed whitespace-pre-wrap text-gray-700">{selected.experience}</div>
-              </div>
-
-              <div className="grid gap-4 sm:grid-cols-2">
-                <div>
-                  <p className="mb-2 text-xs font-semibold uppercase tracking-wide text-gray-400">Ảnh đại diện</p>
+              {/* Header */}
+              <div className="flex items-center justify-between border-b border-gray-100 px-8 py-5">
+                <div className="flex items-center gap-4">
                   {selected.avatarPath ? (
-                    <div className="relative h-48 w-full overflow-hidden rounded-xl border border-white/60">
-                      <Image src={selected.avatarPath} alt={selected.fullName} fill className="object-cover object-top" sizes="400px" unoptimized />
+                    <div className="relative h-14 w-14 shrink-0 overflow-hidden rounded-2xl">
+                      <Image src={selected.avatarPath} alt={selected.fullName} fill className="object-cover object-top" sizes="56px" unoptimized />
                     </div>
                   ) : (
-                    <div className="flex h-24 items-center justify-center rounded-xl bg-gray-50 text-sm text-gray-400">Chưa có ảnh</div>
-                  )}
-                </div>
-                <div>
-                  <p className="mb-2 text-xs font-semibold uppercase tracking-wide text-gray-400">Sơ yếu lý lịch (CV)</p>
-                  {selected.resumePath ? (
-                    <div className="rounded-xl border border-green-200 bg-green-50 p-4 space-y-3">
-                      <div className="flex items-center gap-3">
-                        <span className="text-3xl">📄</span>
-                        <div>
-                          <p className="text-sm font-medium text-gray-900">CV đã lưu trên Cloudinary</p>
-                          <p className="text-xs text-green-600">☁ Lưu vĩnh viễn</p>
-                        </div>
-                      </div>
-                      <a href={selected.resumePath} target="_blank" rel="noopener noreferrer"
-                        className="btn-primary btn-sm block text-center">Mở xem CV →</a>
+                    <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-brand-gold text-white text-xl font-bold">
+                      {selected.fullName[0]}
                     </div>
-                  ) : (
-                    <div className="flex h-24 items-center justify-center rounded-xl bg-gray-50 text-sm text-gray-400">Chưa upload CV</div>
                   )}
+                  <div>
+                    <h2 className="text-xl font-bold text-gray-900">{selected.fullName}</h2>
+                    <p className="text-sm text-gray-500">{selected.country} · Duyệt ngày {new Date(selected.createdAt).toLocaleDateString("vi-VN")}</p>
+                  </div>
                 </div>
+                <button onClick={() => setSelected(null)}
+                  className="flex h-10 w-10 items-center justify-center rounded-full bg-gray-100 text-gray-500 hover:bg-gray-200 text-lg font-bold">
+                  ✕
+                </button>
               </div>
-            </div>
 
-            <div style={{ flexShrink: 0 }} className="border-t border-white/40 px-6 py-4">
-              <button onClick={() => setSelected(null)} className="btn-outline w-full">Đóng</button>
+              {/* Nội dung */}
+              <div className="px-8 py-6 space-y-6">
+
+                {/* 4 ô thông tin */}
+                <div className="grid grid-cols-2 gap-4 sm:grid-cols-4">
+                  <div className="rounded-xl bg-gray-50 p-4">
+                    <p className="text-xs font-semibold uppercase tracking-wide text-gray-400">Ngày sinh</p>
+                    <p className="mt-1 text-base font-semibold text-gray-900">{selected.dob}</p>
+                  </div>
+                  <div className="rounded-xl bg-gray-50 p-4">
+                    <p className="text-xs font-semibold uppercase tracking-wide text-gray-400">Điện thoại</p>
+                    <p className="mt-1 text-base font-semibold text-gray-900">{selected.phone}</p>
+                  </div>
+                  <div className="rounded-xl bg-gray-50 p-4">
+                    <p className="text-xs font-semibold uppercase tracking-wide text-gray-400">Quốc gia</p>
+                    <p className="mt-1 text-base font-semibold text-gray-900">{selected.country}</p>
+                  </div>
+                  <div className="rounded-xl bg-green-50 border border-green-200 p-4">
+                    <p className="text-xs font-semibold uppercase tracking-wide text-gray-400">Trạng thái</p>
+                    <p className="mt-1 text-base font-semibold text-green-700">✓ Đã duyệt</p>
+                  </div>
+                </div>
+
+                {/* Kinh nghiệm */}
+                <div>
+                  <p className="mb-2 text-xs font-semibold uppercase tracking-wide text-gray-400">Kinh nghiệm làm việc</p>
+                  <div className="rounded-xl border border-gray-100 bg-gray-50 p-5 text-sm leading-relaxed text-gray-800 whitespace-pre-wrap">
+                    {selected.experience}
+                  </div>
+                </div>
+
+                {/* Ảnh + CV */}
+                <div className="grid gap-6 sm:grid-cols-2">
+                  <div>
+                    <p className="mb-2 text-xs font-semibold uppercase tracking-wide text-gray-400">Ảnh đại diện</p>
+                    {selected.avatarPath ? (
+                      <div className="relative h-64 w-full overflow-hidden rounded-xl border border-gray-200">
+                        <Image src={selected.avatarPath} alt={selected.fullName} fill className="object-cover object-top" sizes="400px" unoptimized />
+                      </div>
+                    ) : (
+                      <div className="flex h-32 items-center justify-center rounded-xl bg-gray-50 border border-dashed border-gray-200 text-sm text-gray-400">
+                        Chưa có ảnh đại diện
+                      </div>
+                    )}
+                  </div>
+                  <div>
+                    <p className="mb-2 text-xs font-semibold uppercase tracking-wide text-gray-400">Sơ yếu lý lịch (CV)</p>
+                    {selected.resumePath ? (
+                      <div className="rounded-xl border border-green-200 bg-green-50 p-5 space-y-4">
+                        <div className="flex items-center gap-3">
+                          <span className="text-3xl">📄</span>
+                          <div>
+                            <p className="font-semibold text-gray-900">CV đã lưu trên Cloudinary</p>
+                            <p className="text-xs text-green-600 font-medium">☁ Lưu vĩnh viễn</p>
+                          </div>
+                        </div>
+                        <a href={selected.resumePath} target="_blank" rel="noopener noreferrer"
+                          className="flex items-center justify-center gap-2 rounded-xl bg-brand-gold px-4 py-3 text-sm font-semibold text-white hover:bg-brand-gold-hover transition-colors">
+                          Mở xem CV →
+                        </a>
+                      </div>
+                    ) : (
+                      <div className="flex h-32 items-center justify-center rounded-xl bg-gray-50 border border-dashed border-gray-200 text-sm text-gray-400">
+                        Chưa upload CV
+                      </div>
+                    )}
+                  </div>
+                </div>
+
+                {/* Nút đóng */}
+                <button onClick={() => setSelected(null)}
+                  className="w-full rounded-xl border-2 border-gray-200 py-3 text-sm font-semibold text-gray-600 hover:bg-gray-50 transition-colors">
+                  Đóng
+                </button>
+              </div>
             </div>
           </div>
         </div>
