@@ -8,6 +8,7 @@ import AdminPartnerCards from "@/components/admin/AdminPartnerCards";
 import AdminApplications from "@/components/admin/AdminApplications";
 import AdminCreateUser from "@/components/admin/AdminCreateUser";
 import AdminNewsPanel from "@/components/admin/AdminNewsPanel";
+import AdminMembersPanel from "@/components/admin/AdminMembersPanel";
 
 type Props = { params: { locale: string } };
 
@@ -25,13 +26,14 @@ export default async function AdminPage({ params: { locale } }: Props) {
     redirect({ href: { pathname: "/auth", query: { redirect: "/admin" } }, locale });
   }
 
-  const [judges, messages, training, partnerCards, applications, newsItems] = await Promise.all([
+  const [judges, messages, training, partnerCards, applications, newsItems, allMembers] = await Promise.all([
     prisma.judge.findMany({ orderBy: { name: "asc" } }),
     prisma.contactMessage.findMany({ orderBy: { createdAt: "desc" }, take: 10 }),
     prisma.trainingRegistration.findMany({ orderBy: { createdAt: "desc" }, take: 10 }),
     prisma.partnerCard.findMany({ orderBy: { sortOrder: "asc" } }),
     prisma.memberApplication.findMany({ orderBy: { createdAt: "desc" } }),
     prisma.newsItem.findMany({ orderBy: { sortOrder: "asc" } }),
+    prisma.member.findMany({ orderBy: { expirationDate: "asc" } }),
   ]);
 
   return (
@@ -69,13 +71,28 @@ export default async function AdminPage({ params: { locale } }: Props) {
             }))}
           />
 
+          {/* Quản lý Hội viên */}
+          <AdminMembersPanel initial={allMembers.map((m) => ({
+            id: m.id,
+            memberCode: m.memberCode,
+            name: m.name,
+            avatarUrl: m.avatarUrl,
+            country: m.country,
+            membershipTier: m.membershipTier,
+            expirationDate: m.expirationDate.toISOString(),
+            paymentStatus: m.paymentStatus as "paid" | "unpaid",
+          }))} />
+
           {/* Quản lý Tin tức */}
           <AdminNewsPanel initial={newsItems.map((n) => ({
             id: n.id,
             title: n.title,
             excerpt: n.excerpt,
+            content: n.content,
             imageUrl: n.imageUrl,
             link: n.link,
+            slug: n.slug,
+            metaDesc: n.metaDesc,
             sortOrder: n.sortOrder,
           }))} />
 

@@ -80,13 +80,16 @@ model Organization {
 }
 
 model NewsItem {
-  id        String   @id @default(cuid())
-  title     String
-  excerpt   String
-  imageUrl  String   @map("image_url")
-  link      String?
-  sortOrder Int      @default(0) @map("sort_order")
-  createdAt DateTime @default(now()) @map("created_at")
+  id          String   @id @default(cuid())
+  title       String
+  excerpt     String
+  content     String   @default("")
+  imageUrl    String   @map("image_url")
+  link        String?
+  slug        String?  @unique
+  metaDesc    String?  @map("meta_desc")
+  sortOrder   Int      @default(0) @map("sort_order")
+  createdAt   DateTime @default(now()) @map("created_at")
 
   @@map("news_items")
 }
