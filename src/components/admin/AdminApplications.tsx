@@ -1,7 +1,8 @@
 "use client";
 
 import Image from "next/image";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { createPortal } from "react-dom";
 
 type App = {
   id: string;
@@ -23,6 +24,16 @@ export default function AdminApplications({ initial }: { initial: App[] }) {
   const [note, setNote] = useState("");
   const [saving, setSaving] = useState(false);
   const [filter, setFilter] = useState<"all" | "pending" | "approved" | "rejected">("pending");
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => setMounted(true), []);
+
+  useEffect(() => {
+    if (!selected) return;
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => { document.body.style.overflow = prev; };
+  }, [selected]);
 
   const filtered = filter === "all" ? apps : apps.filter((a) => a.status === filter);
 
@@ -71,42 +82,52 @@ export default function AdminApplications({ initial }: { initial: App[] }) {
 
       {filtered.length === 0 && <p className="text-sm text-gray-400">Không có đơn nào.</p>}
 
-      {/* Danh sách đơn */}
-      <div className="space-y-3">
+      {/* Danh sách đơn — grid giống hồ sơ đã duyệt */}
+      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {filtered.map((app) => (
           <div key={app.id}
-            className="glass-panel cursor-pointer p-4 transition-all hover:bg-white/50"
+            className="glass-panel cursor-pointer overflow-hidden p-0 transition-all hover:bg-white/50"
             onClick={() => { setSelected(app); setNote(app.adminNote ?? ""); }}>
-            <div className="flex items-center gap-4">
+            <div className="relative h-40 w-full overflow-hidden">
               {app.avatarPath ? (
-                <div className="relative h-12 w-12 shrink-0 overflow-hidden rounded-xl">
-                  <Image src={app.avatarPath} alt={app.fullName} fill className="object-cover" sizes="48px" unoptimized />
-                </div>
+                <Image src={app.avatarPath} alt={app.fullName} fill className="object-cover object-top" sizes="300px" unoptimized />
               ) : (
-                <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-brand-gold text-white text-lg font-bold">
+                <div className="flex h-full items-center justify-center bg-gradient-to-br from-brand-gold-light to-white text-4xl font-bold text-brand-gold">
                   {app.fullName[0]}
                 </div>
               )}
-              <div className="flex-1 min-w-0">
-                <p className="font-semibold text-gray-900">{app.fullName}</p>
-                <p className="text-sm text-gray-500">{app.country} · {app.phone} · {new Date(app.createdAt).toLocaleDateString("vi-VN")}</p>
+              <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
+              <div className="absolute bottom-3 left-3 right-3">
+                <p className="font-display font-semibold text-white text-sm leading-tight">{app.fullName}</p>
+                <p className="text-xs text-white/75">{app.country}</p>
               </div>
-              <span className={`shrink-0 rounded-full px-3 py-1 text-xs font-semibold ${statusBadge[app.status]}`}>
+              <span className={`absolute right-2 top-2 rounded-full px-2 py-0.5 text-xs font-semibold backdrop-blur-sm ${statusBadge[app.status]}`}>
                 {statusLabel[app.status]}
               </span>
+            </div>
+            <div className="p-3 text-xs text-gray-500">
+              <span>{app.resumePath ? "📄 Có CV" : "❌ Chưa có CV"}</span>
+              <span className="mx-2">·</span>
+              <span>{app.phone}</span>
+              <span className="mx-2">·</span>
+              <span>Nộp: {new Date(app.createdAt).toLocaleDateString("vi-VN")}</span>
             </div>
           </div>
         ))}
       </div>
 
-      {/* ── MODAL ĐẦY ĐỦ ── */}
-      {selected && (
+      {/* Modal — render qua portal để không bị giới hạn bởi container cha */}
+      {selected && mounted && createPortal(
         <div
-          className="fixed inset-0 z-50 overflow-y-auto bg-black/60 backdrop-blur-sm"
+          className="fixed inset-0 z-[9999] overflow-y-auto bg-black/60 backdrop-blur-sm"
           onClick={(e) => { if (e.target === e.currentTarget) setSelected(null); }}
         >
           <div className="flex min-h-full items-start justify-center p-4 py-8">
-            <div className="w-full rounded-3xl bg-white shadow-2xl" style={{ maxWidth: 860 }}>
+            <div
+              className="w-full rounded-3xl bg-white shadow-2xl"
+              style={{ width: "min(92vw, 960px)", maxHeight: "92vh", display: "flex", flexDirection: "column" }}
+              onClick={(e) => e.stopPropagation()}
+            >
 
               {/* ── Header ── */}
               <div className="flex items-center justify-between border-b border-gray-100 px-8 py-5">
@@ -131,8 +152,8 @@ export default function AdminApplications({ initial }: { initial: App[] }) {
                 </button>
               </div>
 
-              {/* ── Nội dung ── */}
-              <div className="px-8 py-6 space-y-6">
+              {/* ── Nội dung (scroll) ── */}
+              <div className="overflow-y-auto px-8 py-6 space-y-6" style={{ flex: "1 1 auto", minHeight: 0 }}>
 
                 {/* 4 ô thông tin */}
                 <div className="grid grid-cols-2 gap-4 sm:grid-cols-4">
@@ -252,7 +273,8 @@ export default function AdminApplications({ initial }: { initial: App[] }) {
               </div>
             </div>
           </div>
-        </div>
+        </div>,
+        document.body
       )}
     </div>
   );

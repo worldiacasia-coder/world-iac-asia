@@ -1,7 +1,8 @@
 "use client";
 
 import Image from "next/image";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { createPortal } from "react-dom";
 
 type Profile = {
   id: string;
@@ -19,6 +20,16 @@ type Profile = {
 export default function AdminMemberProfiles({ profiles }: { profiles: Profile[] }) {
   const [selected, setSelected] = useState<Profile | null>(null);
   const [search, setSearch] = useState("");
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => setMounted(true), []);
+
+  useEffect(() => {
+    if (!selected) return;
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => { document.body.style.overflow = prev; };
+  }, [selected]);
 
   const approved = profiles.filter((p) => p.status === "approved");
   const filtered = approved.filter(
@@ -84,14 +95,18 @@ export default function AdminMemberProfiles({ profiles }: { profiles: Profile[] 
         ))}
       </div>
 
-      {/* Modal chi tiết hồ sơ */}
-      {selected && (
+      {/* Modal chi tiết hồ sơ — portal tránh bị giới hạn width bởi backdrop-blur */}
+      {selected && mounted && createPortal(
         <div
-          className="fixed inset-0 z-50 overflow-y-auto bg-black/60 backdrop-blur-sm"
+          className="fixed inset-0 z-[9999] overflow-y-auto bg-black/60 backdrop-blur-sm"
           onClick={(e) => { if (e.target === e.currentTarget) setSelected(null); }}
         >
           <div className="flex min-h-full items-start justify-center p-4 py-8">
-            <div className="w-full rounded-3xl bg-white shadow-2xl" style={{ maxWidth: 860 }}>
+            <div
+              className="w-full rounded-3xl bg-white shadow-2xl"
+              style={{ width: "min(92vw, 960px)", maxHeight: "92vh", display: "flex", flexDirection: "column" }}
+              onClick={(e) => e.stopPropagation()}
+            >
 
               {/* Header */}
               <div className="flex items-center justify-between border-b border-gray-100 px-8 py-5">
@@ -116,8 +131,8 @@ export default function AdminMemberProfiles({ profiles }: { profiles: Profile[] 
                 </button>
               </div>
 
-              {/* Nội dung */}
-              <div className="px-8 py-6 space-y-6">
+              {/* Nội dung (scroll) */}
+              <div className="overflow-y-auto px-8 py-6 space-y-6" style={{ flex: "1 1 auto", minHeight: 0 }}>
 
                 {/* 4 ô thông tin */}
                 <div className="grid grid-cols-2 gap-4 sm:grid-cols-4">
@@ -193,7 +208,8 @@ export default function AdminMemberProfiles({ profiles }: { profiles: Profile[] 
               </div>
             </div>
           </div>
-        </div>
+        </div>,
+        document.body
       )}
     </div>
   );
