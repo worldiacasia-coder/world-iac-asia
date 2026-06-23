@@ -108,62 +108,69 @@ export default function AdminApplications({ initial }: { initial: App[] }) {
 
       {/* Modal chi tiết */}
       {selected && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4 backdrop-blur-sm">
-          <div className="glass-panel w-full max-w-lg max-h-[90vh] overflow-y-auto p-6">
-            <div className="flex items-start justify-between gap-4">
-              <h3 className="font-display text-xl font-semibold text-gray-900">{selected.fullName}</h3>
-              <button onClick={() => setSelected(null)} className="text-gray-400 hover:text-gray-600">✕</button>
-            </div>
-            <div className="mt-4 space-y-3 text-sm">
-              <div className="grid grid-cols-2 gap-3">
-                <div><p className="text-xs text-gray-400">Ngày sinh</p><p className="font-medium">{selected.dob}</p></div>
-                <div><p className="text-xs text-gray-400">Điện thoại</p><p className="font-medium">{selected.phone}</p></div>
-                <div><p className="text-xs text-gray-400">Quốc gia</p><p className="font-medium">{selected.country}</p></div>
-                <div><p className="text-xs text-gray-400">Ngày nộp</p><p className="font-medium">{new Date(selected.createdAt).toLocaleDateString("vi-VN")}</p></div>
-              </div>
-              <div>
-                <p className="text-xs text-gray-400">Kinh nghiệm</p>
-                <p className="mt-1 whitespace-pre-wrap text-gray-700">{selected.experience}</p>
-              </div>
-              {selected.avatarPath && (
-                <div>
-                  <p className="text-xs text-gray-400">Ảnh đại diện</p>
-                  <div className="relative mt-1 h-32 w-32 overflow-hidden rounded-xl">
-                    <Image src={selected.avatarPath} alt="" fill className="object-cover" sizes="128px" />
-                  </div>
-                </div>
-              )}
-              {selected.resumePath && (
-                <div>
-                  <p className="text-xs text-gray-400">Sơ yếu lý lịch</p>
-                  <a href={selected.resumePath} target="_blank" className="mt-1 inline-flex items-center gap-1 text-brand-gold hover:underline">
-                    Xem file →
-                  </a>
-                </div>
-              )}
+        <div className="fixed inset-0 z-50 flex items-end justify-center bg-black/50 backdrop-blur-sm sm:items-center sm:p-4">
+          <div className="glass-panel flex w-full max-w-lg flex-col rounded-b-none rounded-t-3xl sm:max-h-[88vh] sm:rounded-3xl">
+            {/* Header cố định */}
+            <div className="flex shrink-0 items-center justify-between gap-4 border-b border-white/40 p-5">
+              <h3 className="font-display text-lg font-semibold text-gray-900">{selected.fullName}</h3>
+              <button onClick={() => setSelected(null)} className="flex h-8 w-8 items-center justify-center rounded-full bg-gray-100 text-gray-500 hover:bg-gray-200">✕</button>
             </div>
 
-            {selected.status === "pending" && (
-              <div className="mt-6 space-y-3">
+            {/* Nội dung cuộn được */}
+            <div className="flex-1 overflow-y-auto p-5">
+              <div className="space-y-3 text-sm">
+                <div className="grid grid-cols-2 gap-3">
+                  <div><p className="text-xs text-gray-400">Ngày sinh</p><p className="font-medium">{selected.dob}</p></div>
+                  <div><p className="text-xs text-gray-400">Điện thoại</p><p className="font-medium">{selected.phone}</p></div>
+                  <div><p className="text-xs text-gray-400">Quốc gia</p><p className="font-medium">{selected.country}</p></div>
+                  <div><p className="text-xs text-gray-400">Ngày nộp</p><p className="font-medium">{new Date(selected.createdAt).toLocaleDateString("vi-VN")}</p></div>
+                </div>
                 <div>
-                  <label className="mb-1 block text-xs font-medium text-gray-600">Ghi chú (tuỳ chọn)</label>
-                  <textarea value={note} onChange={(e) => setNote(e.target.value)} rows={2} className="input-field resize-none text-sm" placeholder="Lý do từ chối hoặc ghi chú..." />
+                  <p className="text-xs text-gray-400">Kinh nghiệm</p>
+                  <p className="mt-1 whitespace-pre-wrap text-gray-700">{selected.experience}</p>
                 </div>
-                <div className="flex gap-3">
-                  <button onClick={() => updateStatus(selected.id, "approved")} disabled={saving} className="btn-primary btn-sm flex-1">
-                    ✓ Duyệt
-                  </button>
-                  <button onClick={() => updateStatus(selected.id, "rejected")} disabled={saving} className="flex-1 rounded-full border border-red-300 bg-red-50 px-4 py-2 text-xs font-semibold text-red-600 transition-all hover:bg-red-100">
-                    ✕ Từ chối
-                  </button>
+                {selected.avatarPath && (
+                  <div>
+                    <p className="text-xs text-gray-400">Ảnh đại diện</p>
+                    <div className="relative mt-1 h-32 w-32 overflow-hidden rounded-xl">
+                      <Image src={selected.avatarPath} alt="" fill className="object-cover" sizes="128px" unoptimized />
+                    </div>
+                  </div>
+                )}
+                {selected.resumePath && (
+                  <div>
+                    <p className="text-xs text-gray-400">Sơ yếu lý lịch</p>
+                    <a href={selected.resumePath} target="_blank" className="mt-1 inline-flex items-center gap-1 text-brand-gold hover:underline">
+                      Xem file →
+                    </a>
+                  </div>
+                )}
+              </div>
+            </div>
+
+            {/* Footer cố định — nút duyệt/từ chối */}
+            <div className="shrink-0 border-t border-white/40 p-5">
+              {selected.status === "pending" ? (
+                <div className="space-y-3">
+                  <div>
+                    <label className="mb-1 block text-xs font-medium text-gray-600">Ghi chú (tuỳ chọn)</label>
+                    <textarea value={note} onChange={(e) => setNote(e.target.value)} rows={2} className="input-field resize-none text-sm" placeholder="Lý do từ chối hoặc ghi chú..." />
+                  </div>
+                  <div className="flex gap-3">
+                    <button onClick={() => updateStatus(selected.id, "approved")} disabled={saving} className="btn-primary btn-sm flex-1">
+                      {saving ? "Đang lưu..." : "✓ Duyệt"}
+                    </button>
+                    <button onClick={() => updateStatus(selected.id, "rejected")} disabled={saving} className="flex-1 rounded-full border border-red-300 bg-red-50 px-4 py-2 text-xs font-semibold text-red-600 transition-all hover:bg-red-100">
+                      ✕ Từ chối
+                    </button>
+                  </div>
                 </div>
-              </div>
-            )}
-            {selected.status !== "pending" && (
-              <div className={`mt-4 rounded-xl px-4 py-3 text-sm ${statusColor[selected.status]}`}>
-                {statusLabel[selected.status]}{selected.adminNote ? ` — ${selected.adminNote}` : ""}
-              </div>
-            )}
+              ) : (
+                <div className={`rounded-xl px-4 py-3 text-sm ${statusColor[selected.status]}`}>
+                  {statusLabel[selected.status]}{selected.adminNote ? ` — ${selected.adminNote}` : ""}
+                </div>
+              )}
+            </div>
           </div>
         </div>
       )}
