@@ -22,7 +22,7 @@ export default function MapPinButton({
   onHover,
   onClick,
 }: Props) {
-  const size = "4.2%";
+  const size = pin.id === "vietnam" ? "4.6%" : "4.2%";
 
   return (
     <button

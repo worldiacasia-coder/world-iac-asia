@@ -31,10 +31,10 @@ export default async function Header({ user }: Props) {
             />
           </span>
           <div className="hidden sm:block">
-            <p className="font-display text-xl font-extrabold leading-tight tracking-wide text-[#1a4b8c] md:text-2xl" style={{ textShadow: "0 1px 2px rgba(26,75,140,0.08)" }}>
+            <p className="font-display text-lg font-bold leading-tight tracking-wide text-[#1a4b8c] md:text-xl">
               {t("brandOrg")}
             </p>
-            <p className="mt-0.5 text-xs font-light tracking-[0.2em] text-gray-400/70">
+            <p className="mt-0.5 text-xs font-normal tracking-widest text-gray-400/80">
               {t("brandShort")}
             </p>
           </div>
