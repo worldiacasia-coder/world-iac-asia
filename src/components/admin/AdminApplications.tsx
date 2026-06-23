@@ -98,8 +98,8 @@ export default function AdminApplications({ initial }: { initial: App[] }) {
 
       {/* ── Modal chi tiết rộng ── */}
       {selected && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 p-6 backdrop-blur-sm">
-          <div className="glass-panel w-full" style={{ display: "flex", flexDirection: "column", maxHeight: "92vh", width: "min(90vw, 900px)" }}>
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 p-4 backdrop-blur-sm">
+          <div className="glass-panel" style={{ width: "90vw", maxWidth: "900px", display: "flex", flexDirection: "column", maxHeight: "92vh" }}>
 
             {/* Header */}
             <div className="flex shrink-0 items-center justify-between gap-4 border-b border-white/40 px-6 py-4">
