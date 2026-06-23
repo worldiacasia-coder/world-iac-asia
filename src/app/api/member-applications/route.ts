@@ -1,8 +1,7 @@
 import { NextResponse } from "next/server";
-import { writeFile } from "fs/promises";
-import { join } from "path";
 import prisma from "@/lib/prisma";
 import { getSession, isAdmin } from "@/lib/auth";
+import { uploadFile } from "@/lib/cloudinary";
 
 /* POST — nộp đơn xin thành viên (public) */
 export async function POST(req: Request) {
@@ -19,32 +18,18 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: "Vui lòng điền đầy đủ thông tin bắt buộc." }, { status: 400 });
     }
 
-    /* Lưu ảnh đại diện */
+    /* Upload ảnh đại diện lên Cloudinary */
     let avatarPath: string | null = null;
     const avatarFile = formData.get("avatar") as File | null;
     if (avatarFile && avatarFile.size > 0) {
-      const bytes = await avatarFile.arrayBuffer();
-      const ext = avatarFile.name.split(".").pop() ?? "jpg";
-      const filename = `${Date.now()}-${Math.random().toString(36).slice(2)}.${ext}`;
-      await writeFile(
-        join(process.cwd(), "public", "uploads", "avatars", filename),
-        Buffer.from(bytes)
-      );
-      avatarPath = `/uploads/avatars/${filename}`;
+      avatarPath = await uploadFile(avatarFile, "world-iac-asia/avatars");
     }
 
-    /* Lưu sơ yếu lý lịch */
+    /* Upload sơ yếu lý lịch lên Cloudinary */
     let resumePath: string | null = null;
     const resumeFile = formData.get("resume") as File | null;
     if (resumeFile && resumeFile.size > 0) {
-      const bytes = await resumeFile.arrayBuffer();
-      const ext = resumeFile.name.split(".").pop() ?? "pdf";
-      const filename = `${Date.now()}-${Math.random().toString(36).slice(2)}.${ext}`;
-      await writeFile(
-        join(process.cwd(), "public", "uploads", "resumes", filename),
-        Buffer.from(bytes)
-      );
-      resumePath = `/uploads/resumes/${filename}`;
+      resumePath = await uploadFile(resumeFile, "world-iac-asia/resumes");
     }
 
     const application = await prisma.memberApplication.create({
