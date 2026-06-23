@@ -98,8 +98,8 @@ export default function AdminApplications({ initial }: { initial: App[] }) {
 
       {/* ── Modal chi tiết rộng ── */}
       {selected && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 p-4 backdrop-blur-sm">
-          <div className="glass-panel w-full max-w-3xl" style={{ display: "flex", flexDirection: "column", maxHeight: "90vh" }}>
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 p-6 backdrop-blur-sm">
+          <div className="glass-panel w-full" style={{ display: "flex", flexDirection: "column", maxHeight: "92vh", width: "min(90vw, 900px)" }}>
 
             {/* Header */}
             <div className="flex shrink-0 items-center justify-between gap-4 border-b border-white/40 px-6 py-4">
@@ -125,7 +125,7 @@ export default function AdminApplications({ initial }: { initial: App[] }) {
             {/* Nội dung cuộn */}
             <div style={{ overflowY: "auto", flex: "1 1 0", minHeight: 0 }} className="px-6 py-5">
               {/* Grid thông tin */}
-              <div className="grid grid-cols-2 gap-4 sm:grid-cols-4">
+              <div className="grid grid-cols-4 gap-4">
                 <div className="rounded-xl bg-white/40 p-3">
                   <p className="text-xs font-medium text-gray-400">Ngày sinh</p>
                   <p className="mt-1 font-semibold text-gray-900">{selected.dob}</p>
@@ -149,19 +149,19 @@ export default function AdminApplications({ initial }: { initial: App[] }) {
               {/* Kinh nghiệm */}
               <div className="mt-5">
                 <p className="mb-2 text-xs font-semibold uppercase tracking-wide text-gray-400">Kinh nghiệm làm việc</p>
-                <div className="rounded-xl bg-white/40 p-4 text-sm leading-relaxed text-gray-700 whitespace-pre-wrap">
+                <div className="rounded-xl bg-white/40 p-4 text-sm leading-relaxed text-gray-700 whitespace-pre-wrap min-h-[80px]">
                   {selected.experience}
                 </div>
               </div>
 
               {/* Ảnh + CV */}
-              <div className="mt-5 grid gap-4 sm:grid-cols-2">
+              <div className="mt-5 grid gap-6 grid-cols-2">
                 {/* Ảnh đại diện */}
                 <div>
                   <p className="mb-2 text-xs font-semibold uppercase tracking-wide text-gray-400">Ảnh đại diện</p>
                   {selected.avatarPath ? (
-                    <div className="relative h-48 w-full overflow-hidden rounded-xl border border-white/60">
-                      <Image src={selected.avatarPath} alt={selected.fullName} fill className="object-cover object-top" sizes="400px" unoptimized />
+                    <div className="relative h-64 w-full overflow-hidden rounded-xl border border-white/60">
+                      <Image src={selected.avatarPath} alt={selected.fullName} fill className="object-cover object-top" sizes="500px" unoptimized />
                     </div>
                   ) : (
                     <div className="flex h-24 items-center justify-center rounded-xl bg-gray-50 text-sm text-gray-400">Chưa có ảnh</div>
