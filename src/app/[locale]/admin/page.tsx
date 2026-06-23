@@ -7,6 +7,7 @@ import AdminJudgePanel from "@/components/admin/AdminJudgePanel";
 import AdminPartnerCards from "@/components/admin/AdminPartnerCards";
 import AdminApplications from "@/components/admin/AdminApplications";
 import AdminCreateUser from "@/components/admin/AdminCreateUser";
+import AdminNewsPanel from "@/components/admin/AdminNewsPanel";
 
 type Props = { params: { locale: string } };
 
@@ -24,12 +25,13 @@ export default async function AdminPage({ params: { locale } }: Props) {
     redirect({ href: { pathname: "/auth", query: { redirect: "/admin" } }, locale });
   }
 
-  const [judges, messages, training, partnerCards, applications] = await Promise.all([
+  const [judges, messages, training, partnerCards, applications, newsItems] = await Promise.all([
     prisma.judge.findMany({ orderBy: { name: "asc" } }),
     prisma.contactMessage.findMany({ orderBy: { createdAt: "desc" }, take: 10 }),
     prisma.trainingRegistration.findMany({ orderBy: { createdAt: "desc" }, take: 10 }),
     prisma.partnerCard.findMany({ orderBy: { sortOrder: "asc" } }),
     prisma.memberApplication.findMany({ orderBy: { createdAt: "desc" } }),
+    prisma.newsItem.findMany({ orderBy: { sortOrder: "asc" } }),
   ]);
 
   return (
@@ -66,6 +68,16 @@ export default async function AdminPage({ params: { locale } }: Props) {
               stars: j.stars,
             }))}
           />
+
+          {/* Quản lý Tin tức */}
+          <AdminNewsPanel initial={newsItems.map((n) => ({
+            id: n.id,
+            title: n.title,
+            excerpt: n.excerpt,
+            imageUrl: n.imageUrl,
+            link: n.link,
+            sortOrder: n.sortOrder,
+          }))} />
 
           {/* Tạo tài khoản */}
           <AdminCreateUser />
