@@ -22,7 +22,7 @@ export default function MapPinButton({
   onHover,
   onClick,
 }: Props) {
-  const size = pin.id === "vietnam" ? "4.6%" : "4.2%";
+  const size = pin.id === "vietnam" ? "5.2%" : "4.8%";
 
   return (
     <button
@@ -32,14 +32,14 @@ export default function MapPinButton({
         top: pin.top,
         width: size,
       }}
-      className={`pointer-events-auto absolute z-10 aspect-square -translate-x-1/2 -translate-y-1/2 overflow-hidden rounded-full border-2 bg-white shadow-[0_2px_8px_rgba(0,0,0,0.35)] transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2 ${
+      className={`pointer-events-auto absolute z-10 aspect-square -translate-x-1/2 -translate-y-1/2 overflow-hidden rounded-full bg-white transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2 ${
         hasOrg ? "cursor-pointer" : "cursor-default"
       } ${
         isHovered || isActive
-          ? "scale-125 border-brand-gold shadow-[0_0_0_4px_rgba(197,160,89,0.55)]"
+          ? "scale-125 shadow-[0_0_0_5px_white,0_0_0_7px_rgba(197,160,89,0.8),0_4px_12px_rgba(0,0,0,0.4)]"
           : hasOrg
-            ? "border-white hover:scale-110 hover:border-brand-gold hover:shadow-[0_0_0_3px_rgba(197,160,89,0.4)]"
-            : "border-gray-300 opacity-80"
+            ? "shadow-[0_0_0_4px_white,0_0_0_5px_rgba(180,180,180,0.5),0_2px_8px_rgba(0,0,0,0.3)] hover:scale-110 hover:shadow-[0_0_0_5px_white,0_0_0_7px_rgba(197,160,89,0.6)]"
+            : "shadow-[0_0_0_4px_white,0_0_0_5px_rgba(180,180,180,0.4)] opacity-80"
       }`}
       onMouseEnter={() => onHover(pin.id)}
       onMouseLeave={() => onHover(null)}
