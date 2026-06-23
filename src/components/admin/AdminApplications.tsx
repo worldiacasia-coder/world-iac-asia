@@ -108,8 +108,8 @@ export default function AdminApplications({ initial }: { initial: App[] }) {
 
       {/* Modal chi tiết */}
       {selected && (
-        <div className="fixed inset-0 z-50 flex items-end justify-center bg-black/50 backdrop-blur-sm sm:items-center sm:p-4">
-          <div className="glass-panel flex w-full max-w-lg flex-col rounded-b-none rounded-t-3xl sm:max-h-[88vh] sm:rounded-3xl">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4 backdrop-blur-sm">
+          <div className="glass-panel w-full max-w-lg" style={{ display: "flex", flexDirection: "column", maxHeight: "85vh" }}>
             {/* Header cố định */}
             <div className="flex shrink-0 items-center justify-between gap-4 border-b border-white/40 p-5">
               <h3 className="font-display text-lg font-semibold text-gray-900">{selected.fullName}</h3>
@@ -117,7 +117,7 @@ export default function AdminApplications({ initial }: { initial: App[] }) {
             </div>
 
             {/* Nội dung cuộn được */}
-            <div className="flex-1 overflow-y-auto p-5">
+            <div style={{ overflowY: "auto", flex: "1 1 0", minHeight: 0 }} className="p-5">
               <div className="space-y-3 text-sm">
                 <div className="grid grid-cols-2 gap-3">
                   <div><p className="text-xs text-gray-400">Ngày sinh</p><p className="font-medium">{selected.dob}</p></div>
@@ -149,7 +149,7 @@ export default function AdminApplications({ initial }: { initial: App[] }) {
             </div>
 
             {/* Footer cố định — nút duyệt/từ chối */}
-            <div className="shrink-0 border-t border-white/40 p-5">
+            <div style={{ flexShrink: 0 }} className="border-t border-white/40 p-5">
               {selected.status === "pending" ? (
                 <div className="space-y-3">
                   <div>
