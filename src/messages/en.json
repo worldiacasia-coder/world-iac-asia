@@ -9,6 +9,7 @@
     "save": "Save",
     "close": "Close",
     "admin": "Admin",
+    "countryRep": "Country Rep",
     "notAvailable": "—",
     "copyright": "© {year} World IAC Asia. All rights reserved.",
     "notFoundTitle": "Page not found",
@@ -136,6 +137,7 @@
     "title": "Judges Panel",
     "subtitle": "International culinary experts evaluating and certifying IAC standards.",
     "loginCta": "Login to view full details",
+    "countryRepNotice": "You are signed in as a Country Representative — judge profiles only. No Admin access and no editing.",
     "lockedMessage": "Please login to view full information",
     "phone": "Phone",
     "email": "Email",
@@ -208,11 +210,11 @@
     "forgotMessage": "Password reset link sent to email (demo). Contact admin@worldiacasia.com for support.",
     "passwordHint": "Minimum 8 characters, 1 uppercase, 1 number",
     "processing": "Processing...",
-    "demoAccounts": "Demo: admin@worldiacasia.com / Admin@123456 · member@worldiacasia.com / Member@123456",
+    "demoAccounts": "Demo: admin@worldiacasia.com / Admin@123456 · rep@worldiacasia.com / Member@123456",
     "loginFailed": "Login failed",
     "registerFailed": "Registration failed",
     "accessNoticeLabel": "Notice",
-    "accessNotice": "Login credentials are issued by the World IAC Asia Admin. Only designated country representatives have access to judge information."
+    "accessNotice": "Login credentials are issued by the World IAC Asia Admin. Country representatives can only view judge profiles — no Admin access and no editing on the website."
   },
   "admin": {
     "title": "Admin Dashboard",

@@ -2,6 +2,7 @@ import Image from "next/image";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import prisma from "@/lib/prisma";
 import { getSession, canViewSensitiveData, isAdmin } from "@/lib/auth";
+import { isCountryRep } from "@/lib/roles";
 import JudgeCard from "@/components/judges/JudgeCard";
 import AdminJudgePanel from "@/components/admin/AdminJudgePanel";
 import { Link } from "@/i18n/navigation";
@@ -50,6 +51,11 @@ export default async function JudgesPage({ params: { locale } }: Props) {
             >
               {t("loginCta")}
             </Link>
+          )}
+          {session && isCountryRep(session.role) && (
+            <p className="mt-6 max-w-xl rounded-xl border border-white/30 bg-black/30 px-4 py-3 text-sm text-white/90 backdrop-blur-sm">
+              {t("countryRepNotice")}
+            </p>
           )}
         </div>
       </div>

@@ -4,6 +4,8 @@ import { useState } from "react";
 import { useTranslations } from "next-intl";
 import { useRouter } from "@/i18n/navigation";
 import { mapApiError } from "@/lib/constants";
+import { getPostLoginPath } from "@/lib/roles";
+import type { Role } from "@prisma/client";
 
 export default function AuthForm({ redirectTo = "/" }: { redirectTo?: string }) {
   const t = useTranslations("auth");
@@ -39,7 +41,7 @@ export default function AuthForm({ redirectTo = "/" }: { redirectTo?: string }) 
       return;
     }
 
-    router.push(redirectTo);
+    router.push(getPostLoginPath(data.user.role as Role, redirectTo));
     router.refresh();
   }
 

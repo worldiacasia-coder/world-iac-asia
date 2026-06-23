@@ -2,6 +2,14 @@ import { SignJWT, jwtVerify } from "jose";
 import { cookies } from "next/headers";
 import { Role } from "@prisma/client";
 
+export type { Role } from "@prisma/client";
+export {
+  isCountryRep,
+  canViewSensitiveData,
+  isAdmin,
+  getPostLoginPath,
+} from "@/lib/roles";
+
 export type SessionUser = {
   id: string;
   email: string;
@@ -54,12 +62,4 @@ export async function getSession(): Promise<SessionUser | null> {
 
 export async function destroySession() {
   cookies().delete(COOKIE_NAME);
-}
-
-export function canViewSensitiveData(role: Role | undefined | null) {
-  return role === "member" || role === "admin";
-}
-
-export function isAdmin(role: Role | undefined | null) {
-  return role === "admin";
 }

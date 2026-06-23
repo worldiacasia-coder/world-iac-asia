@@ -45,13 +45,13 @@ Open [http://localhost:3000](http://localhost:3000)
 | Role | Email | Password |
 |------|-------|----------|
 | Admin | admin@worldiacasia.com | Admin@123456 |
-| Member | member@worldiacasia.com | Member@123456 |
+| Country Rep | rep@worldiacasia.com | Member@123456 |
 
 ## RBAC Rules
 
 - **Guest**: sees judge name, avatar, title, country, stars — sensitive data masked
-- **Member / Admin**: full judge profiles revealed
-- **Admin only**: can update judge star ratings (1–5)
+- **Country Rep**: full judge profiles revealed — no Admin access, read-only
+- **Admin only**: full dashboard, can update judge star ratings (1–5) and manage content
 
 ## Member Expiry Logic
 

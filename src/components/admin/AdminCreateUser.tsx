@@ -2,10 +2,25 @@
 
 import { useState } from "react";
 
+const ROLES = [
+  {
+    value: "country_rep",
+    label: "Đại diện quốc gia",
+    description: "Chỉ xem toàn bộ thông tin giám khảo (điện thoại, email, chứng chỉ…). Không truy cập trang Admin, không chỉnh sửa nội dung.",
+  },
+  {
+    value: "admin",
+    label: "Admin",
+    description: "Toàn quyền quản trị: duyệt hồ sơ, quản lý hội viên, tin tức, đối tác và chỉnh sửa xếp hạng giám khảo.",
+  },
+] as const;
+
 export default function AdminCreateUser() {
-  const [form, setForm] = useState({ fullName: "", email: "", password: "", role: "member" });
+  const [form, setForm] = useState({ fullName: "", email: "", password: "", role: "country_rep" });
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
   const [msg, setMsg] = useState("");
+
+  const selectedRole = ROLES.find((r) => r.value === form.role) ?? ROLES[0];
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -25,8 +40,8 @@ export default function AdminCreateUser() {
     const data = await res.json();
     if (res.ok) {
       setStatus("success");
-      setMsg(`Đã tạo tài khoản: ${form.email}`);
-      setForm({ fullName: "", email: "", password: "", role: "member" });
+      setMsg(`Đã tạo tài khoản ${selectedRole.label}: ${form.email}`);
+      setForm({ fullName: "", email: "", password: "", role: "country_rep" });
     } else {
       setStatus("error");
       setMsg(data.error ?? "Lỗi tạo tài khoản");
@@ -37,7 +52,7 @@ export default function AdminCreateUser() {
     <div className="card-compact">
       <h2 className="font-display text-lg font-semibold text-gray-900">Tạo tài khoản đăng nhập</h2>
       <p className="mt-1 text-sm text-gray-500">
-        Chỉ admin mới có thể cấp tài khoản. Người được cấp mới có thể đăng nhập để xem thông tin giám khảo.
+        Chỉ Admin cấp tài khoản. Đại diện quốc gia sau khi đăng nhập chỉ được xem thông tin giám khảo — không vào trang Admin, không chỉnh sửa gì trên website.
       </p>
       <div className="mt-2 h-px w-8 bg-brand-gold" />
 
@@ -61,11 +76,16 @@ export default function AdminCreateUser() {
           <input required type="password" value={form.password} onChange={(e) => setForm({ ...form, password: e.target.value })} className="input-field" placeholder="Tối thiểu 8 ký tự, 1 hoa, 1 số" />
         </div>
         <div>
-          <label className="mb-1 block text-xs font-medium text-gray-600">Vai trò</label>
+          <label className="mb-1 block text-xs font-medium text-gray-600">Vai trò *</label>
           <select value={form.role} onChange={(e) => setForm({ ...form, role: e.target.value })} className="select-field">
-            <option value="member">Đại diện quốc gia (member)</option>
-            <option value="admin">Admin</option>
+            {ROLES.map((r) => (
+              <option key={r.value} value={r.value}>{r.label}</option>
+            ))}
           </select>
+        </div>
+        <div className="sm:col-span-2 rounded-xl border border-gray-100 bg-gray-50 p-4 text-sm text-gray-600">
+          <p className="font-semibold text-gray-800">{selectedRole.label}</p>
+          <p className="mt-1 leading-relaxed">{selectedRole.description}</p>
         </div>
         <div className="sm:col-span-2">
           <button type="submit" disabled={status === "loading"} className="btn-primary btn-sm">

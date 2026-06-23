@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import bcrypt from "bcryptjs";
 import { z } from "zod";
 import prisma from "@/lib/prisma";
-import { createSession, getSession, isAdmin } from "@/lib/auth";
+import { getSession, isAdmin } from "@/lib/auth";
 
 const schema = z
   .object({
@@ -14,7 +14,7 @@ const schema = z
       .regex(/[A-Z]/, "Mật khẩu phải có ít nhất 1 chữ hoa")
       .regex(/[0-9]/, "Mật khẩu phải có ít nhất 1 số"),
     confirmPassword: z.string(),
-    role: z.enum(["member", "admin"]).optional(),
+    role: z.enum(["country_rep", "member", "admin"]).optional(),
   })
   .refine((d) => d.password === d.confirmPassword, {
     message: "Mật khẩu xác nhận không khớp",
@@ -33,13 +33,15 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    /* Nếu muốn chỉ định role, phải là admin */
-    const requestedRole = parsed.data.role ?? "member";
-    if (requestedRole === "admin") {
-      const session = await getSession();
-      if (!isAdmin(session?.role)) {
-        return NextResponse.json({ error: "Không có quyền tạo tài khoản admin" }, { status: 403 });
-      }
+    /* Chỉ admin mới được tạo tài khoản đăng nhập */
+    const session = await getSession();
+    if (!isAdmin(session?.role)) {
+      return NextResponse.json({ error: "Chỉ admin mới có thể tạo tài khoản" }, { status: 403 });
+    }
+
+    const requestedRole = parsed.data.role ?? "country_rep";
+    if (requestedRole === "admin" && !isAdmin(session?.role)) {
+      return NextResponse.json({ error: "Không có quyền tạo tài khoản admin" }, { status: 403 });
     }
 
     const email = parsed.data.email.toLowerCase();
@@ -52,12 +54,6 @@ export async function POST(request: NextRequest) {
     const user = await prisma.user.create({
       data: { email, passwordHash, fullName: parsed.data.fullName, role: requestedRole },
     });
-
-    /* Nếu admin tạo account, KHÔNG tạo session (không login thay user) */
-    const callerSession = await getSession();
-    if (!isAdmin(callerSession?.role)) {
-      await createSession({ id: user.id, email: user.email, fullName: user.fullName, role: user.role });
-    }
 
     return NextResponse.json(
       { user: { id: user.id, email: user.email, fullName: user.fullName, role: user.role } },

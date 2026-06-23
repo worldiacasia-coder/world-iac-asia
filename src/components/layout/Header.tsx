@@ -3,6 +3,7 @@ import { getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import { NAV_ROUTES } from "@/lib/constants";
 import type { SessionUser } from "@/lib/auth";
+import { isAdmin, isCountryRep } from "@/lib/roles";
 import LogoutButton from "@/components/auth/LogoutButton";
 import LanguageSwitcher from "@/components/layout/LanguageSwitcher";
 import HeaderFlagStrip from "@/components/layout/HeaderFlagStrip";
@@ -59,13 +60,18 @@ export default async function Header({ user }: Props) {
                 className="hidden text-sm text-gray-600 transition-colors hover:text-brand-gold sm:inline"
               >
                 {user.fullName}
-                {user.role === "admin" && (
+                {isAdmin(user.role) && (
                   <span className="ml-2 rounded-full border border-white/60 bg-white/30 px-1.5 py-0.5 text-xs font-medium text-brand-gold backdrop-blur-sm">
                     {tCommon("admin")}
                   </span>
                 )}
+                {isCountryRep(user.role) && (
+                  <span className="ml-2 rounded-full border border-white/60 bg-white/30 px-1.5 py-0.5 text-xs font-medium text-blue-700 backdrop-blur-sm">
+                    {tCommon("countryRep")}
+                  </span>
+                )}
               </Link>
-              {user.role === "admin" && (
+              {isAdmin(user.role) && (
                 <Link href="/admin" className="btn-outline btn-sm hidden sm:inline-flex">
                   {tCommon("admin")}
                 </Link>

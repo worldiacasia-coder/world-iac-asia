@@ -9,6 +9,7 @@
     "save": "Lưu",
     "close": "Đóng",
     "admin": "Admin",
+    "countryRep": "Đại diện quốc gia",
     "notAvailable": "—",
     "copyright": "© {year} World IAC Asia. Bảo lưu mọi quyền.",
     "notFoundTitle": "Không tìm thấy trang",
@@ -136,6 +137,7 @@
     "title": "Ban giám khảo",
     "subtitle": "Hội đồng chuyên gia ẩm thực quốc tế đánh giá và công nhận tiêu chuẩn IAC.",
     "loginCta": "Đăng nhập để xem đầy đủ",
+    "countryRepNotice": "Bạn đang đăng nhập với vai trò Đại diện quốc gia — chỉ xem thông tin giám khảo, không truy cập trang Admin và không chỉnh sửa nội dung.",
     "lockedMessage": "Vui lòng Đăng nhập để xem đầy đủ thông tin",
     "phone": "Điện thoại",
     "email": "Email",
@@ -208,11 +210,11 @@
     "forgotMessage": "Liên kết đặt lại mật khẩu đã được gửi đến email (demo). Vui lòng liên hệ admin@worldiacasia.com nếu cần hỗ trợ.",
     "passwordHint": "Tối thiểu 8 ký tự, 1 chữ hoa, 1 số",
     "processing": "Đang xử lý...",
-    "demoAccounts": "Demo: admin@worldiacasia.com / Admin@123456 · member@worldiacasia.com / Member@123456",
+    "demoAccounts": "Demo: admin@worldiacasia.com / Admin@123456 · rep@worldiacasia.com / Member@123456",
     "loginFailed": "Đăng nhập thất bại",
     "registerFailed": "Đăng ký thất bại",
     "accessNoticeLabel": "Lưu ý",
-    "accessNotice": "Tài khoản đăng nhập được cấp bởi Admin World IAC Asia. Chỉ đại diện quốc gia được chỉ định mới có quyền truy cập thông tin giám khảo."
+    "accessNotice": "Tài khoản đăng nhập được cấp bởi Admin World IAC Asia. Đại diện quốc gia chỉ được xem thông tin giám khảo — không truy cập trang Admin và không chỉnh sửa nội dung website."
   },
   "admin": {
     "title": "Admin Dashboard",

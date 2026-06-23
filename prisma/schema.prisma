@@ -10,7 +10,8 @@ datasource db {
 
 enum Role {
   guest
-  member
+  member       // legacy — dùng country_rep cho tài khoản mới
+  country_rep  // đại diện quốc gia: chỉ xem thông tin giám khảo
   admin
 }
 

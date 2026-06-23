@@ -132,10 +132,10 @@ async function main() {
         role: Role.admin,
       },
       {
-        email: "member@worldiacasia.com",
+        email: "rep@worldiacasia.com",
         passwordHash: memberPassword,
-        fullName: "Demo Member",
-        role: Role.member,
+        fullName: "Demo Country Rep",
+        role: Role.country_rep,
       },
     ],
   });
@@ -331,7 +331,7 @@ async function main() {
   console.log("Seed completed successfully.");
   console.log("Admin:", process.env.ADMIN_EMAIL ?? "admin@worldiacasia.com");
   console.log("Password:", process.env.ADMIN_PASSWORD ?? "Admin@123456");
-  console.log("Member demo: member@worldiacasia.com / Member@123456");
+  console.log("Country rep demo: rep@worldiacasia.com / Member@123456");
 }
 
 main()
