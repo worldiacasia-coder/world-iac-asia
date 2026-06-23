@@ -9,6 +9,7 @@ import AdminApplications from "@/components/admin/AdminApplications";
 import AdminCreateUser from "@/components/admin/AdminCreateUser";
 import AdminNewsPanel from "@/components/admin/AdminNewsPanel";
 import AdminMembersPanel from "@/components/admin/AdminMembersPanel";
+import AdminMemberProfiles from "@/components/admin/AdminMemberProfiles";
 
 type Props = { params: { locale: string } };
 
@@ -70,6 +71,20 @@ export default async function AdminPage({ params: { locale } }: Props) {
               stars: j.stars,
             }))}
           />
+
+          {/* Hồ sơ thành viên được duyệt */}
+          <AdminMemberProfiles profiles={applications.map((a) => ({
+            id: a.id,
+            fullName: a.fullName,
+            dob: a.dob,
+            phone: a.phone,
+            country: a.country,
+            experience: a.experience,
+            avatarPath: a.avatarPath,
+            resumePath: a.resumePath,
+            status: a.status as "pending" | "approved" | "rejected",
+            createdAt: a.createdAt.toISOString(),
+          }))} />
 
           {/* Quản lý Hội viên */}
           <AdminMembersPanel initial={allMembers.map((m) => ({

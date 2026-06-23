@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import prisma from "@/lib/prisma";
 import { getSession, isAdmin } from "@/lib/auth";
+import { deleteFileByUrl } from "@/lib/cloudinary";
 
 export async function GET(request: NextRequest) {
   const { searchParams } = new URL(request.url);
@@ -45,13 +46,30 @@ export async function PATCH(req: Request) {
   return NextResponse.json({ member });
 }
 
-/* DELETE — admin xoá hội viên */
+/* DELETE — admin xoá hội viên + file Cloudinary */
 export async function DELETE(req: Request) {
   const session = await getSession();
   if (!isAdmin(session?.role)) return NextResponse.json({ error: "Forbidden" }, { status: 403 });
 
   const { id } = await req.json();
   if (!id) return NextResponse.json({ error: "Thiếu id." }, { status: 400 });
+
+  const member = await prisma.member.findUnique({ where: { id } });
+  if (member) {
+    /* Xoá ảnh avatar trên Cloudinary nếu là URL Cloudinary */
+    if (member.avatarUrl?.includes("cloudinary.com")) {
+      await deleteFileByUrl(member.avatarUrl);
+    }
+    /* Xoá hồ sơ liên quan (application) và files của nó */
+    const apps = await prisma.memberApplication.findMany({
+      where: { fullName: member.name, country: member.country },
+    });
+    for (const app of apps) {
+      if (app.avatarPath?.includes("cloudinary.com")) await deleteFileByUrl(app.avatarPath);
+      if (app.resumePath?.includes("cloudinary.com")) await deleteFileByUrl(app.resumePath);
+    }
+  }
+
   await prisma.member.delete({ where: { id } });
   return NextResponse.json({ ok: true });
 }
