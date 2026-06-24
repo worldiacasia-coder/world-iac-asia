@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useState } from "react";
+import { useRef, useState } from "react";
 
 type Card = {
   id: string;
@@ -16,16 +16,37 @@ export default function AdminPartnerCards({ initial }: { initial: Card[] }) {
   const [form, setForm] = useState({ name: "", description: "", imageUrl: "", sortOrder: 0 });
   const [editId, setEditId] = useState<string | null>(null);
   const [saving, setSaving] = useState(false);
+  const [uploading, setUploading] = useState(false);
   const [msg, setMsg] = useState("");
+  const imageRef = useRef<HTMLInputElement>(null);
 
   function startEdit(c: Card) {
     setEditId(c.id);
     setForm({ name: c.name, description: c.description, imageUrl: c.imageUrl, sortOrder: c.sortOrder });
     setMsg("");
   }
+
   function cancelEdit() {
     setEditId(null);
     setForm({ name: "", description: "", imageUrl: "", sortOrder: 0 });
+    setMsg("");
+  }
+
+  async function uploadImage(file: File) {
+    setUploading(true);
+    setMsg("");
+    try {
+      const fd = new FormData();
+      fd.append("file", file);
+      const res = await fetch("/api/partner-cards/upload", { method: "POST", body: fd });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error ?? "Tải ảnh thất bại");
+      setForm((f) => ({ ...f, imageUrl: data.url }));
+    } catch (e: unknown) {
+      setMsg(e instanceof Error ? e.message : "Tải ảnh thất bại");
+    } finally {
+      setUploading(false);
+    }
   }
 
   async function save() {
@@ -83,7 +104,6 @@ export default function AdminPartnerCards({ initial }: { initial: Card[] }) {
         <div className="mt-2 h-px w-8 bg-brand-gold" />
       </div>
 
-      {/* Form thêm / sửa */}
       <div className="rounded-2xl border border-white/60 bg-white/40 p-5 backdrop-blur-sm">
         <p className="mb-4 text-sm font-semibold text-gray-700">
           {isEditing ? "✏️ Chỉnh sửa thẻ" : "➕ Thêm thẻ mới"}
@@ -99,13 +119,34 @@ export default function AdminPartnerCards({ initial }: { initial: Card[] }) {
             />
           </div>
           <div>
-            <label className="mb-1 block text-xs font-medium text-gray-600">URL Ảnh *</label>
-            <input
-              value={form.imageUrl}
-              onChange={(e) => setForm({ ...form, imageUrl: e.target.value })}
-              className="input-field"
-              placeholder="https://... hoặc /images/..."
-            />
+            <label className="mb-1 block text-xs font-medium text-gray-600">Ảnh thẻ *</label>
+            <div className="flex gap-2">
+              <input
+                value={form.imageUrl}
+                onChange={(e) => setForm({ ...form, imageUrl: e.target.value })}
+                className="input-field min-w-0 flex-1"
+                placeholder="Tải ảnh từ máy hoặc dán URL..."
+              />
+              <button
+                type="button"
+                onClick={() => imageRef.current?.click()}
+                disabled={uploading}
+                className="btn-outline btn-sm shrink-0"
+              >
+                {uploading ? "⏳" : "📁 Tải lên"}
+              </button>
+              <input
+                ref={imageRef}
+                type="file"
+                accept="image/*"
+                className="sr-only"
+                onChange={(e) => {
+                  const file = e.target.files?.[0];
+                  if (file) uploadImage(file);
+                  e.target.value = "";
+                }}
+              />
+            </div>
           </div>
           <div className="sm:col-span-2">
             <label className="mb-1 block text-xs font-medium text-gray-600">Mô tả</label>
@@ -128,15 +169,14 @@ export default function AdminPartnerCards({ initial }: { initial: Card[] }) {
           </div>
         </div>
 
-        {/* Preview ảnh */}
         {form.imageUrl && (
-          <div className="mt-4 relative h-32 w-48 overflow-hidden rounded-xl border border-white/50">
-            <Image src={form.imageUrl} alt="preview" fill className="object-cover" sizes="192px" />
+          <div className="relative mt-4 h-32 w-48 overflow-hidden rounded-xl border border-white/50">
+            <Image src={form.imageUrl} alt="preview" fill className="object-cover" sizes="192px" unoptimized />
           </div>
         )}
 
         {msg && (
-          <p className={`mt-3 text-sm font-medium ${msg.includes("Lỗi") ? "text-red-600" : "text-green-700"}`}>
+          <p className={`mt-3 text-sm font-medium ${msg.includes("Lỗi") || msg.includes("thất bại") ? "text-red-600" : "text-green-700"}`}>
             {msg}
           </p>
         )}
@@ -144,7 +184,7 @@ export default function AdminPartnerCards({ initial }: { initial: Card[] }) {
         <div className="mt-4 flex gap-3">
           <button
             onClick={save}
-            disabled={saving || !form.name || !form.imageUrl}
+            disabled={saving || uploading || !form.name || !form.imageUrl}
             className="btn-primary btn-sm"
           >
             {saving ? "Đang lưu..." : isEditing ? "Lưu thay đổi" : "Thêm mới"}
@@ -157,12 +197,11 @@ export default function AdminPartnerCards({ initial }: { initial: Card[] }) {
         </div>
       </div>
 
-      {/* Danh sách cards */}
       <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
         {cards.map((c) => (
           <div key={c.id} className="glass-panel overflow-hidden p-0">
             <div className="relative aspect-video w-full overflow-hidden">
-              <Image src={c.imageUrl} alt={c.name} fill className="object-cover" sizes="300px" />
+              <Image src={c.imageUrl} alt={c.name} fill className="object-cover" sizes="300px" unoptimized />
               <div className="absolute inset-0 bg-black/30" />
               <p className="absolute bottom-2 left-3 font-display text-sm font-semibold text-white">
                 {c.name}

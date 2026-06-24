@@ -25,23 +25,14 @@ export default async function Footer() {
       <div className="relative z-10">
         <div className="container-main grid gap-12 py-16 md:grid-cols-4">
           <div className="md:col-span-2">
-            <div className="flex flex-col items-start gap-3">
-              <div className="relative h-16 w-16 shrink-0">
+            <div className="flex flex-col items-start gap-4">
+              <div className="relative h-32 w-32 shrink-0 sm:h-36 sm:w-36">
                 <Image
-                  src="/images/logos/world-iac-asia-logo.jpg"
+                  src="/images/world-iac-asia-logo.png"
                   alt="WORLD IAC ASIA"
                   fill
-                  sizes="64px"
-                  className="object-contain"
-                />
-              </div>
-              <div className="relative h-12 w-36 shrink-0">
-                <Image
-                  src="/images/logos/world-iac-5stars.jpg"
-                  alt="5 Gold Stars of the Kitchen"
-                  fill
                   sizes="144px"
-                  className="object-contain object-left"
+                  className="object-contain"
                 />
               </div>
               <div>
@@ -72,11 +63,6 @@ export default async function Footer() {
                   </Link>
                 </li>
               ))}
-              <li>
-                <Link href="/map" className="text-sm text-white/60 transition-colors hover:text-brand-gold">
-                  {t("networkLink")}
-                </Link>
-              </li>
               <li>
                 <Link href="/auth" className="text-sm text-white/60 transition-colors hover:text-brand-gold">
                   {t("authLink")}
