@@ -2,7 +2,6 @@ import Image from "next/image";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import prisma from "@/lib/prisma";
 import PartnerCardSlider from "@/components/home/PartnerCardSlider";
-import PartnerMarquee from "@/components/partners/PartnerMarquee";
 import ContactForm from "@/components/partners/ContactForm";
 
 type Props = { params: { locale: string } };
@@ -50,14 +49,6 @@ export default async function PartnersPage({ params: { locale } }: Props) {
           <p className="mt-4 max-w-2xl text-base text-gray-500">{t("cardsSubtitle")}</p>
         </div>
         <PartnerCardSlider cards={partnerCards} emptyMessage={t("cardsEmpty")} />
-      </section>
-
-      {/* Partners marquee — logo đối tác */}
-      <section className="py-10">
-        <div className="container-main mb-6">
-          <h2 className="font-display text-xl font-semibold text-gray-900">{t("logosTitle")}</h2>
-        </div>
-        <PartnerMarquee emptyMessage={t("logosEmpty")} />
       </section>
 
       {/* Editorial divider image */}

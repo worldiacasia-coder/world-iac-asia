@@ -4,6 +4,7 @@ import { getSession, canViewSensitiveData, isAdmin } from "@/lib/auth";
 import { isCountryRep } from "@/lib/roles";
 import JudgeCard from "@/components/judges/JudgeCard";
 import JudgesHero from "@/components/judges/JudgesHero";
+import JudgeCourseRegistrationForm from "@/components/judges/JudgeCourseRegistrationForm";
 import AdminJudgePanel from "@/components/admin/AdminJudgePanel";
 
 type Props = { params: { locale: string } };
@@ -16,6 +17,7 @@ export async function generateMetadata({ params: { locale } }: Props) {
 export default async function JudgesPage({ params: { locale } }: Props) {
   setRequestLocale(locale);
   const session = await getSession();
+  const t = await getTranslations("judges");
   const canView = canViewSensitiveData(session?.role);
   const admin = isAdmin(session?.role);
   const judges = await prisma.judge.findMany({ orderBy: { name: "asc" } });
@@ -60,6 +62,20 @@ export default async function JudgesPage({ params: { locale } }: Props) {
               }))}
             />
           )}
+        </div>
+      </section>
+
+      <section className="section section-alt">
+        <div className="container-main">
+          <p className="section-label">WORLD IAC ASIA</p>
+          <h2 className="mt-3 section-title">{t("courseSectionTitle")}</h2>
+          <div className="mt-4 h-0.5 w-12 bg-brand-gold" />
+          <p className="mt-4 max-w-3xl text-base leading-relaxed text-gray-500">
+            {t("courseSectionDesc")}
+          </p>
+          <div className="mt-10">
+            <JudgeCourseRegistrationForm />
+          </div>
         </div>
       </section>
     </>

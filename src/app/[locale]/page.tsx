@@ -142,7 +142,7 @@ export default async function HomePage({ params: { locale } }: Props) {
       <section className="section">
         <div className="container-main">
           <div className="mb-8">
-            <h2 className="section-title">{t("partnersTitle")}</h2>
+            <h2 className="section-title">{t("internationalPartnersTitle")}</h2>
             <div className="mt-4 h-0.5 w-12 bg-brand-gold" />
           </div>
         </div>

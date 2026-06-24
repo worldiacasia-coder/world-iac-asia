@@ -11,6 +11,7 @@ import AdminCreateUser from "@/components/admin/AdminCreateUser";
 import AdminNewsPanel from "@/components/admin/AdminNewsPanel";
 import AdminMembersPanel from "@/components/admin/AdminMembersPanel";
 import AdminContactMessages from "@/components/admin/AdminContactMessages";
+import AdminTrainingRegistrations from "@/components/admin/AdminTrainingRegistrations";
 import AdminMemberProfiles from "@/components/admin/AdminMemberProfiles";
 
 type Props = { params: { locale: string } };
@@ -32,7 +33,7 @@ export default async function AdminPage({ params: { locale } }: Props) {
   const [judges, messages, training, partnerCards, applications, newsItems, allMembers] = await Promise.all([
     prisma.judge.findMany({ orderBy: { name: "asc" } }),
     prisma.contactMessage.findMany({ orderBy: { createdAt: "desc" } }),
-    prisma.trainingRegistration.findMany({ orderBy: { createdAt: "desc" }, take: 10 }),
+    prisma.trainingRegistration.findMany({ orderBy: { createdAt: "desc" } }),
     prisma.partnerCard.findMany({ orderBy: { sortOrder: "asc" } }),
     prisma.memberApplication.findMany({ orderBy: { createdAt: "desc" } }),
     getAdminNewsItems(),
@@ -154,23 +155,18 @@ export default async function AdminPage({ params: { locale } }: Props) {
             }))}
           />
 
-          {/* Training registrations */}
-          <div className="card-compact">
-            <h2 className="font-display text-lg font-semibold text-gray-900">
-              {t("trainingTitle")} ({training.length})
-            </h2>
-            <div className="mt-2 h-px w-8 bg-brand-gold" />
-            <ul className="mt-5 max-h-80 space-y-3 overflow-y-auto text-sm">
-              {training.map((item) => (
-                <li key={item.id} className="border-b border-white/30 pb-3 last:border-0">
-                  <p className="font-medium text-gray-900">{item.fullName}</p>
-                  <p className="text-gray-500">{item.course}</p>
-                  <p className="text-xs text-gray-400">{item.email}</p>
-                </li>
-              ))}
-              {training.length === 0 && <li className="text-gray-400">Chưa có đăng ký.</li>}
-            </ul>
-          </div>
+          <AdminTrainingRegistrations
+            initial={training.map((item) => ({
+              id: item.id,
+              fullName: item.fullName,
+              organization: item.organization,
+              phone: item.phone,
+              email: item.email,
+              course: item.course,
+              isRead: item.isRead,
+              createdAt: item.createdAt.toISOString(),
+            }))}
+          />
         </div>
       </section>
     </>

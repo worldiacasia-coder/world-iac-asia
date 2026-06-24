@@ -112,6 +112,7 @@ model TrainingRegistration {
   phone        String
   email        String
   course       String
+  isRead       Boolean  @default(false) @map("is_read")
   createdAt    DateTime @default(now()) @map("created_at")
 
   @@map("training_registrations")
