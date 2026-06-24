@@ -16,8 +16,30 @@ const SECRETARY_NEWS = {
   sortOrder: 0,
 };
 
+export type NewsRecord = {
+  id: string;
+  title: string;
+  excerpt: string;
+  content: string;
+  imageUrl: string;
+  link: string | null;
+  slug: string | null;
+  metaDesc: string | null;
+  sortOrder: number;
+  createdAt: Date;
+};
+
+function fallbackSecretaryNews(): NewsRecord {
+  return {
+    id: "fallback-secretary",
+    ...SECRETARY_NEWS,
+    link: null,
+    createdAt: new Date(0),
+  };
+}
+
 /** Tạo bài Tổng thư ký mặc định nếu chưa có — không ghi đè bài admin đã chỉnh sửa. */
-export async function ensureSecretaryNewsItem() {
+async function ensureSecretaryNewsItem() {
   await prisma.newsItem.upsert({
     where: { slug: SECRETARY_NEWS_SLUG },
     create: SECRETARY_NEWS,
@@ -25,7 +47,21 @@ export async function ensureSecretaryNewsItem() {
   });
 }
 
-export async function getHomeNewsItems() {
-  await ensureSecretaryNewsItem();
-  return prisma.newsItem.findMany({ orderBy: { sortOrder: "asc" } });
+export async function getHomeNewsItems(): Promise<NewsRecord[]> {
+  try {
+    await ensureSecretaryNewsItem();
+    return prisma.newsItem.findMany({ orderBy: { sortOrder: "asc" } });
+  } catch (error) {
+    console.error("[news] Failed to load news items:", error);
+    return [fallbackSecretaryNews()];
+  }
+}
+
+export async function getAdminNewsItems(): Promise<NewsRecord[]> {
+  try {
+    return prisma.newsItem.findMany({ orderBy: { sortOrder: "asc" } });
+  } catch (error) {
+    console.error("[news] Failed to load admin news items:", error);
+    return [];
+  }
 }

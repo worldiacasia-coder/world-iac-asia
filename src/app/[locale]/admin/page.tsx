@@ -2,6 +2,7 @@ import Image from "next/image";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { redirect } from "@/i18n/navigation";
 import { getSession, isAdmin } from "@/lib/auth";
+import { getAdminNewsItems } from "@/lib/news-defaults";
 import prisma from "@/lib/prisma";
 import AdminJudgePanel from "@/components/admin/AdminJudgePanel";
 import AdminPartnerCards from "@/components/admin/AdminPartnerCards";
@@ -24,7 +25,7 @@ export default async function AdminPage({ params: { locale } }: Props) {
   const session = await getSession();
 
   if (!isAdmin(session?.role)) {
-    redirect({ href: { pathname: "/auth", query: { redirect: "/admin" } }, locale });
+    redirect({ href: "/auth?redirect=/admin", locale });
   }
 
   const [judges, messages, training, partnerCards, applications, newsItems, allMembers] = await Promise.all([
@@ -33,7 +34,7 @@ export default async function AdminPage({ params: { locale } }: Props) {
     prisma.trainingRegistration.findMany({ orderBy: { createdAt: "desc" }, take: 10 }),
     prisma.partnerCard.findMany({ orderBy: { sortOrder: "asc" } }),
     prisma.memberApplication.findMany({ orderBy: { createdAt: "desc" } }),
-    prisma.newsItem.findMany({ orderBy: { sortOrder: "asc" } }),
+    getAdminNewsItems(),
     prisma.member.findMany({ orderBy: { expirationDate: "asc" } }),
   ]);
 
