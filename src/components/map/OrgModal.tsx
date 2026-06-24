@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { useTranslations } from "next-intl";
+import type { NationalPresident } from "@/data/national-presidents";
 
 export type OrganizationData = {
   countryId: string;
@@ -16,82 +17,111 @@ export type OrganizationData = {
 
 type Props = {
   org: OrganizationData | null;
+  president: NationalPresident | null;
   countryName: string;
   onClose: () => void;
 };
 
-export default function OrgModal({ org, countryName, onClose }: Props) {
+export default function OrgModal({ org, president, countryName, onClose }: Props) {
   const t = useTranslations("map");
+  const tPres = useTranslations("nationalPresidents");
   const tCommon = useTranslations("common");
 
-  if (!org) return null;
+  if (!org && !president) return null;
+
+  const presidentName = president ? tPres(president.nameKey) : org?.representative;
+  const presidentTitle = president ? tPres(president.titleKey) : null;
+  const presidentBio = president ? tPres(president.bioKey) : null;
+  const presidentImage = president?.image ?? org?.logoUrl;
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center bg-gray-900/40 p-4 backdrop-blur-sm"
+      className="fixed inset-0 z-[9999] flex items-center justify-center overflow-y-auto bg-black/60 p-4 backdrop-blur-sm"
       onClick={onClose}
       role="dialog"
       aria-modal="true"
     >
       <div
-        className="glass-panel w-full max-w-md p-8"
+        className="my-4 w-full max-w-lg rounded-3xl bg-white shadow-2xl"
         onClick={(e) => e.stopPropagation()}
       >
-        <div className="relative border-b border-white/50 pb-6">
-          <div className="flex items-center justify-center gap-3">
-            <Image
-              src={org.flagUrl}
-              alt={countryName}
-              width={40}
-              height={28}
-              className="rounded border border-white/50"
-            />
-            <p className="text-sm font-medium text-brand-gold">{countryName}</p>
+        {/* Header */}
+        <div className="flex items-center justify-between border-b border-gray-100 px-6 py-4">
+          <div className="flex items-center gap-3">
+            {org && (
+              <Image
+                src={org.flagUrl}
+                alt={countryName}
+                width={36}
+                height={24}
+                className="rounded border border-gray-200"
+                unoptimized
+              />
+            )}
+            <div>
+              <p className="text-xs font-semibold uppercase tracking-wide text-brand-gold">{countryName}</p>
+              <p className="text-sm font-medium text-gray-500">{org?.orgName ?? `World IAC ${countryName}`}</p>
+            </div>
           </div>
           <button
             type="button"
             onClick={onClose}
-            className="absolute right-0 top-0 text-gray-400 transition-colors hover:text-gray-900"
+            className="flex h-9 w-9 items-center justify-center rounded-full bg-gray-100 text-gray-500 hover:bg-gray-200"
             aria-label={tCommon("close")}
           >
             ✕
           </button>
         </div>
 
-        <div className="mt-6 flex justify-center">
-          <Image
-            src={org.logoUrl}
-            alt={org.orgName}
-            width={112}
-            height={112}
-            className="h-28 w-28 rounded-full border-2 border-white/60 object-cover shadow-sm"
-          />
+        <div className="max-h-[75vh] overflow-y-auto px-6 py-6">
+          {/* Ảnh chủ tịch */}
+          {presidentImage && (
+            <div className="relative mx-auto h-56 w-44 overflow-hidden rounded-2xl border border-gray-200 shadow-md">
+              <Image
+                src={presidentImage}
+                alt={presidentName ?? countryName}
+                fill
+                className="object-cover object-top"
+                sizes="176px"
+              />
+            </div>
+          )}
+
+          <div className="mt-5 text-center">
+            <h2 className="font-display text-xl font-semibold text-gray-900">{presidentName}</h2>
+            {presidentTitle && (
+              <p className="mt-1 text-sm font-medium text-brand-gold">{presidentTitle}</p>
+            )}
+          </div>
+
+          {presidentBio && (
+            <div className="mt-5">
+              <p className="text-xs font-semibold uppercase tracking-wide text-gray-400">{t("biography")}</p>
+              <p className="mt-2 text-sm leading-relaxed text-gray-600">{presidentBio}</p>
+            </div>
+          )}
+
+          {org && (
+            <dl className="mt-6 space-y-4 border-t border-gray-100 pt-6 text-sm">
+              <div>
+                <dt className="text-xs font-semibold uppercase tracking-wide text-gray-400">{t("address")}</dt>
+                <dd className="mt-1 text-gray-700">{org.address}</dd>
+              </div>
+              <div>
+                <dt className="text-xs font-semibold uppercase tracking-wide text-gray-400">{t("phone")}</dt>
+                <dd className="mt-1 text-gray-700">
+                  <a href={`tel:${org.phone}`} className="hover:text-brand-gold">{org.phone}</a>
+                </dd>
+              </div>
+              <div>
+                <dt className="text-xs font-semibold uppercase tracking-wide text-gray-400">{t("email")}</dt>
+                <dd className="mt-1 text-gray-700">
+                  <a href={`mailto:${org.email}`} className="hover:text-brand-gold">{org.email}</a>
+                </dd>
+              </div>
+            </dl>
+          )}
         </div>
-
-        <h2 className="mt-5 text-center font-display text-xl font-semibold text-gray-900">{org.orgName}</h2>
-
-        <dl className="mt-8 space-y-4 text-sm">
-          <div>
-            <dt className="text-xs font-semibold uppercase tracking-wider text-gray-400">
-              {t("representative")}
-            </dt>
-            <dd className="mt-1 text-gray-900">{org.representative}</dd>
-          </div>
-          <hr className="divider" />
-          <div>
-            <dt className="text-xs font-semibold uppercase tracking-wider text-gray-400">
-              {t("biography")}
-            </dt>
-            <dd className="mt-1 text-gray-600">{org.address}</dd>
-          </div>
-          <hr className="divider" />
-          <div>
-            <dt className="text-xs font-semibold uppercase tracking-wider text-gray-400">
-              {t("information")}
-            </dt>
-            <dd className="mt-1 text-gray-600">{`${org.phone} • ${org.email}`}</dd>
-          </div>
-        </dl>
       </div>
     </div>
   );

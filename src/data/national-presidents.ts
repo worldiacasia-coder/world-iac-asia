@@ -6,7 +6,20 @@ export type NationalPresident = {
   bioKey: string;
 };
 
+/** Ánh xạ mã quốc gia (pin trên bản đồ) → id chủ tịch */
+export const COUNTRY_CODE_TO_PRESIDENT_ID: Record<string, string> = {
+  VN: "vietnam",
+  KR: "south-korea",
+  TW: "taiwan",
+  PH: "philippines",
+  SG: "singapore",
+  ID: "indonesia",
+  IN: "india",
+  MY: "malaysia",
+};
+
 export const nationalPresidents: NationalPresident[] = [
+  { id: "vietnam", image: "/images/leadership/tran-le-thanh-thien.jpg", nameKey: "vietnamName", titleKey: "vietnamTitle", bioKey: "vietnamBio" },
   { id: "philippines", image: "/images/leadership/placeholder-president.jpg", nameKey: "philippinesName", titleKey: "philippinesTitle", bioKey: "philippinesBio" },
   { id: "singapore", image: "/images/leadership/judy-koh.jpg", nameKey: "singaporeName", titleKey: "singaporeTitle", bioKey: "singaporeBio" },
   { id: "indonesia", image: "/images/leadership/roy-lesmana.jpg", nameKey: "indonesiaName", titleKey: "indonesiaTitle", bioKey: "indonesiaBio" },
@@ -16,6 +29,12 @@ export const nationalPresidents: NationalPresident[] = [
   { id: "malaysia", image: "/images/leadership/william-surianath.jpg", nameKey: "malaysiaName", titleKey: "malaysiaTitle", bioKey: "malaysiaBio" },
   { id: "taiwan", image: "/images/leadership/ho-chen-hsiung.jpg", nameKey: "taiwanName", titleKey: "taiwanTitle", bioKey: "taiwanBio" },
 ];
+
+export function getPresidentByCountryCode(countryCode: string): NationalPresident | undefined {
+  const id = COUNTRY_CODE_TO_PRESIDENT_ID[countryCode];
+  if (!id) return undefined;
+  return nationalPresidents.find((p) => p.id === id);
+}
 
 export const advisoryBoardSlides = [
   { id: "simone", image: "/images/leadership/simone-falcini.jpg", nameKey: "simoneName", roleKey: "simoneRole" },
