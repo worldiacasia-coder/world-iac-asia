@@ -10,15 +10,23 @@ export type PartnerCardData = {
   imageUrl: string;
 };
 
-type Props = { cards: PartnerCardData[] };
+type Props = {
+  cards: PartnerCardData[];
+  emptyMessage?: string;
+};
 
 const CARD_W = 340;
 const GAP = 20;
 
-export default function PartnerCardSlider({ cards }: Props) {
+export default function PartnerCardSlider({ cards, emptyMessage }: Props) {
   const [paused, setPaused] = useState(false);
 
-  if (cards.length === 0) return null;
+  if (cards.length === 0) {
+    if (!emptyMessage) return null;
+    return (
+      <p className="px-4 text-center text-sm text-gray-500">{emptyMessage}</p>
+    );
+  }
 
   /* Nhân đôi để loop mượt */
   const doubled = [...cards, ...cards];

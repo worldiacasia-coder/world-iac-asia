@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { useTranslations } from "next-intl";
 import { useRouter } from "@/i18n/navigation";
-import { mapApiError } from "@/lib/constants";
+import { mapApiError, SITE } from "@/lib/constants";
 import { getPostLoginPath } from "@/lib/roles";
 import type { Role } from "@prisma/client";
 
@@ -112,10 +112,10 @@ export default function AuthForm({ redirectTo = "/" }: { redirectTo?: string }) 
           </p>
           <p className="mt-1 text-sm leading-relaxed text-gray-600">{t("accessNotice")}</p>
           <a
-            href="mailto:info@worldiacasia.com"
+            href={`mailto:${SITE.email}`}
             className="mt-2 inline-flex text-sm font-medium text-brand-gold hover:text-brand-gold-hover"
           >
-            info@worldiacasia.com →
+            {SITE.email} →
           </a>
         </div>
       </div>

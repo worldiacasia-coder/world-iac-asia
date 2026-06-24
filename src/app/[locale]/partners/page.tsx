@@ -1,5 +1,7 @@
 import Image from "next/image";
 import { getTranslations, setRequestLocale } from "next-intl/server";
+import prisma from "@/lib/prisma";
+import PartnerCardSlider from "@/components/home/PartnerCardSlider";
 import PartnerMarquee from "@/components/partners/PartnerMarquee";
 import ContactForm from "@/components/partners/ContactForm";
 
@@ -13,6 +15,7 @@ export async function generateMetadata({ params: { locale } }: Props) {
 export default async function PartnersPage({ params: { locale } }: Props) {
   setRequestLocale(locale);
   const t = await getTranslations("partners");
+  const partnerCards = await prisma.partnerCard.findMany({ orderBy: { sortOrder: "asc" } });
 
   return (
     <>
@@ -39,9 +42,22 @@ export default async function PartnersPage({ params: { locale } }: Props) {
         </div>
       </div>
 
-      {/* Partners marquee */}
+      {/* Partner cards — ảnh công nhận / lợi ích */}
+      <section className="section section-alt">
+        <div className="container-main mb-8">
+          <h2 className="section-title">{t("cardsTitle")}</h2>
+          <div className="mt-4 h-0.5 w-12 bg-brand-gold" />
+          <p className="mt-4 max-w-2xl text-base text-gray-500">{t("cardsSubtitle")}</p>
+        </div>
+        <PartnerCardSlider cards={partnerCards} emptyMessage={t("cardsEmpty")} />
+      </section>
+
+      {/* Partners marquee — logo đối tác */}
       <section className="py-10">
-        <PartnerMarquee />
+        <div className="container-main mb-6">
+          <h2 className="font-display text-xl font-semibold text-gray-900">{t("logosTitle")}</h2>
+        </div>
+        <PartnerMarquee emptyMessage={t("logosEmpty")} />
       </section>
 
       {/* Editorial divider image */}

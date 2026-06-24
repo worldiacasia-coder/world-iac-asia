@@ -1,8 +1,22 @@
 import Image from "next/image";
 import prisma from "@/lib/prisma";
 
-export default async function PartnerMarquee() {
+type Props = {
+  emptyMessage?: string;
+};
+
+export default async function PartnerMarquee({ emptyMessage }: Props) {
   const partners = await prisma.partner.findMany({ orderBy: { sortOrder: "asc" } });
+
+  if (partners.length === 0) {
+    if (!emptyMessage) return null;
+    return (
+      <div className="glass-section py-10">
+        <p className="text-center text-sm text-gray-500">{emptyMessage}</p>
+      </div>
+    );
+  }
+
   const doubled = [...partners, ...partners];
 
   return (

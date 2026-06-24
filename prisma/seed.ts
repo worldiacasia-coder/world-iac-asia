@@ -111,6 +111,7 @@ async function main() {
   await prisma.trainingRegistration.deleteMany();
   await prisma.course.deleteMany();
   await prisma.partner.deleteMany();
+  await prisma.partnerCard.deleteMany();
   await prisma.newsItem.deleteMany();
   await prisma.member.deleteMany();
   await prisma.judge.deleteMany();
@@ -322,6 +323,35 @@ async function main() {
       { name: "Food & Hospitality", logoUrl: "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=200&h=80&fit=crop", sortOrder: 4 },
       { name: "Asia Culinary Board", logoUrl: "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=200&h=80&fit=crop", sortOrder: 5 },
       { name: "World Gastronomy Institute", logoUrl: "https://images.unsplash.com/photo-1555244162-803834f70033?w=200&h=80&fit=crop", sortOrder: 6 },
+    ],
+  });
+
+  await prisma.partnerCard.createMany({
+    data: [
+      {
+        name: "Sự công nhận",
+        description: "Khẳng định chất lượng và sáng tạo trong ngành ẩm thực thông qua tiêu chuẩn World IAC.",
+        imageUrl: "https://images.unsplash.com/photo-1556911220-bff31c812dba?w=800&h=600&fit=crop",
+        sortOrder: 1,
+      },
+      {
+        name: "Truyền thông",
+        description: "Xây dựng thương hiệu cá nhân và doanh nghiệp mạnh mẽ trên nền tảng mạng lưới quốc tế.",
+        imageUrl: "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=800&h=600&fit=crop",
+        sortOrder: 2,
+      },
+      {
+        name: "Tăng trưởng",
+        description: "Thu hút khách hàng và mở rộng cơ hội hợp tác trong ngành F&B châu Á.",
+        imageUrl: "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=800&h=600&fit=crop",
+        sortOrder: 3,
+      },
+      {
+        name: "Giá trị thương hiệu",
+        description: "Nâng cao vị thế dẫn đầu trong ngành F&B với chứng nhận và công nhận quốc tế.",
+        imageUrl: "https://images.unsplash.com/photo-1555244162-803834f70033?w=800&h=600&fit=crop",
+        sortOrder: 4,
+      },
     ],
   });
 

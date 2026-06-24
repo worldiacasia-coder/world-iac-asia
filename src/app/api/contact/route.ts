@@ -5,7 +5,7 @@ import prisma from "@/lib/prisma";
 const schema = z.object({
   fullName: z.string().min(2),
   email: z.string().email(),
-  phone: z.string().optional(),
+  phone: z.string().min(8, "Vui lòng nhập số điện thoại"),
   subject: z.string().min(2),
   message: z.string().min(10),
 });

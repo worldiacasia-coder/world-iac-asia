@@ -146,7 +146,10 @@ export default async function HomePage({ params: { locale } }: Props) {
             <div className="mt-4 h-0.5 w-12 bg-brand-gold" />
           </div>
         </div>
-        <PartnerCardSlider cards={partnerCards} />
+        <PartnerCardSlider
+          cards={partnerCards}
+          emptyMessage={t("partnersCardsEmpty")}
+        />
       </section>
     </>
   );

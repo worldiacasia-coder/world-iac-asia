@@ -124,6 +124,7 @@ model ContactMessage {
   phone     String?
   subject   String
   message   String
+  isRead    Boolean  @default(false) @map("is_read")
   createdAt DateTime @default(now()) @map("created_at")
 
   @@map("contact_messages")

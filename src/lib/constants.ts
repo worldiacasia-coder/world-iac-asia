@@ -11,7 +11,7 @@ export const SITE = {
   name: "WORLD INDEPENDENT ASSOCIATION OF CHEFS – ASIA",
   org: "WORLD IAC ASIA",
   tagline: "A member of WORLD IAC",
-  email: "info@worldiacasia.com",
+  email: "worldiacasia@gmail.com",
   phone: "+84 975 575 449",
   address: "135/28 Nguyen Huu Canh, Ward 22, Binh Thanh, Ho Chi Minh City, Vietnam",
   worldIacUrl: "https://www.world-iac.com/",

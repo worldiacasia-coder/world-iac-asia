@@ -98,8 +98,9 @@ export default function ContactForm() {
             className="input-field"
           />
           <input
+            required
             type="tel"
-            placeholder={t("phone")}
+            placeholder={`${t("phone")} *`}
             value={form.phone}
             onChange={(e) => setForm({ ...form, phone: e.target.value })}
             className="input-field"
