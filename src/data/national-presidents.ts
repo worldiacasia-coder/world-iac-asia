@@ -37,11 +37,11 @@ export function getPresidentByCountryCode(countryCode: string): NationalPresiden
 }
 
 export const advisoryBoardSlides = [
-  { id: "simone", image: "/images/leadership/simone-falcini.jpg", nameKey: "simoneName", roleKey: "simoneRole" },
-  { id: "thien", image: "/images/leadership/tran-le-thanh-thien.jpg", nameKey: "thienName", roleKey: "thienRole" },
-  { id: "trinh", image: "/images/leadership/trinh-le-thanh.jpg", nameKey: "trinhName", roleKey: "trinhRole" },
-  { id: "judy", image: "/images/leadership/judy-koh.jpg", nameKey: "judyName", roleKey: "judyRole" },
-  { id: "roy", image: "/images/leadership/roy-lesmana.jpg", nameKey: "royName", roleKey: "royRole" },
+  { id: "simone", image: "/images/leadership/simone-falcini.jpg", nameKey: "simoneName", roleKey: "simoneRole", objectPosition: "center 18%" },
+  { id: "thien", image: "/images/leadership/tran-le-thanh-thien.jpg", nameKey: "thienName", roleKey: "thienRole", objectPosition: "center 12%" },
+  { id: "trinh", image: "/images/leadership/trinh-le-thanh.jpg", nameKey: "trinhName", roleKey: "trinhRole", objectPosition: "center 10%" },
+  { id: "judy", image: "/images/leadership/judy-koh.jpg", nameKey: "judyName", roleKey: "judyRole", objectPosition: "center 15%" },
+  { id: "roy", image: "/images/leadership/roy-lesmana.jpg", nameKey: "royName", roleKey: "royRole", objectPosition: "center 20%" },
 ];
 
 export const judgeCourseSlides = [

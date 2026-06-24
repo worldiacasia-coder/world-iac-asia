@@ -9,6 +9,7 @@ type Slide = {
   alt: string;
   caption?: string;
   subcaption?: string;
+  objectPosition?: string;
 };
 
 type Props = {
@@ -18,6 +19,8 @@ type Props = {
   rounded?: boolean;
   showCaptions?: boolean;
   showControls?: boolean;
+  /** Mặc định căn ảnh — dùng center top cho ảnh chân dung */
+  defaultObjectPosition?: string;
 };
 
 export default function ImageSlider({
@@ -27,6 +30,7 @@ export default function ImageSlider({
   rounded = true,
   showCaptions = true,
   showControls = true,
+  defaultObjectPosition = "center center",
 }: Props) {
   const [active, setActive] = useState(0);
 
@@ -51,7 +55,14 @@ export default function ImageSlider({
           key={s.id}
           className={`absolute inset-0 transition-opacity duration-700 ${i === active ? "opacity-100" : "opacity-0"}`}
         >
-          <Image src={s.image} alt={s.alt} fill className="object-cover object-center" sizes="100vw" />
+          <Image
+            src={s.image}
+            alt={s.alt}
+            fill
+            className="object-cover"
+            style={{ objectPosition: s.objectPosition ?? defaultObjectPosition }}
+            sizes="100vw"
+          />
         </div>
       ))}
       <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
