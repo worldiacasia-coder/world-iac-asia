@@ -2,11 +2,10 @@
 
 import Image from "next/image";
 import { useTranslations } from "next-intl";
-import { useEffect, useState } from "react";
 import { Link } from "@/i18n/navigation";
 import CardSlider from "@/components/ui/CardSlider";
 
-type NewsItem = {
+export type NewsSliderItem = {
   id: string;
   title: string;
   excerpt: string;
@@ -15,16 +14,12 @@ type NewsItem = {
   link?: string | null;
 };
 
-export default function NewsSlider() {
-  const t = useTranslations("home");
-  const [items, setItems] = useState<NewsItem[]>([]);
+type Props = {
+  items: NewsSliderItem[];
+};
 
-  useEffect(() => {
-    fetch("/api/news")
-      .then((r) => r.json())
-      .then((d) => setItems(d.news ?? []))
-      .catch(() => {});
-  }, []);
+export default function NewsSlider({ items }: Props) {
+  const t = useTranslations("home");
 
   if (!items.length) return null;
 

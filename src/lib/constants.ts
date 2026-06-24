@@ -1,6 +1,7 @@
 export const NAV_ROUTES = [
   { href: "/", key: "home" },
   { href: "/judges", key: "judges" },
+  { href: "/map", key: "network" },
   { href: "/members", key: "members" },
   { href: "/news", key: "news" },
   { href: "/partners", key: "partners" },

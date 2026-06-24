@@ -18,6 +18,7 @@
   "nav": {
     "home": "Trang chủ",
     "judges": "Giám khảo IAC",
+    "network": "Mạng lưới IAC",
     "members": "Hội viên",
     "activities": "Hoạt động",
     "news": "Tin tức",
@@ -108,6 +109,7 @@
     "statMembers": "Hội viên",
     "statJudges": "Giám khảo",
     "newsTitle": "Tin tức mới nhất",
+    "viewAllNews": "Xem tất cả tin tức",
     "newsBadge": "Tin mới",
     "benefitsTitle": "Lợi ích khi tham gia",
     "partnersTitle": "Đối tác & công nhận",

@@ -6,6 +6,7 @@ import NewsHighlightSection from "@/components/home/NewsHighlightSection";
 import PartnerCardSlider from "@/components/home/PartnerCardSlider";
 import prisma from "@/lib/prisma";
 import { SITE } from "@/lib/constants";
+import { getHomeNewsItems } from "@/lib/news-defaults";
 
 type Props = { params: { locale: string } };
 
@@ -17,6 +18,7 @@ export default async function HomePage({ params: { locale } }: Props) {
   const partnerCards = await prisma.partnerCard.findMany({
     orderBy: { sortOrder: "asc" },
   });
+  const newsItems = await getHomeNewsItems();
 
   const stats = [
     { n: "13", l: t("statCountries") },
@@ -29,7 +31,16 @@ export default async function HomePage({ params: { locale } }: Props) {
     <>
       <HeroSlider />
 
-      <NewsHighlightSection />
+      <NewsHighlightSection
+        items={newsItems.map((item) => ({
+          id: item.id,
+          title: item.title,
+          excerpt: item.excerpt,
+          imageUrl: item.imageUrl,
+          slug: item.slug,
+          link: item.link,
+        }))}
+      />
 
       <section className="border-y border-white/50 bg-white/60 backdrop-blur-lg">
         <div className="container-main grid grid-cols-2 divide-x divide-white/40 md:grid-cols-4">

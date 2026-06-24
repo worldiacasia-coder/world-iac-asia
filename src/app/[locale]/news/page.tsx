@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
-import prisma from "@/lib/prisma";
+import { getHomeNewsItems } from "@/lib/news-defaults";
 import NewsHighlightSection from "@/components/home/NewsHighlightSection";
 
 type Props = { params: { locale: string } };
@@ -14,7 +14,7 @@ export async function generateMetadata({ params: { locale } }: Props) {
 export default async function NewsPage({ params: { locale } }: Props) {
   setRequestLocale(locale);
   const t = await getTranslations("newsPage");
-  const newsItems = await prisma.newsItem.findMany({ orderBy: { sortOrder: "asc" } });
+  const newsItems = await getHomeNewsItems();
 
   return (
     <>
@@ -36,7 +36,16 @@ export default async function NewsPage({ params: { locale } }: Props) {
         </div>
       </div>
 
-      <NewsHighlightSection />
+      <NewsHighlightSection
+        items={newsItems.map((item) => ({
+          id: item.id,
+          title: item.title,
+          excerpt: item.excerpt,
+          imageUrl: item.imageUrl,
+          slug: item.slug,
+          link: item.link,
+        }))}
+      />
 
       <section className="section">
         <div className="container-main grid gap-8 md:grid-cols-2 lg:grid-cols-3">
