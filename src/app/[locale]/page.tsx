@@ -31,17 +31,6 @@ export default async function HomePage({ params: { locale } }: Props) {
     <>
       <HeroSlider />
 
-      <NewsHighlightSection
-        items={newsItems.map((item) => ({
-          id: item.id,
-          title: item.title,
-          excerpt: item.excerpt,
-          imageUrl: item.imageUrl,
-          slug: item.slug,
-          link: item.link,
-        }))}
-      />
-
       <section className="border-y border-white/50 bg-white/60 backdrop-blur-lg">
         <div className="container-main grid grid-cols-2 divide-x divide-white/40 md:grid-cols-4">
           {stats.map((stat) => (
@@ -129,7 +118,18 @@ export default async function HomePage({ params: { locale } }: Props) {
         </div>
       </section>
 
-      <section className="section">
+      <NewsHighlightSection
+        items={newsItems.map((item) => ({
+          id: item.id,
+          title: item.title,
+          excerpt: item.excerpt,
+          imageUrl: item.imageUrl,
+          slug: item.slug,
+          link: item.link,
+        }))}
+      />
+
+      <section className="section section-alt">
         <div className="container-main max-w-3xl">
           <p className="section-label">{t("heroBadge")}</p>
           <h2 className="mt-3 section-title">{t("missionTitle")}</h2>
@@ -139,7 +139,7 @@ export default async function HomePage({ params: { locale } }: Props) {
         </div>
       </section>
 
-      <section className="section section-alt">
+      <section className="section">
         <div className="container-main">
           <div className="mb-8">
             <h2 className="section-title">{t("partnersTitle")}</h2>

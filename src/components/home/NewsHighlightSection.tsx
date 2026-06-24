@@ -12,7 +12,7 @@ export default function NewsHighlightSection({ items }: Props) {
   const t = useTranslations("home");
 
   return (
-    <section className="section section-alt">
+    <section className="section">
       <div className="container-main">
         <div className="flex flex-wrap items-end justify-between gap-4">
           <div>
