@@ -55,6 +55,7 @@ model Member {
   name            String
   avatarUrl       String        @map("avatar_url")
   country         String
+  jobTitle        String        @default("") @map("job_title")
   membershipTier  String        @map("membership_tier")
   expirationDate  DateTime      @map("expiration_date")
   paymentStatus   PaymentStatus @default(unpaid) @map("payment_status")

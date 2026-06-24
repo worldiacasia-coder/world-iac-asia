@@ -1,8 +1,8 @@
 {
   "metadata": {
-    "siteTitle": "5 Gold Stars of the Kitchen | World IAC Asia",
-    "siteDescription": "World IAC Asia Portal - Managing members, judge profiles, and regional organization network across Asia.",
-    "titleTemplate": "{title} | World IAC Asia"
+    "siteTitle": "WORLD IAC ASIA",
+    "siteDescription": "WORLD IAC ASIA Portal - Managing members, judge profiles, and regional organization network across Asia.",
+    "titleTemplate": "{title} | WORLD IAC ASIA"
   },
   "common": {
     "loading": "Loading...",
@@ -17,15 +17,15 @@
   },
   "nav": {
     "home": "Home",
-    "map": "IAC Network",
-    "judges": "Judges",
+    "judges": "IAC Judges",
     "members": "Members",
-    "training": "Training",
-    "partners": "Partners"
+    "activities": "Activities",
+    "news": "News",
+    "partners": "Partners & Recognition"
   },
   "header": {
-    "brandShort": "5 Gold Stars",
-    "brandOrg": "World IAC Asia",
+    "brandShort": "A member of WORLD IAC",
+    "brandOrg": "WORLD IAC ASIA",
     "login": "Login",
     "logout": "Logout",
     "profile": "Profile"
@@ -33,7 +33,9 @@
   "footer": {
     "links": "Links",
     "contact": "Contact",
-    "authLink": "Login / Register",
+    "authLink": "Login",
+    "networkLink": "IAC Network",
+    "addressLabel": "Address",
     "tel": "Tel",
     "email": "Email"
   },
@@ -62,33 +64,38 @@
     "submitAnother": "Submit Another Application"
   },
   "presidentAsia": {
-    "label": "World IAC Asia",
+    "label": "WORLD IAC ASIA",
     "title": "President of World IAC Asia",
-    "p1": "Chef Tran Le Thanh Thien, born in 1994 in Kien Giang province, officially assumed the Presidency of World IAC Asia in 2025. He also serves as Vice President of the Global Chefs Union (GCU) and is a PhD student at UNESCO Chair. He is widely regarded as a role model for the young generation of Vietnamese chefs making their mark on the international stage.",
-    "p2": "Holding an MBA from Ho Chi Minh City University of Technology (HUTECH), he combines a strong business foundation with culinary passion to serve as a culinary lecturer for University CY Paris (France) at HUTECH and several major universities in Ho Chi Minh City. He is the Founder of 2D&ONE Culinary Academy.",
-    "p3": "As a Global Culinary Flavor Ambassador, Representative of Chefs Without Borders (CFS), and International Judge in young chefs competitions, Chef Thien is committed to connecting the Asian culinary community, elevating professional standards, and promoting Vietnamese cuisine worldwide. He is also the author of the plant-based cookbook \"An Xanh Song Lanh\" (Green Eating, Healthy Living).",
-    "ctaLabel": "World IAC Asia",
-    "ctaTitle": "IAC Network Across Asia",
-    "ctaDesc": "Explore the World IAC Asia network map — 10 countries, 1 professional culinary community.",
-    "ctaBtn": "View network map →"
+    "role": "World IAC Asia President",
+    "p1": "A celebrated culinary figure, educator, and strategic consultant, Mr. Tran Le Thanh Thien wields substantial influence across the domestic and international F&B landscapes. In his esteemed roles as President of World IAC Asia and Founder of the Asia Culinary and Baking Academy, he acts as a vital cultural bridge and is frequently spotlighted as an International Judge and Organising Committee Chair at world-class arenas, including Master Chef of Foodex 2026 and the World Bakery and Confectionery Competition 2026. His visionary approach to global standardization, paired with his dedication to mentorship, has solidified his status as a trailblazer redefining excellence for the next generation of hospitality talents.",
+    "ctaBtn": "View IAC Network →"
+  },
+  "secretary": {
+    "label": "WORLD IAC ASIA",
+    "title": "General Secretary of World IAC Asia",
+    "bio": "Chef Trinh Le Thanh, General Secretary of World IAC Asia, is a celebrated culinary figure, master artisan, and visionary educator renowned for her profound expertise in Vietnamese pastry arts and Chinese gastronomy. A driving force within the international F&B landscape, she is deeply committed to empowering global culinary communities and fostering strategic industry growth. Serving as an esteemed International Judge and Deputy Chair of the Organizing Committee for world-class arenas—including Master Chef of Foodex 2026 and the World Bakery and Confectionery Competition 2026—Chef Trinh Le Thanh acts as a vital cultural bridge and mentor, dedicated to advancing professional standards and inspiring the next generation of hospitality talents to excel globally."
   },
   "president": {
-    "label": "World IAC",
-    "title": "About the World IAC President",
-    "p1": "Chef Simone Falcini was born in 1972 in Empoli, Italy. He is the World President of the World Independent Association of Chefs (World IAC) and President of the Italian Chefs Association. From an early age, he developed a passion for cuisine through his family's long-standing food business in Empoli.",
-    "p2": "He took on his first Executive Chef role in 1996, opened his own restaurant in 1998, and spent four years in Asia studying Eastern gastronomy — the foundation on which he built his Asia–Europe culinary bridge strategy within the World IAC Asia framework.",
-    "p3": "As the Founder and Educational Director of ITCP – Istituto Italiano della Cucina e Pasticceria, he designs training programs certified to European quality standard ISO 29990:2015. He previously served as Teaching Director at Accademia Italiana Chef, a member of the National Council of the Italian Professional Chefs Association, and received the WISE Award 2016 at a ceremony in Los Angeles.",
-    "ctaLabel": "World IAC Asia",
+    "label": "WORLD IAC",
+    "title": "Global President",
+    "role": "World President — World IAC / Global President",
+    "p1": "Chef Simone Falcini serves as World President of the World Independent Association of Chefs (World IAC), leading the global vision to connect professional chefs worldwide.",
+    "quote": "We want to be a family, to share, to rejoice, and to be close, both in good times and in bad. Our philosophy is to always look to the future and to solutions for the common good. Personally, I like to think of myself as everyone's president, and I am available to professionals and junior chefs to create a strong and solid bond that can take deep root. I look forward to seeing you at WORLD IAC.",
     "ctaTitle": "International Judges Network",
-    "ctaDesc": "Explore our panel of international culinary experts — the people who set and uphold the gold standard for the F&B industry across Asia.",
-    "ctaBtn": "View judges →"
+    "ctaDesc": "Explore our panel of international culinary experts who set and uphold the gold standard for the F&B industry across Asia.",
+    "ctaBtn": "View IAC Judges →"
   },
   "home": {
-    "heroBadge": "World IAC Asia Portal",
-    "heroTitle": "5 Gold Stars of the Kitchen",
+    "heroBadge": "WORLD IAC ASIA",
+    "heroTitle": "WORLD IAC ASIA",
     "heroSubtitle": "Asia's leading professional culinary organization network — managing members, judges, and international culinary accreditation standards.",
     "ctaMap": "Explore IAC Network",
-    "ctaRegister": "Become a Member",
+    "ctaJudges": "IAC Judges",
+    "ctaNews": "Featured News",
+    "ctaActivities": "View activities →",
+    "iacIntroLabel": "About IAC",
+    "iacIntroTitle": "Featured Highlights",
+    "iacIntroDesc": "Latest activities, events, and news from World IAC Asia.",
     "missionTitle": "World IAC Asia Mission",
     "missionP1": "World IAC Asia connects culinary organizations across 10 Asian countries, promoting quality standards, professional training, and outstanding contributions in the F&B industry.",
     "missionP2": "We provide a transparent platform for members, judges, and partners to grow together and elevate Asian culinary brands on the global stage.",
@@ -99,7 +106,7 @@
     "newsTitle": "Latest News",
     "newsBadge": "Latest",
     "benefitsTitle": "Membership Benefits",
-    "partnersTitle": "Partners",
+    "partnersTitle": "Partners & Recognition",
     "benefit1Title": "Recognition",
     "benefit1Desc": "Affirm your quality and creativity in the culinary industry.",
     "benefit2Title": "Media",
@@ -112,6 +119,17 @@
   "map": {
     "title": "World IAC Asia Network",
     "subtitle": "Click a country flag on the map to view representative organization details.",
+    "advisorySubtitle": "World IAC Asia Advisory Board — leaders shaping standards and professional culinary community development.",
+    "simoneName": "Chef Simone Falcini",
+    "simoneRole": "World President — World IAC",
+    "thienName": "Tran Le Thanh Thien",
+    "thienRole": "President — World IAC Asia",
+    "trinhName": "Chef Trinh Le Thanh",
+    "trinhRole": "General Secretary — World IAC Asia",
+    "judyName": "Chef Judy Koh",
+    "judyRole": "President — World IAC Singapore",
+    "royName": "Chef Roy Lesmana",
+    "royRole": "President — World IAC Indonesia",
     "ariaLabel": "World IAC Asia network map",
     "noData": "No data available",
     "representative": "Representative",
@@ -134,8 +152,14 @@
     "IN": "India"
   },
   "judges": {
-    "title": "Judges Panel",
+    "title": "IAC Judges",
     "subtitle": "International culinary experts evaluating and certifying IAC standards.",
+    "courseSectionTitle": "IAC Judge Course",
+    "courseSectionDesc": "Training and certification program for judges under World IAC standards.",
+    "coursePosterTitle": "IAC Judge Course Poster",
+    "coursePosterDesc": "Introduction to the World IAC international judge training program.",
+    "regulationsTitle": "Judge Regulations",
+    "regulationsDesc": "Standards, procedures, and professional ethics for IAC judges.",
     "loginCta": "Login to view full details",
     "countryRepNotice": "You are signed in as a Country Representative — judge profiles only. No Admin access and no editing.",
     "lockedMessage": "Please login to view full information",
@@ -161,7 +185,54 @@
     "allCountries": "All countries",
     "notFound": "No members found.",
     "expired": "Expired",
-    "expires": "Expires"
+    "expires": "Expires",
+    "jobTitle": "Current Title"
+  },
+  "activities": {
+    "title": "Activities",
+    "subtitle": "Follow activities, events, and programs from World IAC Asia.",
+    "question": "Where are IAC Asia-wide activities posted?",
+    "answer": "News, events, and activities from World IAC Asia are updated in the News section, through partner recognition channels, and on the IAC network map for each member country.",
+    "channelNewsTitle": "News",
+    "channelNewsDesc": "Highlights, events, and latest announcements.",
+    "channelPartnersTitle": "Partners & Recognition",
+    "channelPartnersDesc": "Partner information and recognition programs.",
+    "channelMapTitle": "IAC Network",
+    "channelMapDesc": "Activities and representative organizations by country."
+  },
+  "newsPage": {
+    "title": "News",
+    "subtitle": "Latest news, events, and highlights from World IAC Asia.",
+    "empty": "No news yet."
+  },
+  "nationalPresidents": {
+    "label": "Leadership",
+    "title": "National Presidents",
+    "subtitle": "World IAC leadership across Asian member countries.",
+    "philippinesName": "Chef Arwin \"Zek\" Gragasin",
+    "philippinesTitle": "President of World IAC Philippines",
+    "philippinesBio": "Chef Arwin \"Zek\" Gragasin's culinary journey began with a passion for Asian cuisine and Filipino heritage. He is President of World IAC Philippines and founder of the Upland Sierra Madre Chef Organisation, specializing in Asian fusion and promoting Filipino culinary heritage globally.",
+    "singaporeName": "Chef Judy Koh",
+    "singaporeTitle": "President of World IAC Singapore",
+    "singaporeBio": "Chef Judy Koh is the President of World IAC Singapore, a culinary educator and internationally recognized pastry expert. She plays a vital role in elevating pastry standards and developing young chefs in Singapore.",
+    "indonesiaName": "Chef Roy Lesmana",
+    "indonesiaTitle": "President of World IAC Indonesia",
+    "indonesiaBio": "Chef Roy Lesmana, President of World IAC Indonesia, is an experienced chef and trainer in Indonesia's F&B industry. He promotes professional standards and connects the culinary community across the region.",
+    "indiaName": "Chef Kaninika",
+    "indiaTitle": "President of World IAC India",
+    "indiaBio": "Chef Kaninika, President of World IAC India, is a culinary expert and educator with significant influence in India's F&B community. She plays a key role in developing judge standards and professional training.",
+    "sriLankaName": "Chef Chamodh Peiris",
+    "sriLankaTitle": "President of World IAC Sri Lanka",
+    "sriLankaBio": "Chef Chamodh Peiris, President of World IAC Sri Lanka, is renowned for the 150.919-meter Swiss Roll record and serves as Head of the Youth Chefs' Club of Ceylon. He champions creativity and youth chef development in Sri Lanka.",
+    "southKoreaName": "Chef Dong Yeon Park",
+    "southKoreaTitle": "President of World IAC South Korea",
+    "southKoreaBio": "Chef Dong Yeon Park, President of World IAC South Korea, is a culinary expert and community leader. He contributes to elevating professional standards and connecting Korean cuisine with the World IAC network.",
+    "malaysiaName": "Chef William Surianath",
+    "malaysiaTitle": "President of World IAC Malaysia",
+    "malaysiaBio": "Chef William Surianath, President of World IAC Malaysia, is an experienced chef and trainer in the hospitality industry. He promotes career development and judge standardization in Malaysia.",
+    "taiwanName": "Chef Ho Chen Hsiung",
+    "taiwanTitle": "President of World IAC Taiwan",
+    "taiwanBio": "Chef Ho Chen Hsiung, President of World IAC Taiwan, is a culinary expert with extensive experience in training and organizing international culinary events. He connects Taiwan's chef community with World IAC."
   },
   "training": {
     "title": "Training & Accreditation",

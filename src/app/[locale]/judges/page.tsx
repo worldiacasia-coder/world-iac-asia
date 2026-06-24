@@ -4,6 +4,7 @@ import prisma from "@/lib/prisma";
 import { getSession, canViewSensitiveData, isAdmin } from "@/lib/auth";
 import { isCountryRep } from "@/lib/roles";
 import JudgeCard from "@/components/judges/JudgeCard";
+import JudgeCourseSlider from "@/components/judges/JudgeCourseSlider";
 import AdminJudgePanel from "@/components/admin/AdminJudgePanel";
 import { Link } from "@/i18n/navigation";
 
@@ -62,7 +63,9 @@ export default async function JudgesPage({ params: { locale } }: Props) {
 
       {/* Judges grid */}
       <section className="section">
-        <div className="container-main">
+        <div className="container-main space-y-12">
+          <JudgeCourseSlider />
+
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {judges.map((judge) => (
               <JudgeCard

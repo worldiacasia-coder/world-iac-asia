@@ -10,7 +10,6 @@ export default async function Footer() {
 
   return (
     <footer className="relative overflow-hidden">
-      {/* Background image */}
       <div className="absolute inset-0 z-0">
         <Image
           src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1920&q=60"
@@ -23,31 +22,41 @@ export default async function Footer() {
         <div className="absolute inset-0 bg-gray-950/88 backdrop-blur-sm" />
       </div>
 
-      {/* Content */}
       <div className="relative z-10">
         <div className="container-main grid gap-12 py-16 md:grid-cols-4">
-          {/* Brand */}
           <div className="md:col-span-2">
-            <div className="flex items-center gap-3">
-              <div className="relative h-14 w-14 shrink-0">
+            <div className="flex flex-col items-start gap-3">
+              <div className="relative h-16 w-16 shrink-0">
                 <Image
-                  src="/images/world-iac-asia-logo.png"
-                  alt="World IAC Asia"
+                  src="/images/logos/world-iac-asia-logo.jpg"
+                  alt="WORLD IAC ASIA"
                   fill
-                  sizes="56px"
+                  sizes="64px"
                   className="object-contain"
                 />
               </div>
+              <div className="relative h-12 w-36 shrink-0">
+                <Image
+                  src="/images/logos/world-iac-5stars.jpg"
+                  alt="5 Gold Stars of the Kitchen"
+                  fill
+                  sizes="144px"
+                  className="object-contain object-left"
+                />
+              </div>
               <div>
-                <p className="font-display text-base font-semibold text-white">{SITE.name}</p>
-                <p className="text-sm text-white/50">{SITE.org}</p>
+                <p className="font-display text-sm font-semibold uppercase tracking-wide text-white md:text-base">
+                  {SITE.name}
+                </p>
+                <p className="mt-1 text-sm text-white/50">{SITE.org}</p>
               </div>
             </div>
             <div className="mt-5 h-px w-10 bg-brand-gold" />
-            <p className="mt-4 max-w-sm text-sm leading-relaxed text-white/60">{SITE.address}</p>
+            <p className="mt-4 max-w-sm text-sm leading-relaxed text-white/60">
+              {t("addressLabel")}: {SITE.address}
+            </p>
           </div>
 
-          {/* Navigation */}
           <div>
             <p className="text-xs font-semibold uppercase tracking-[0.15em] text-white/40">
               {t("links")}
@@ -64,17 +73,18 @@ export default async function Footer() {
                 </li>
               ))}
               <li>
-                <Link
-                  href="/auth"
-                  className="text-sm text-white/60 transition-colors hover:text-brand-gold"
-                >
+                <Link href="/map" className="text-sm text-white/60 transition-colors hover:text-brand-gold">
+                  {t("networkLink")}
+                </Link>
+              </li>
+              <li>
+                <Link href="/auth" className="text-sm text-white/60 transition-colors hover:text-brand-gold">
                   {t("authLink")}
                 </Link>
               </li>
             </ul>
           </div>
 
-          {/* Contact */}
           <div>
             <p className="text-xs font-semibold uppercase tracking-[0.15em] text-white/40">
               {t("contact")}
@@ -93,30 +103,9 @@ export default async function Footer() {
                 </a>
               </p>
             </div>
-
-            {/* Flag icons */}
-            <div className="mt-6 flex flex-wrap gap-2">
-              {["vietnam", "korea", "taiwan", "thailand", "singapore", "malaysia", "indonesia", "philippines", "india", "cambodia"].map(
-                (flag) => (
-                  <div
-                    key={flag}
-                    className="relative h-5 w-7 overflow-hidden rounded-sm opacity-60 transition-opacity hover:opacity-100"
-                  >
-                    <Image
-                      src={`/flags/${flag}.png`}
-                      alt={flag}
-                      fill
-                      sizes="28px"
-                      className="object-cover"
-                    />
-                  </div>
-                )
-              )}
-            </div>
           </div>
         </div>
 
-        {/* Bottom bar */}
         <div className="border-t border-white/10 py-6 text-center text-xs text-white/30">
           {tCommon("copyright", { year: new Date().getFullYear() })}
         </div>

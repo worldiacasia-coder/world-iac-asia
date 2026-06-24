@@ -1,8 +1,8 @@
 {
   "metadata": {
-    "siteTitle": "5 Gold Stars of the Kitchen | World IAC Asia",
-    "siteDescription": "World IAC Asia Portal - Quản lý hội viên, hồ sơ giám khảo và mạng lưới tổ chức khu vực châu Á.",
-    "titleTemplate": "{title} | World IAC Asia"
+    "siteTitle": "WORLD IAC ASIA",
+    "siteDescription": "WORLD IAC ASIA Portal - Quản lý hội viên, hồ sơ giám khảo và mạng lưới tổ chức khu vực châu Á.",
+    "titleTemplate": "{title} | WORLD IAC ASIA"
   },
   "common": {
     "loading": "Đang tải...",
@@ -17,15 +17,15 @@
   },
   "nav": {
     "home": "Trang chủ",
-    "map": "Mạng lưới IAC",
-    "judges": "Giám khảo",
+    "judges": "Giám khảo IAC",
     "members": "Hội viên",
-    "training": "Đào tạo",
-    "partners": "Đối tác"
+    "activities": "Hoạt động",
+    "news": "Tin tức",
+    "partners": "Đối tác & công nhận"
   },
   "header": {
-    "brandShort": "5 Gold Stars",
-    "brandOrg": "World IAC Asia",
+    "brandShort": "A member of WORLD IAC",
+    "brandOrg": "WORLD IAC ASIA",
     "login": "Đăng nhập",
     "logout": "Đăng xuất",
     "profile": "Hồ sơ"
@@ -33,7 +33,9 @@
   "footer": {
     "links": "Liên kết",
     "contact": "Liên hệ",
-    "authLink": "Đăng nhập / Đăng ký",
+    "authLink": "Đăng nhập",
+    "networkLink": "Mạng lưới IAC",
+    "addressLabel": "Địa chỉ",
     "tel": "Tel",
     "email": "Email"
   },
@@ -62,33 +64,38 @@
     "submitAnother": "Nộp hồ sơ khác"
   },
   "presidentAsia": {
-    "label": "World IAC Asia",
+    "label": "WORLD IAC ASIA",
     "title": "Chủ Tịch World IAC Khối Châu Á",
-    "p1": "Chef Trần Lê Thanh Thiện sinh năm 1994 tại Kiên Giang — là Chủ tịch World IAC Asia kể từ năm 2025, đồng thời giữ chức Phó Chủ tịch Liên đoàn Đầu bếp Toàn cầu (Global Chefs Union) và là nghiên cứu sinh tiến sĩ tại UNESCO Chair. Ông là tấm gương tiêu biểu của thế hệ đầu bếp trẻ Việt Nam vươn ra tầm quốc tế.",
-    "p2": "Tốt nghiệp MBA chuyên ngành quản trị tại Đại học Công nghệ TP.HCM (HUTECH), ông kết hợp nền tảng kinh doanh với đam mê ẩm thực để trở thành giảng viên ẩm thực cho Đại học CY Paris (Pháp) tại HUTECH và nhiều trường đại học lớn tại TP.HCM. Ông là Nhà sáng lập Học viện ẩm thực 2D&ONE Culinary Academy.",
-    "p3": "Với vai trò Đại sứ hương vị ẩm thực toàn cầu, Đại diện đầu bếp không biên giới (CFS) và Giám khảo quốc tế các cuộc thi đầu bếp trẻ, Chef Thiện kiên định với sứ mệnh kết nối cộng đồng đầu bếp châu Á, nâng tầm tiêu chuẩn nghề nghiệp và quảng bá ẩm thực Việt Nam ra thế giới. Ông cũng là tác giả cuốn sách thuần chay \"An Xanh Sống Lành\".",
-    "ctaLabel": "World IAC Asia",
-    "ctaTitle": "Mạng lưới IAC tại châu Á",
-    "ctaDesc": "Khám phá bản đồ mạng lưới World IAC Asia — 10 quốc gia, 1 cộng đồng ẩm thực chuyên nghiệp.",
-    "ctaBtn": "Xem bản đồ mạng lưới →"
+    "role": "World IAC Asia President",
+    "p1": "Là một nhân vật ẩm thực, nhà giáo dục và nhà tư vấn chiến lược danh tiếng, Ông Trần Lê Thanh Thiện sở hữu tầm ảnh hưởng sâu rộng trong cả bối cảnh F&B trong nước lẫn quốc tế. Trên cương vị tôn kính là Chủ tịch World IAC Asia và Nhà sáng lập Học viện Ẩm thực và Bánh Châu Á, ông đóng vai trò như một cầu nối văn hóa thiết yếu, đồng thời thường xuyên là tâm điểm với tư cách Giám khảo quốc tế cùng Trưởng ban tổ chức tại các đấu trường đẳng cấp thế giới, bao gồm Master Chef of Foodex 2026 và World Bakery and Confectionery Competition 2026. Tiếp cận bằng tầm nhìn chuẩn hóa toàn cầu kết hợp cùng tâm huyết cố vấn, ông đã củng cố vững chắc vị thế của một người tiên phong—vạch ra những chuẩn mực xuất sắc mới và định hình tương lai cho thế hệ tài năng tiếp theo của ngành nhà hàng - khách sạn.",
+    "ctaBtn": "Xem mạng lưới IAC →"
+  },
+  "secretary": {
+    "label": "WORLD IAC ASIA",
+    "title": "Tổng thư ký Khối Châu Á",
+    "bio": "Chef Trịnh Lệ Thanh, Tổng thư ký World IAC Asia, là một nhân vật ẩm thực danh tiếng, bậc thầy nghệ nhân và là nhà giáo dục có tầm nhìn, nổi tiếng với chuyên môn sâu rộng trong nghệ thuật bánh Việt và tinh hoa ẩm thức Hoa. Là một động lực mạnh mẽ trong bối cảnh ngành F&B quốc tế, bà luôn tận tâm cống hiến cho việc phát triển các cộng đồng ẩm thực toàn cầu và thúc đẩy sự tăng trưởng chiến lược của ngành. Với tư cách là một Giám khảo quốc tế uy tín và Phó Trưởng ban tổ chức tại các đấu trường đẳng cấp thế giới—bao gồm Master Chef of Foodex 2026 và World Bakery and Confectionery Competition 2026—Chef Trịnh Lệ Thanh đóng vai trò như một cầu nối văn hóa và người cố vấn thiết yếu, không ngừng nỗ lực chuẩn hóa các tiêu chuẩn chuyên môn và truyền cảm hứng cho thế hệ tài năng tiếp theo của ngành nhà hàng - khách sạn tự tin tỏa sáng trên trường quốc tế."
   },
   "president": {
-    "label": "World IAC",
-    "title": "Thông tin chủ tịch World IAC",
-    "p1": "Chef Simone Falcini sinh năm 1972 tại Empoli, Ý — là Chủ tịch Thế giới của Hiệp hội Đầu bếp Độc lập Thế giới (World IAC) và Chủ tịch Hiệp hội Đầu bếp Italia. Từ nhỏ ông đã đam mê ẩm thực qua truyền thống gia đình kinh doanh ẩm thực tại Empoli.",
-    "p2": "Ông đảm nhận vai trò Executive Chef đầu tiên năm 1996, khai trương nhà hàng riêng năm 1998, và dành 4 năm tại châu Á để nghiên cứu ẩm thực phương Đông — nền tảng để ông xây dựng chiến lược kết nối ẩm thực Á–Âu trong khuôn khổ World IAC Asia.",
-    "p3": "Là Nhà sáng lập kiêm Giám đốc Giáo dục của ITCP – Istituto Italiano della Cucina e Pasticceria, ông thiết kế các chương trình đào tạo đạt chuẩn chất lượng châu Âu ISO 29990:2015. Ông từng là Giám đốc Đào tạo tại Accademia Italiana Chef, thành viên Hội đồng Quốc gia Hiệp hội Đầu bếp Chuyên nghiệp Italia, và nhận giải thưởng WISE Award 2016 tại Los Angeles.",
-    "ctaLabel": "World IAC Asia",
+    "label": "WORLD IAC",
+    "title": "Chủ tịch Toàn cầu",
+    "role": "World President — World IAC / Global President",
+    "p1": "Chef Simone Falcini là Chủ tịch Thế giới của Hiệp hội Đầu bếp Độc lập Thế giới (World IAC), định hướng tầm nhìn kết nối cộng đồng đầu bếp chuyên nghiệp toàn cầu.",
+    "quote": "We want to be a family, to share, to rejoice, and to be close, both in good times and in bad. Our philosophy is to always look to the future and to solutions for the common good. Personally, I like to think of myself as everyone's president, and I am available to professionals and junior chefs to create a strong and solid bond that can take deep root. I look forward to seeing you at WORLD IAC.",
     "ctaTitle": "Mạng lưới giám khảo quốc tế",
     "ctaDesc": "Khám phá hội đồng chuyên gia ẩm thực quốc tế — những người đặt ra và duy trì tiêu chuẩn vàng cho ngành F&B châu Á.",
-    "ctaBtn": "Xem giám khảo →"
+    "ctaBtn": "Xem giám khảo IAC →"
   },
   "home": {
-    "heroBadge": "World IAC Asia Portal",
-    "heroTitle": "5 Gold Stars of the Kitchen",
+    "heroBadge": "WORLD IAC ASIA",
+    "heroTitle": "WORLD IAC ASIA",
     "heroSubtitle": "Mạng lưới tổ chức ẩm thực chuyên nghiệp hàng đầu châu Á — quản lý hội viên, giám khảo và tiêu chuẩn công nhận ẩm thực quốc tế.",
     "ctaMap": "Khám phá mạng lưới IAC",
-    "ctaRegister": "Đăng ký thành viên",
+    "ctaJudges": "Giám khảo IAC",
+    "ctaNews": "Tin tức nổi bật",
+    "ctaActivities": "Xem hoạt động →",
+    "iacIntroLabel": "Giới thiệu IAC",
+    "iacIntroTitle": "Tin highlight nổi bật",
+    "iacIntroDesc": "Cập nhật các hoạt động, sự kiện và thông tin mới nhất từ World IAC Asia.",
     "missionTitle": "Sứ mệnh World IAC Asia",
     "missionP1": "World IAC Asia kết nối các tổ chức ẩm thực tại 10 quốc gia châu Á, thúc đẩy tiêu chuẩn chất lượng, đào tạo chuyên nghiệp và vinh danh những đóng góp xuất sắc trong ngành F&B.",
     "missionP2": "Chúng tôi tạo nền tảng minh bạch để hội viên, giám khảo và đối tác cùng phát triển, nâng cao giá trị thương hiệu ẩm thực châu Á trên trường quốc tế.",
@@ -99,7 +106,7 @@
     "newsTitle": "Tin tức mới nhất",
     "newsBadge": "Tin mới",
     "benefitsTitle": "Lợi ích khi tham gia",
-    "partnersTitle": "Đối tác",
+    "partnersTitle": "Đối tác & công nhận",
     "benefit1Title": "Sự công nhận",
     "benefit1Desc": "Khẳng định chất lượng và sáng tạo trong ngành ẩm thực.",
     "benefit2Title": "Truyền thông",
@@ -112,6 +119,17 @@
   "map": {
     "title": "Mạng lưới World IAC Asia",
     "subtitle": "Nhấp vào biểu tượng quốc kỳ trên bản đồ để xem thông tin tổ chức đại diện.",
+    "advisorySubtitle": "Ban cố vấn World IAC Asia — những nhà lãnh đạo định hình tiêu chuẩn và phát triển cộng đồng ẩm thực chuyên nghiệp.",
+    "simoneName": "Chef Simone Falcini",
+    "simoneRole": "World President — World IAC",
+    "thienName": "Tran Le Thanh Thien",
+    "thienRole": "President — World IAC Asia",
+    "trinhName": "Chef Trịnh Lệ Thanh",
+    "trinhRole": "General Secretary — World IAC Asia",
+    "judyName": "Chef Judy Koh",
+    "judyRole": "President — World IAC Singapore",
+    "royName": "Chef Roy Lesmana",
+    "royRole": "President — World IAC Indonesia",
     "ariaLabel": "Bản đồ mạng lưới World IAC Asia",
     "noData": "Chưa có dữ liệu",
     "representative": "Đại diện",
@@ -134,8 +152,14 @@
     "IN": "Ấn Độ"
   },
   "judges": {
-    "title": "Ban giám khảo",
+    "title": "Giám khảo IAC",
     "subtitle": "Hội đồng chuyên gia ẩm thực quốc tế đánh giá và công nhận tiêu chuẩn IAC.",
+    "courseSectionTitle": "Khóa giám khảo IAC",
+    "courseSectionDesc": "Chương trình đào tạo và công nhận giám khảo theo tiêu chuẩn World IAC.",
+    "coursePosterTitle": "Poster Khóa giám khảo IAC",
+    "coursePosterDesc": "Giới thiệu chương trình đào tạo giám khảo quốc tế World IAC.",
+    "regulationsTitle": "Quy định ban giám khảo",
+    "regulationsDesc": "Tiêu chuẩn, quy trình và đạo đức nghề nghiệp của giám khảo IAC.",
     "loginCta": "Đăng nhập để xem đầy đủ",
     "countryRepNotice": "Bạn đang đăng nhập với vai trò Đại diện quốc gia — chỉ xem thông tin giám khảo, không truy cập trang Admin và không chỉnh sửa nội dung.",
     "lockedMessage": "Vui lòng Đăng nhập để xem đầy đủ thông tin",
@@ -161,7 +185,54 @@
     "allCountries": "Tất cả quốc gia",
     "notFound": "Không tìm thấy hội viên.",
     "expired": "Đã hết hạn",
-    "expires": "Hết hạn"
+    "expires": "Hết hạn",
+    "jobTitle": "Chức danh"
+  },
+  "activities": {
+    "title": "Hoạt động",
+    "subtitle": "Theo dõi các hoạt động, sự kiện và chương trình của World IAC Asia.",
+    "question": "Các hoạt động của IAC toàn Châu Á up ở đâu?",
+    "answer": "Tin tức, sự kiện và hoạt động của World IAC Asia được cập nhật tại mục Tin tức, thông qua các đối tác công nhận, và trên bản đồ mạng lưới IAC tại từng quốc gia thành viên.",
+    "channelNewsTitle": "Tin tức",
+    "channelNewsDesc": "Tin highlight, sự kiện và thông cáo mới nhất.",
+    "channelPartnersTitle": "Đối tác & công nhận",
+    "channelPartnersDesc": "Thông tin đối tác và chương trình công nhận.",
+    "channelMapTitle": "Mạng lưới IAC",
+    "channelMapDesc": "Hoạt động và tổ chức đại diện theo từng quốc gia."
+  },
+  "newsPage": {
+    "title": "Tin tức",
+    "subtitle": "Cập nhật tin tức, sự kiện và hoạt động nổi bật của World IAC Asia.",
+    "empty": "Chưa có tin tức."
+  },
+  "nationalPresidents": {
+    "label": "Ban điều hành",
+    "title": "Chủ tịch các Quốc gia",
+    "subtitle": "Đội ngũ lãnh đạo World IAC tại các quốc gia thành viên châu Á.",
+    "philippinesName": "Chef Arwin \"Zek\" Gragasin",
+    "philippinesTitle": "President of World IAC Philippines",
+    "philippinesBio": "Hành trình ẩm thực của Chef Arwin \"Zek\" Gragasin bắt đầu từ đam mê ẩm thực châu Á và truyền thống Philippines. Ông là Chủ tịch World IAC Philippines, đồng thời sáng lập Upland Sierra Madre Chef Organisation, chuyên về ẩm thực fusion châu Á và quảng bá di sản ẩm thực Philippines ra thế giới.",
+    "singaporeName": "Chef Judy Koh",
+    "singaporeTitle": "President of World IAC Singapore",
+    "singaporeBio": "Chef Judy Koh là Chủ tịch World IAC Singapore, nhà giáo dục ẩm thực và chuyên gia bánh ngọt quốc tế. Bà đóng vai trò quan trọng trong việc nâng cao tiêu chuẩn nghề bánh và phát triển thế hệ đầu bếp trẻ tại Singapore.",
+    "indonesiaName": "Chef Roy Lesmana",
+    "indonesiaTitle": "President of World IAC Indonesia",
+    "indonesiaBio": "Chef Roy Lesmana, Chủ tịch World IAC Indonesia, là đầu bếp và nhà đào tạo có kinh nghiệm sâu rộng trong ngành F&B Indonesia. Ông thúc đẩy tiêu chuẩn chuyên môn và kết nối cộng đồng đầu bếp trong khu vực.",
+    "indiaName": "Chef Kaninika",
+    "indiaTitle": "President of World IAC India",
+    "indiaBio": "Chef Kaninika, Chủ tịch World IAC India, là chuyên gia ẩm thực và nhà giáo dục với tầm ảnh hưởng trong cộng đồng F&B Ấn Độ. Bà đóng vai trò then chốt trong việc phát triển tiêu chuẩn giám khảo và đào tạo nghề.",
+    "sriLankaName": "Chef Chamodh Peiris",
+    "sriLankaTitle": "President of World IAC Sri Lanka",
+    "sriLankaBio": "Chef Chamodh Peiris, Chủ tịch World IAC Sri Lanka, nổi tiếng với kỷ lục Swiss Roll dài 150.919 mét và là Trưởng Youth Chefs' Club of Ceylon. Ông thúc đẩy sự sáng tạo và phát triển thế hệ đầu bếp trẻ tại Sri Lanka.",
+    "southKoreaName": "Chef Dong Yeon Park",
+    "southKoreaTitle": "President of World IAC South Korea",
+    "southKoreaBio": "Chef Dong Yeon Park, Chủ tịch World IAC Hàn Quốc, là chuyên gia ẩm thực và nhà lãnh đạo cộng đồng đầu bếp. Ông góp phần nâng cao tiêu chuẩn nghề nghiệp và kết nối ẩm thực Hàn Quốc với mạng lưới World IAC.",
+    "malaysiaName": "Chef William Surianath",
+    "malaysiaTitle": "President of World IAC Malaysia",
+    "malaysiaBio": "Chef William Surianath, Chủ tịch World IAC Malaysia, là đầu bếp và nhà đào tạo có kinh nghiệm trong ngành khách sạn - nhà hàng. Ông thúc đẩy phát triển nghề nghiệp và chuẩn hóa tiêu chuẩn giám khảo tại Malaysia.",
+    "taiwanName": "Chef Ho Chen Hsiung",
+    "taiwanTitle": "President of World IAC Taiwan",
+    "taiwanBio": "Chef Ho Chen Hsiung, Chủ tịch World IAC Đài Loan, là chuyên gia ẩm thực với kinh nghiệm sâu rộng trong đào tạo và tổ chức sự kiện ẩm thực quốc tế. Ông góp phần kết nối cộng đồng đầu bếp Đài Loan với World IAC."
   },
   "training": {
     "title": "Khóa đào tạo & Công nhận",

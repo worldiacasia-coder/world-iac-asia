@@ -1,15 +1,16 @@
 export const NAV_ROUTES = [
   { href: "/", key: "home" },
-  { href: "/map", key: "map" },
   { href: "/judges", key: "judges" },
   { href: "/members", key: "members" },
-  { href: "/training", key: "training" },
+  { href: "/activities", key: "activities" },
+  { href: "/news", key: "news" },
   { href: "/partners", key: "partners" },
 ] as const;
 
 export const SITE = {
-  name: "5 Gold Stars of the Kitchen",
-  org: "World IAC Asia",
+  name: "WORLD INDEPENDENT ASSOCIATION OF CHEFS – ASIA",
+  org: "WORLD IAC ASIA",
+  tagline: "A member of WORLD IAC",
   email: "info@worldiacasia.com",
   phone: "+84 975 575 449",
   address: "135/28 Nguyen Huu Canh, Ward 22, Binh Thanh, Ho Chi Minh City, Vietnam",

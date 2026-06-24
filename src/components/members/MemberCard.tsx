@@ -8,6 +8,7 @@ export type MemberData = {
   name: string;
   avatarUrl: string;
   country: string;
+  jobTitle: string;
   membershipTier: string;
   expirationDate: string | Date;
   paymentStatus: "paid" | "unpaid";
@@ -51,6 +52,9 @@ export default function MemberCard({ member }: { member: MemberData }) {
           {member.name}
         </h3>
         <p className="mt-0.5 font-mono text-xs text-gray-400">{member.memberCode}</p>
+        {member.jobTitle && (
+          <p className="mt-1 text-sm font-medium text-brand-gold">{member.jobTitle}</p>
+        )}
         <div className="mt-2 flex items-center justify-between gap-2">
           <p className="text-xs text-gray-500">{member.country}</p>
           <p className="text-xs text-gray-400">
