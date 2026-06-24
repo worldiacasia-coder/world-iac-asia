@@ -6,6 +6,7 @@ import { useTranslations } from "next-intl";
 import { COUNTRY_CODE_BY_PIN_ID, MAP_BASE, iacMapPins } from "@/data/map-pins";
 import { getPresidentByCountryCode, type NationalPresident } from "@/data/national-presidents";
 import MapPinButton from "./MapPinButton";
+import MapCountryLabel from "./MapCountryLabel";
 import OrgModal, { type OrganizationData } from "./OrgModal";
 
 export default function AsiaMap() {
@@ -68,7 +69,18 @@ export default function AsiaMap() {
             const countryName = tCountries(countryCode);
             const presidentName = president ? tPres(president.nameKey) : org?.representative;
 
-            return (
+            return pin.styledLabel ? (
+              <MapCountryLabel
+                key={pin.id}
+                pin={pin}
+                isHovered={hoveredPinId === pin.id}
+                isActive={selected?.name === countryName}
+                hasOrg={hasData}
+                ariaLabel={`${countryName}${presidentName ? ` — ${presidentName}` : ""}`}
+                onHover={setHoveredPinId}
+                onClick={() => handlePinClick(countryCode)}
+              />
+            ) : (
               <MapPinButton
                 key={pin.id}
                 pin={pin}

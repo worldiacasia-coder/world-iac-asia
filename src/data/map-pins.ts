@@ -5,6 +5,9 @@ export interface MapPin {
   flagUrl: string;
   top: string;
   left: string;
+  /** Styled map label with leader line (matches static map artwork). */
+  styledLabel?: boolean;
+  lineTarget?: { top: string; left: string };
 }
 
 export const iacMapPins: MapPin[] = [
@@ -93,8 +96,10 @@ export const iacMapPins: MapPin[] = [
     countryName: "Sri Lanka",
     label: "World IAC Asia - Sri Lanka",
     flagUrl: "/flags/sri-lanka.png",
-    top: "79%",
-    left: "33%",
+    top: "82.5%",
+    left: "28.6%",
+    styledLabel: true,
+    lineTarget: { top: "72.5%", left: "43.8%" },
   },
 ];
 
