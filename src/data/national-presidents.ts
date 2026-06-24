@@ -16,6 +16,7 @@ export const COUNTRY_CODE_TO_PRESIDENT_ID: Record<string, string> = {
   ID: "indonesia",
   IN: "india",
   MY: "malaysia",
+  LK: "sri-lanka",
 };
 
 export const nationalPresidents: NationalPresident[] = [

@@ -19,10 +19,11 @@ type Props = {
   org: OrganizationData | null;
   president: NationalPresident | null;
   countryName: string;
+  flagUrl: string | null;
   onClose: () => void;
 };
 
-export default function OrgModal({ org, president, countryName, onClose }: Props) {
+export default function OrgModal({ org, president, countryName, flagUrl, onClose }: Props) {
   const t = useTranslations("map");
   const tPres = useTranslations("nationalPresidents");
   const tCommon = useTranslations("common");
@@ -48,9 +49,9 @@ export default function OrgModal({ org, president, countryName, onClose }: Props
         {/* Header */}
         <div className="flex items-center justify-between border-b border-gray-100 px-6 py-4">
           <div className="flex items-center gap-3">
-            {org && (
+            {flagUrl && (
               <Image
-                src={org.flagUrl}
+                src={flagUrl}
                 alt={countryName}
                 width={36}
                 height={24}

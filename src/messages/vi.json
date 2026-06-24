@@ -156,7 +156,8 @@
     "MY": "Malaysia",
     "SG": "Singapore",
     "ID": "Indonesia",
-    "IN": "Ấn Độ"
+    "IN": "Ấn Độ",
+    "LK": "Sri Lanka"
   },
   "judges": {
     "title": "Giám khảo IAC",
@@ -234,7 +235,7 @@
     "indiaBio": "Chef Kaninika, Chủ tịch World IAC India, là chuyên gia ẩm thực và nhà giáo dục với tầm ảnh hưởng trong cộng đồng F&B Ấn Độ. Bà đóng vai trò then chốt trong việc phát triển tiêu chuẩn giám khảo và đào tạo nghề.",
     "sriLankaName": "Chef Chamodh Peiris",
     "sriLankaTitle": "President of World IAC Sri Lanka",
-    "sriLankaBio": "Chef Chamodh Peiris, Chủ tịch World IAC Sri Lanka, nổi tiếng với kỷ lục Swiss Roll dài 150.919 mét và là Trưởng Youth Chefs' Club of Ceylon. Ông thúc đẩy sự sáng tạo và phát triển thế hệ đầu bếp trẻ tại Sri Lanka.",
+    "sriLankaBio": "Chef Chamodh Peiris, Chủ tịch World IAC Sri Lanka, là nhà lãnh đạo ẩm thực Sri Lanka danh tiếng, giám khảo quốc tế và người giữ kỷ lục Serandib World Record, được tung hô nhờ kiến tạo Swiss Roll kỷ lục dài 150,919 mét. Là Nhà sáng lập và Giám đốc tầm nhìn của Youth Chefs' Club of Ceylon, ông sở hữu 16 năm kinh nghiệm thực chiến đẳng cấp, chuyên sâu về bánh ngọt hiện đại, bánh artisan và nghệ thuật confectionery nâng cao. Là giảng viên patisserie chuyên nghiệp và cố vấn bậc thầy, Chef Chamodh là nguồn cảm hứng toàn cầu—kết nối liền mạch tiêu chuẩn F&B hàng đầu với phát triển tài năng trẻ qua các workshop chuyên biệt, góp phần định hình và nâng tầm thế hệ đầu bếp tiếp theo trên toàn thế giới.",
     "southKoreaName": "Chef Dong Yeon Park",
     "southKoreaTitle": "President of World IAC South Korea",
     "southKoreaBio": "Chef Dong Yeon Park, Chủ tịch World IAC Hàn Quốc, là chuyên gia ẩm thực và nhà lãnh đạo cộng đồng đầu bếp. Ông góp phần nâng cao tiêu chuẩn nghề nghiệp và kết nối ẩm thực Hàn Quốc với mạng lưới World IAC.",

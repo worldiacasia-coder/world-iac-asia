@@ -19,6 +19,7 @@ export default function AsiaMap() {
     org: OrganizationData | null;
     president: NationalPresident | null;
     name: string;
+    flagUrl: string | null;
   } | null>(null);
 
   useEffect(() => {
@@ -35,8 +36,14 @@ export default function AsiaMap() {
   function handlePinClick(countryCode: string) {
     const org = getOrg(countryCode) ?? null;
     const president = getPresidentByCountryCode(countryCode) ?? null;
+    const pin = iacMapPins.find((p) => COUNTRY_CODE_BY_PIN_ID[p.id] === countryCode);
     if (org || president) {
-      setSelected({ org, president, name: tCountries(countryCode) });
+      setSelected({
+        org,
+        president,
+        name: tCountries(countryCode),
+        flagUrl: org?.flagUrl ?? pin?.flagUrl ?? null,
+      });
     }
   }
 
@@ -83,6 +90,7 @@ export default function AsiaMap() {
         org={selected?.org ?? null}
         president={selected?.president ?? null}
         countryName={selected?.name ?? ""}
+        flagUrl={selected?.flagUrl ?? null}
         onClose={() => setSelected(null)}
       />
     </div>

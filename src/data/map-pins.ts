@@ -88,6 +88,14 @@ export const iacMapPins: MapPin[] = [
     top: "66%",
     left: "27.8%",
   },
+  {
+    id: "sri-lanka",
+    countryName: "Sri Lanka",
+    label: "World IAC Asia - Sri Lanka",
+    flagUrl: "/flags/sri-lanka.png",
+    top: "79%",
+    left: "33%",
+  },
 ];
 
 export const MAP_BASE = {
@@ -107,6 +115,7 @@ export const COUNTRY_CODE_BY_PIN_ID: Record<string, string> = {
   singapore: "SG",
   indonesia: "ID",
   india: "IN",
+  "sri-lanka": "LK",
 };
 
 export function getPinById(id: string): MapPin | undefined {
