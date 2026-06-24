@@ -61,6 +61,8 @@
     "error": "Submission failed. Please try again.",
     "successTitle": "Application Submitted Successfully!",
     "successDesc": "The World IAC Asia Management Board will review your application and contact you within 7 business days.",
+    "successShirtDesc": "You can order your World IAC Asia member shirt now:",
+    "successShirtBtn": "Order Member Shirt",
     "submitAnother": "Submit Another Application"
   },
   "presidentAsia": {
@@ -81,9 +83,9 @@
     "role": "World President — World IAC / Global President",
     "p1": "Chef Simone Falcini serves as World President of the World Independent Association of Chefs (World IAC), leading the global vision to connect professional chefs worldwide.",
     "quote": "We want to be a family, to share, to rejoice, and to be close, both in good times and in bad. Our philosophy is to always look to the future and to solutions for the common good. Personally, I like to think of myself as everyone's president, and I am available to professionals and junior chefs to create a strong and solid bond that can take deep root. I look forward to seeing you at WORLD IAC.",
-    "ctaTitle": "International Judges Network",
-    "ctaDesc": "Explore our panel of international culinary experts who set and uphold the gold standard for the F&B industry across Asia.",
-    "ctaBtn": "View IAC Judges →"
+    "ctaTitle": "World IAC Homepage",
+    "ctaDesc": "Discover the World Independent Association of Chefs — the global community of professional chefs.",
+    "ctaBtn": "World IAC Homepage →"
   },
   "home": {
     "heroBadge": "WORLD IAC ASIA",
@@ -91,7 +93,9 @@
     "heroSubtitle": "Asia's leading professional culinary organization network — managing members, judges, and international culinary accreditation standards.",
     "ctaMap": "Explore IAC Network",
     "ctaJudges": "IAC Judges",
+    "ctaNetwork": "IAC Network",
     "ctaNews": "Featured News",
+    "readMore": "Read more",
     "ctaActivities": "View activities →",
     "iacIntroLabel": "About IAC",
     "iacIntroTitle": "Featured Highlights",
@@ -204,7 +208,8 @@
   "newsPage": {
     "title": "News",
     "subtitle": "Latest news, events, and highlights from World IAC Asia.",
-    "empty": "No news yet."
+    "empty": "No news yet.",
+    "backToNews": "← Back to news"
   },
   "nationalPresidents": {
     "label": "Leadership",

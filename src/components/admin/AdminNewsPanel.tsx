@@ -286,7 +286,7 @@ export default function AdminNewsPanel({ initial }: { initial: NewsItem[] }) {
                 <label className="mb-1 block text-xs text-gray-500">Slug URL (tự động tạo)</label>
                 <input value={form.slug ?? ""} onChange={(e) => setForm({ ...form, slug: e.target.value })}
                   className="input-field text-sm" placeholder="vd: world-iac-summit-2025" />
-                <p className="mt-1 text-xs text-gray-400">/tin-tuc/{form.slug || "..."}</p>
+                <p className="mt-1 text-xs text-gray-400">/news/{form.slug || "..."}</p>
               </div>
               <div>
                 <label className="mb-1 block text-xs text-gray-500">Meta Description</label>
@@ -329,7 +329,7 @@ export default function AdminNewsPanel({ initial }: { initial: NewsItem[] }) {
               <div className="flex flex-1 items-start justify-between gap-3 p-4">
                 <div className="min-w-0 flex-1">
                   <p className="font-display font-semibold text-gray-900 line-clamp-1">{item.title}</p>
-                  <p className="mt-0.5 text-xs text-gray-400">{item.slug ? `/tin-tuc/${item.slug}` : "Chưa có slug"}</p>
+                  <p className="mt-0.5 text-xs text-gray-400">{item.slug ? `/news/${item.slug}` : "Chưa có slug"}</p>
                   <p className="mt-1 text-sm text-gray-500 line-clamp-2">{item.excerpt}</p>
                 </div>
                 <div className="flex shrink-0 gap-2">

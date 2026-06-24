@@ -4,8 +4,8 @@ import { Link } from "@/i18n/navigation";
 import HeroSlider from "@/components/home/HeroSlider";
 import NewsHighlightSection from "@/components/home/NewsHighlightSection";
 import PartnerCardSlider from "@/components/home/PartnerCardSlider";
-import NationalPresidentsGrid from "@/components/home/NationalPresidentsGrid";
 import prisma from "@/lib/prisma";
+import { SITE } from "@/lib/constants";
 
 type Props = { params: { locale: string } };
 
@@ -14,8 +14,6 @@ export default async function HomePage({ params: { locale } }: Props) {
   const t = await getTranslations("home");
   const tP = await getTranslations("president");
   const tPA = await getTranslations("presidentAsia");
-  const tSec = await getTranslations("secretary");
-
   const partnerCards = await prisma.partnerCard.findMany({
     orderBy: { sortOrder: "asc" },
   });
@@ -75,7 +73,14 @@ export default async function HomePage({ params: { locale } }: Props) {
               <div className="mt-8 rounded-2xl border border-brand-gold/30 bg-brand-gold-light p-6">
                 <h3 className="font-display text-xl font-semibold text-gray-900">{tP("ctaTitle")}</h3>
                 <p className="mt-2 text-sm leading-relaxed text-gray-500">{tP("ctaDesc")}</p>
-                <Link href="/judges" className="btn-primary mt-4 inline-flex">{tP("ctaBtn")}</Link>
+                <a
+                  href={SITE.worldIacUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn-primary mt-4 inline-flex"
+                >
+                  {tP("ctaBtn")}
+                </a>
               </div>
             </div>
           </div>
@@ -113,33 +118,6 @@ export default async function HomePage({ params: { locale } }: Props) {
         </div>
       </section>
 
-      {/* General Secretary */}
-      <section className="section">
-        <div className="container-main">
-          <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
-            <div className="img-zoom glass-panel overflow-hidden rounded-3xl">
-              <div className="relative aspect-[4/5] w-full">
-                <Image
-                  src="/images/leadership/trinh-le-thanh.jpg"
-                  alt="Chef Trinh Le Thanh"
-                  fill
-                  className="object-cover object-top"
-                  sizes="(max-width: 1024px) 100vw, 50vw"
-                />
-              </div>
-            </div>
-            <div>
-              <p className="section-label">{tSec("label")}</p>
-              <h2 className="mt-3 section-title">{tSec("title")}</h2>
-              <div className="mt-4 h-0.5 w-12 bg-brand-gold" />
-              <p className="mt-6 text-base leading-relaxed text-gray-500">{tSec("bio")}</p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <NationalPresidentsGrid />
-
       <section className="section">
         <div className="container-main max-w-3xl">
           <p className="section-label">{t("heroBadge")}</p>
@@ -147,7 +125,6 @@ export default async function HomePage({ params: { locale } }: Props) {
           <div className="mt-4 h-0.5 w-12 bg-brand-gold" />
           <p className="mt-6 text-base leading-relaxed text-gray-500">{t("missionP1")}</p>
           <p className="mt-4 text-base leading-relaxed text-gray-500">{t("missionP2")}</p>
-          <Link href="/activities" className="btn-primary mt-8 inline-flex">{t("ctaActivities")}</Link>
         </div>
       </section>
 

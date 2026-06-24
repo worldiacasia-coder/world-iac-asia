@@ -2,7 +2,7 @@
 
 import { useRef, useState } from "react";
 import { useTranslations } from "next-intl";
-import { MEMBER_COUNTRIES } from "@/lib/constants";
+import { MEMBER_COUNTRIES, SITE } from "@/lib/constants";
 
 type Status = "idle" | "loading" | "success" | "error";
 
@@ -61,6 +61,17 @@ export default function MemberApplicationForm() {
         </div>
         <h3 className="mt-4 font-display text-xl font-semibold text-gray-900">{t("successTitle")}</h3>
         <p className="mt-2 text-sm text-gray-500">{t("successDesc")}</p>
+        <div className="mt-6 rounded-2xl border border-brand-gold/30 bg-brand-gold-light p-5">
+          <p className="text-sm text-gray-600">{t("successShirtDesc")}</p>
+          <a
+            href={SITE.memberShirtFormUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="btn-primary mt-4 inline-flex"
+          >
+            {t("successShirtBtn")}
+          </a>
+        </div>
         <button
           onClick={() => setStatus("idle")}
           className="btn-outline mt-6 inline-flex"

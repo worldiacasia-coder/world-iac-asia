@@ -15,12 +15,18 @@ type Props = {
   slides: Slide[];
   aspectClass?: string;
   intervalMs?: number;
+  rounded?: boolean;
+  showCaptions?: boolean;
+  showControls?: boolean;
 };
 
 export default function ImageSlider({
   slides,
   aspectClass = "aspect-[21/9]",
   intervalMs = 5000,
+  rounded = true,
+  showCaptions = true,
+  showControls = true,
 }: Props) {
   const [active, setActive] = useState(0);
 
@@ -39,7 +45,7 @@ export default function ImageSlider({
   const slide = slides[active];
 
   return (
-    <div className={`relative w-full overflow-hidden rounded-3xl ${aspectClass}`}>
+    <div className={`relative w-full overflow-hidden ${rounded ? "rounded-3xl" : ""} ${aspectClass}`}>
       {slides.map((s, i) => (
         <div
           key={s.id}
@@ -49,7 +55,7 @@ export default function ImageSlider({
         </div>
       ))}
       <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
-      {(slide.caption || slide.subcaption) && (
+      {(slide.caption || slide.subcaption) && showCaptions && (
         <div className="absolute bottom-0 left-0 right-0 p-6 md:p-8">
           {slide.caption && (
             <p className="font-display text-xl font-semibold text-white md:text-2xl">{slide.caption}</p>
@@ -59,7 +65,7 @@ export default function ImageSlider({
           )}
         </div>
       )}
-      {slides.length > 1 && (
+      {slides.length > 1 && showControls && (
         <>
           <div className="absolute bottom-4 right-4 flex gap-2">
             {slides.map((s, i) => (

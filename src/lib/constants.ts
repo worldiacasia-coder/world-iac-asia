@@ -2,7 +2,6 @@ export const NAV_ROUTES = [
   { href: "/", key: "home" },
   { href: "/judges", key: "judges" },
   { href: "/members", key: "members" },
-  { href: "/activities", key: "activities" },
   { href: "/news", key: "news" },
   { href: "/partners", key: "partners" },
 ] as const;
@@ -14,6 +13,8 @@ export const SITE = {
   email: "info@worldiacasia.com",
   phone: "+84 975 575 449",
   address: "135/28 Nguyen Huu Canh, Ward 22, Binh Thanh, Ho Chi Minh City, Vietnam",
+  worldIacUrl: "https://www.world-iac.com/",
+  memberShirtFormUrl: "https://forms.gle/knbEiLjBTr4fnzLX8",
 } as const;
 
 export const MEMBER_COUNTRIES = [

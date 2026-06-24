@@ -61,6 +61,8 @@
     "error": "Gửi thất bại. Vui lòng thử lại.",
     "successTitle": "Hồ sơ đã được gửi thành công!",
     "successDesc": "Ban Điều hành World IAC Asia sẽ xem xét hồ sơ và liên hệ với bạn trong vòng 7 ngày làm việc.",
+    "successShirtDesc": "Bạn có thể đặt mua áo hội viên World IAC Asia ngay bây giờ:",
+    "successShirtBtn": "Mua áo hội viên",
     "submitAnother": "Nộp hồ sơ khác"
   },
   "presidentAsia": {
@@ -81,9 +83,9 @@
     "role": "World President — World IAC / Global President",
     "p1": "Chef Simone Falcini là Chủ tịch Thế giới của Hiệp hội Đầu bếp Độc lập Thế giới (World IAC), định hướng tầm nhìn kết nối cộng đồng đầu bếp chuyên nghiệp toàn cầu.",
     "quote": "We want to be a family, to share, to rejoice, and to be close, both in good times and in bad. Our philosophy is to always look to the future and to solutions for the common good. Personally, I like to think of myself as everyone's president, and I am available to professionals and junior chefs to create a strong and solid bond that can take deep root. I look forward to seeing you at WORLD IAC.",
-    "ctaTitle": "Mạng lưới giám khảo quốc tế",
-    "ctaDesc": "Khám phá hội đồng chuyên gia ẩm thực quốc tế — những người đặt ra và duy trì tiêu chuẩn vàng cho ngành F&B châu Á.",
-    "ctaBtn": "Xem giám khảo IAC →"
+    "ctaTitle": "Trang chủ World IAC",
+    "ctaDesc": "Khám phá Hiệp hội Đầu bếp Độc lập Thế giới — cộng đồng đầu bếp chuyên nghiệp toàn cầu.",
+    "ctaBtn": "Trang chủ World IAC →"
   },
   "home": {
     "heroBadge": "WORLD IAC ASIA",
@@ -91,7 +93,9 @@
     "heroSubtitle": "Mạng lưới tổ chức ẩm thực chuyên nghiệp hàng đầu châu Á — quản lý hội viên, giám khảo và tiêu chuẩn công nhận ẩm thực quốc tế.",
     "ctaMap": "Khám phá mạng lưới IAC",
     "ctaJudges": "Giám khảo IAC",
+    "ctaNetwork": "Mạng lưới IAC",
     "ctaNews": "Tin tức nổi bật",
+    "readMore": "Đọc thêm",
     "ctaActivities": "Xem hoạt động →",
     "iacIntroLabel": "Giới thiệu IAC",
     "iacIntroTitle": "Tin highlight nổi bật",
@@ -204,7 +208,8 @@
   "newsPage": {
     "title": "Tin tức",
     "subtitle": "Cập nhật tin tức, sự kiện và hoạt động nổi bật của World IAC Asia.",
-    "empty": "Chưa có tin tức."
+    "empty": "Chưa có tin tức.",
+    "backToNews": "← Quay lại tin tức"
   },
   "nationalPresidents": {
     "label": "Ban điều hành",

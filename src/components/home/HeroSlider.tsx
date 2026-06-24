@@ -115,10 +115,10 @@ export default function HeroSlider() {
                 {t("ctaJudges")}
               </Link>
               <Link
-                href="/news"
+                href="/map"
                 className="inline-flex items-center justify-center rounded-full border border-white/50 bg-white/10 px-6 py-3 text-sm font-semibold tracking-wide text-white backdrop-blur-sm transition-all duration-300 hover:bg-white/20"
               >
-                {t("ctaNews")}
+                {t("ctaNetwork")}
               </Link>
             </div>
           </div>

@@ -278,21 +278,37 @@ async function main() {
   await prisma.newsItem.createMany({
     data: [
       {
+        title: "Tổng thư ký Khối Châu Á",
+        excerpt:
+          "Chef Trịnh Lệ Thanh, Tổng thư ký World IAC Asia, là bậc thầy nghệ nhân và nhà giáo dục có tầm nhìn, chuyên môn sâu rộng trong nghệ thuật bánh Việt và tinh hoa ẩm thức Hoa.",
+        content: `<p>Chef Trịnh Lệ Thanh, Tổng thư ký World IAC Asia, là một nhân vật ẩm thực danh tiếng, bậc thầy nghệ nhân và là nhà giáo dục có tầm nhìn, nổi tiếng với chuyên môn sâu rộng trong nghệ thuật bánh Việt và tinh hoa ẩm thức Hoa.</p>
+<p>Là một động lực mạnh mẽ trong bối cảnh ngành F&amp;B quốc tế, bà luôn tận tâm cống hiến cho việc phát triển các cộng đồng ẩm thực toàn cầu và thúc đẩy sự tăng trưởng chiến lược của ngành.</p>
+<p>Với tư cách là một Giám khảo quốc tế uy tín và Phó Trưởng ban tổ chức tại các đấu trường đẳng cấp thế giới—bao gồm Master Chef of Foodex 2026 và World Bakery and Confectionery Competition 2026—Chef Trịnh Lệ Thanh đóng vai trò như một cầu nối văn hóa và người cố vấn thiết yếu, không ngừng nỗ lực chuẩn hóa các tiêu chuẩn chuyên môn và truyền cảm hứng cho thế hệ tài năng tiếp theo của ngành nhà hàng - khách sạn tự tin tỏa sáng trên trường quốc tế.</p>`,
+        imageUrl: "/images/leadership/trinh-le-thanh.jpg",
+        slug: "tong-thu-ky-khoi-chau-a",
+        metaDesc:
+          "Giới thiệu Chef Trịnh Lệ Thanh — Tổng thư ký World IAC Asia, giám khảo quốc tế và nhà giáo dục ẩm thực hàng đầu châu Á.",
+        sortOrder: 0,
+      },
+      {
         title: "Food & Hospitality Hanoi 2025",
         excerpt: "Cơ hội giao thương và phát triển sáng tạo trong ngành F&B và Nhà hàng – Khách sạn.",
         imageUrl: "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=800&h=450&fit=crop",
+        slug: "food-hospitality-hanoi-2025",
         sortOrder: 1,
       },
       {
         title: "World IAC Asia Annual Summit",
         excerpt: "Hội nghị thường niên các đầu bếp và chuyên gia ẩm thực châu Á.",
         imageUrl: "https://images.unsplash.com/photo-1555244162-803834f70033?w=800&h=450&fit=crop",
+        slug: "world-iac-asia-annual-summit",
         sortOrder: 2,
       },
       {
         title: "New Accreditation Standards 2025",
         excerpt: "Tiêu chuẩn công nhận mới cho các khóa đào tạo ẩm thực chuyên nghiệp.",
         imageUrl: "https://images.unsplash.com/photo-1556911220-e15b29be8c8f?w=800&h=450&fit=crop",
+        slug: "new-accreditation-standards-2025",
         sortOrder: 3,
       },
     ],
