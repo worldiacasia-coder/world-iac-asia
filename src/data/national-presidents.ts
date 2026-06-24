@@ -20,7 +20,7 @@ export const COUNTRY_CODE_TO_PRESIDENT_ID: Record<string, string> = {
 
 export const nationalPresidents: NationalPresident[] = [
   { id: "vietnam", image: "/images/leadership/tran-le-thanh-thien.jpg", nameKey: "vietnamName", titleKey: "vietnamTitle", bioKey: "vietnamBio" },
-  { id: "philippines", image: "/images/leadership/placeholder-president.jpg", nameKey: "philippinesName", titleKey: "philippinesTitle", bioKey: "philippinesBio" },
+  { id: "philippines", image: "/images/leadership/arwin-gragasin.png", nameKey: "philippinesName", titleKey: "philippinesTitle", bioKey: "philippinesBio" },
   { id: "singapore", image: "/images/leadership/judy-koh.jpg", nameKey: "singaporeName", titleKey: "singaporeTitle", bioKey: "singaporeBio" },
   { id: "indonesia", image: "/images/leadership/roy-lesmana.jpg", nameKey: "indonesiaName", titleKey: "indonesiaTitle", bioKey: "indonesiaBio" },
   { id: "india", image: "/images/leadership/kaninika.jpg", nameKey: "indiaName", titleKey: "indiaTitle", bioKey: "indiaBio" },

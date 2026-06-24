@@ -38,7 +38,7 @@ const organizations = [
     countryId: "PH",
     orgName: "World IAC Asia - Philippine",
     flagUrl: "/flags/philippines.png",
-    logoUrl: "/images/leadership/placeholder-president.jpg",
+    logoUrl: "/images/leadership/arwin-gragasin.png",
     representative: "Chef Arwin \"Zek\" Gragasin",
     address: "Manila, Philippines",
     phone: "+63 2 8765 4321",
