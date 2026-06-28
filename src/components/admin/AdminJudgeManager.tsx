@@ -86,7 +86,9 @@ export default function AdminJudgeManager({ initial }: { initial: JudgeRecord[] 
       const res = await fetch("/api/judges/upload", { method: "POST", body: fd });
       const data = await readJsonResponse<{ url?: string; error?: string }>(res);
       if (!res.ok) throw new Error(data.error ?? "Tải ảnh thất bại");
-      setForm((f) => ({ ...f, avatarUrl: data.url }));
+      if (!data.url) throw new Error("Tải ảnh thất bại");
+      const url = data.url;
+      setForm((f) => ({ ...f, avatarUrl: url }));
     } catch (e: unknown) {
       setMsg(e instanceof Error ? e.message : "Tải ảnh thất bại");
     } finally {
@@ -106,12 +108,14 @@ export default function AdminJudgeManager({ initial }: { initial: JudgeRecord[] 
       });
       const data = await readJsonResponse<{ judge?: JudgeRecord; error?: string }>(res);
       if (!res.ok) throw new Error(data.error ?? "Lỗi lưu");
+      if (!data.judge) throw new Error("Lỗi lưu");
+      const judge = data.judge;
 
       if (editId) {
-        setJudges((prev) => sortJudges(prev.map((j) => (j.id === editId ? { ...j, ...data.judge } : j))));
+        setJudges((prev) => sortJudges(prev.map((j) => (j.id === editId ? { ...j, ...judge } : j))));
         setMsg("Đã cập nhật giám khảo!");
       } else {
-        setJudges((prev) => sortJudges([...prev, data.judge]));
+        setJudges((prev) => sortJudges([...prev, judge]));
         setMsg("Đã thêm giám khảo mới!");
       }
       cancelEdit();
