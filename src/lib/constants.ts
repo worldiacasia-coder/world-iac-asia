@@ -1,7 +1,7 @@
 export const NAV_ROUTES = [
   { href: "/", key: "home" },
-  { href: "/judges", key: "judges" },
   { href: "/map", key: "network" },
+  { href: "/judges", key: "judges" },
   { href: "/members", key: "members" },
   { href: "/news", key: "news" },
   { href: "/partners", key: "partners" },
@@ -11,7 +11,7 @@ export const SITE = {
   name: "WORLD INDEPENDENT ASSOCIATION OF CHEFS – ASIA",
   org: "WORLD IAC ASIA",
   tagline: "A member of WORLD IAC",
-  email: "worldiacasia@gmail.com",
+  email: "asia@world-iac.com",
   phone: "+84 975 575 449",
   address: "135/28 Nguyen Huu Canh, Ward 22, Binh Thanh, Ho Chi Minh City, Vietnam",
   worldIacUrl: "https://www.world-iac.com/",

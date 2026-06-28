@@ -99,7 +99,6 @@ export async function PATCH(req: Request) {
           name: app.fullName,
           avatarUrl,
           country: app.country,
-          membershipTier: "Standard",
           expirationDate,
           paymentStatus: "unpaid",
         },

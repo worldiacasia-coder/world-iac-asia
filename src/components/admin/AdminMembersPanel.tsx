@@ -9,12 +9,9 @@ type Member = {
   name: string;
   avatarUrl: string;
   country: string;
-  membershipTier: string;
   expirationDate: string;
   paymentStatus: "paid" | "unpaid";
 };
-
-const TIERS = ["Standard", "Gold", "Premium", "Platinum"];
 
 export default function AdminMembersPanel({ initial }: { initial: Member[] }) {
   const [members, setMembers] = useState<Member[]>(initial);
@@ -45,15 +42,6 @@ export default function AdminMembersPanel({ initial }: { initial: Member[] }) {
       setMembers((prev) => prev.map((m) => m.id === id ? { ...m, ...data.member, expirationDate: data.member.expirationDate } : m));
     }
     setSaving(null);
-  }
-
-  async function updateTier(id: string, membershipTier: string) {
-    const res = await fetch("/api/members", {
-      method: "PATCH",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ id, membershipTier }),
-    });
-    if (res.ok) setMembers((prev) => prev.map((m) => m.id === id ? { ...m, membershipTier } : m));
   }
 
   async function updatePayment(id: string, paymentStatus: "paid" | "unpaid") {
@@ -129,13 +117,6 @@ export default function AdminMembersPanel({ initial }: { initial: Member[] }) {
 
                 {/* Controls */}
                 <div className="flex shrink-0 flex-wrap items-center gap-2">
-                  {/* Tier */}
-                  <select value={m.membershipTier}
-                    onChange={(e) => updateTier(m.id, e.target.value)}
-                    className="rounded-lg border border-white/60 bg-white/40 px-2 py-1 text-xs backdrop-blur-sm">
-                    {TIERS.map((t) => <option key={t} value={t}>{t}</option>)}
-                  </select>
-
                   {/* Payment */}
                   <select value={m.paymentStatus}
                     onChange={(e) => updatePayment(m.id, e.target.value as "paid" | "unpaid")}

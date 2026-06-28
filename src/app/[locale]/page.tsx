@@ -2,11 +2,11 @@ import Image from "next/image";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import HeroSlider from "@/components/home/HeroSlider";
-import NewsHighlightSection from "@/components/home/NewsHighlightSection";
+import VisionMissionSection from "@/components/home/VisionMissionSection";
 import PartnerCardSlider from "@/components/home/PartnerCardSlider";
 import prisma from "@/lib/prisma";
 import { SITE } from "@/lib/constants";
-import { getHomeNewsItems } from "@/lib/news-defaults";
+import { getHomeContent } from "@/lib/home-content";
 
 type Props = { params: { locale: string } };
 
@@ -18,7 +18,7 @@ export default async function HomePage({ params: { locale } }: Props) {
   const partnerCards = await prisma.partnerCard.findMany({
     orderBy: { sortOrder: "asc" },
   });
-  const newsItems = await getHomeNewsItems();
+  const homeContent = await getHomeContent();
 
   const stats = [
     { n: "13", l: t("statCountries") },
@@ -50,14 +50,14 @@ export default async function HomePage({ params: { locale } }: Props) {
               <div className="relative aspect-[4/5] w-full">
                 <Image
                   src="/images/leadership/simone-falcini.jpg"
-                  alt="Chef Simone Falcini"
+                  alt={tP("name")}
                   fill
                   className="object-cover object-center"
                   sizes="(max-width: 1024px) 100vw, 50vw"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent" />
                 <div className="absolute bottom-5 left-5 right-5">
-                  <p className="font-display text-lg font-semibold text-white drop-shadow">Chef Simone Falcini</p>
+                  <p className="font-display text-lg font-semibold text-white drop-shadow">{tP("name")}</p>
                   <p className="mt-0.5 text-sm text-white/80 drop-shadow">{tP("role")}</p>
                 </div>
               </div>
@@ -118,26 +118,7 @@ export default async function HomePage({ params: { locale } }: Props) {
         </div>
       </section>
 
-      <NewsHighlightSection
-        items={newsItems.map((item) => ({
-          id: item.id,
-          title: item.title,
-          excerpt: item.excerpt,
-          imageUrl: item.imageUrl,
-          slug: item.slug,
-          link: item.link,
-        }))}
-      />
-
-      <section className="section section-alt">
-        <div className="container-main max-w-3xl">
-          <p className="section-label">{t("heroBadge")}</p>
-          <h2 className="mt-3 section-title">{t("missionTitle")}</h2>
-          <div className="mt-4 h-0.5 w-12 bg-brand-gold" />
-          <p className="mt-6 text-base leading-relaxed text-gray-500">{t("missionP1")}</p>
-          <p className="mt-4 text-base leading-relaxed text-gray-500">{t("missionP2")}</p>
-        </div>
-      </section>
+      <VisionMissionSection content={homeContent} locale={locale} />
 
       <section className="section">
         <div className="container-main">

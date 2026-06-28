@@ -1,5 +1,6 @@
 import { PrismaClient, Role } from "@prisma/client";
 import bcrypt from "bcryptjs";
+import { HOME_CONTENT_DEFAULTS } from "../src/lib/home-content";
 
 const prisma = new PrismaClient();
 
@@ -219,7 +220,6 @@ async function main() {
         avatarUrl: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&h=200&fit=crop&crop=face",
         country: "Vietnam",
         jobTitle: "Executive Chef",
-        membershipTier: "Gold",
         expirationDate: nextYear,
         paymentStatus: "paid",
       },
@@ -229,7 +229,6 @@ async function main() {
         avatarUrl: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=200&h=200&fit=crop&crop=face",
         country: "Singapore",
         jobTitle: "Pastry Chef",
-        membershipTier: "Platinum",
         expirationDate: nextYear,
         paymentStatus: "paid",
       },
@@ -239,7 +238,6 @@ async function main() {
         avatarUrl: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=200&h=200&fit=crop&crop=face",
         country: "Korea",
         jobTitle: "Sous Chef",
-        membershipTier: "Silver",
         expirationDate: lastMonth,
         paymentStatus: "unpaid",
       },
@@ -249,7 +247,6 @@ async function main() {
         avatarUrl: "https://images.unsplash.com/photo-1560250097-0b93528c311a?w=200&h=200&fit=crop&crop=face",
         country: "Thailand",
         jobTitle: "Head Chef",
-        membershipTier: "Gold",
         expirationDate: lastMonth,
         paymentStatus: "unpaid",
       },
@@ -259,7 +256,6 @@ async function main() {
         avatarUrl: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=200&h=200&fit=crop&crop=face",
         country: "Philippines",
         jobTitle: "Chef de Partie",
-        membershipTier: "Silver",
         expirationDate: nextYear,
         paymentStatus: "paid",
       },
@@ -269,7 +265,6 @@ async function main() {
         avatarUrl: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=200&h=200&fit=crop&crop=face",
         country: "India",
         jobTitle: "Commis Chef",
-        membershipTier: "Gold",
         expirationDate: nextYear,
         paymentStatus: "paid",
       },
@@ -378,6 +373,19 @@ async function main() {
         sortOrder: 4,
       },
     ],
+  });
+
+  await prisma.homeContent.upsert({
+    where: { id: "default" },
+    create: HOME_CONTENT_DEFAULTS,
+    update: {
+      visionVi: HOME_CONTENT_DEFAULTS.visionVi,
+      visionEn: HOME_CONTENT_DEFAULTS.visionEn,
+      missionVi: HOME_CONTENT_DEFAULTS.missionVi,
+      missionEn: HOME_CONTENT_DEFAULTS.missionEn,
+      valuesVi: HOME_CONTENT_DEFAULTS.valuesVi,
+      valuesEn: HOME_CONTENT_DEFAULTS.valuesEn,
+    },
   });
 
   console.log("Seed completed successfully.");

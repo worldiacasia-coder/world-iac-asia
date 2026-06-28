@@ -3,7 +3,9 @@ import { getTranslations, setRequestLocale } from "next-intl/server";
 import { redirect } from "@/i18n/navigation";
 import { getSession, isAdmin } from "@/lib/auth";
 import { getAdminNewsItems } from "@/lib/news-defaults";
+import { getHomeContent } from "@/lib/home-content";
 import prisma from "@/lib/prisma";
+import AdminHomeContent from "@/components/admin/AdminHomeContent";
 import AdminJudgePanel from "@/components/admin/AdminJudgePanel";
 import AdminPartnerCards from "@/components/admin/AdminPartnerCards";
 import AdminApplications from "@/components/admin/AdminApplications";
@@ -30,7 +32,7 @@ export default async function AdminPage({ params: { locale } }: Props) {
     redirect({ href: "/auth?redirect=/admin", locale });
   }
 
-  const [judges, messages, training, partnerCards, applications, newsItems, allMembers] = await Promise.all([
+  const [judges, messages, training, partnerCards, applications, newsItems, allMembers, homeContent] = await Promise.all([
     prisma.judge.findMany({ orderBy: { name: "asc" } }),
     prisma.contactMessage.findMany({ orderBy: { createdAt: "desc" } }),
     prisma.trainingRegistration.findMany({ orderBy: { createdAt: "desc" } }),
@@ -38,6 +40,7 @@ export default async function AdminPage({ params: { locale } }: Props) {
     prisma.memberApplication.findMany({ orderBy: { createdAt: "desc" } }),
     getAdminNewsItems(),
     prisma.member.findMany({ orderBy: { expirationDate: "asc" } }),
+    getHomeContent(),
   ]);
 
   return (
@@ -65,6 +68,8 @@ export default async function AdminPage({ params: { locale } }: Props) {
 
       <section className="section">
         <div className="container-main space-y-12">
+          <AdminHomeContent initial={homeContent} />
+
           {/* Judge ratings panel */}
           <AdminJudgePanel
             judges={judges.map((j) => ({
@@ -96,7 +101,6 @@ export default async function AdminPage({ params: { locale } }: Props) {
             name: m.name,
             avatarUrl: m.avatarUrl,
             country: m.country,
-            membershipTier: m.membershipTier,
             expirationDate: m.expirationDate.toISOString(),
             paymentStatus: m.paymentStatus as "paid" | "unpaid",
           }))} />

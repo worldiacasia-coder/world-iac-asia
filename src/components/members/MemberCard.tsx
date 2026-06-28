@@ -9,7 +9,6 @@ export type MemberData = {
   avatarUrl: string;
   country: string;
   jobTitle: string;
-  membershipTier: string;
   expirationDate: string | Date;
   paymentStatus: "paid" | "unpaid";
 };
@@ -32,11 +31,6 @@ export default function MemberCard({ member }: { member: MemberData }) {
           sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
-
-        {/* Tier badge */}
-        <div className="absolute bottom-3 left-3 rounded-full bg-brand-gold/90 px-2.5 py-1 text-xs font-semibold text-white backdrop-blur-sm">
-          {member.membershipTier}
-        </div>
 
         {/* Expired badge */}
         {expired && (

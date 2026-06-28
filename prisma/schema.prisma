@@ -56,7 +56,6 @@ model Member {
   avatarUrl       String        @map("avatar_url")
   country         String
   jobTitle        String        @default("") @map("job_title")
-  membershipTier  String        @map("membership_tier")
   expirationDate  DateTime      @map("expiration_date")
   paymentStatus   PaymentStatus @default(unpaid) @map("payment_status")
   createdAt       DateTime      @default(now()) @map("created_at")
@@ -171,4 +170,18 @@ model PartnerCard {
   createdAt   DateTime @default(now()) @map("created_at")
 
   @@map("partner_cards")
+}
+
+model HomeContent {
+  id             String @id @default("default")
+  bannerImageUrl String @default("") @map("banner_image_url")
+  sideImageUrl   String @default("") @map("side_image_url")
+  visionVi       String @default("") @map("vision_vi")
+  visionEn       String @default("") @map("vision_en")
+  missionVi      String @default("") @map("mission_vi")
+  missionEn      String @default("") @map("mission_en")
+  valuesVi       String @default("") @map("values_vi")
+  valuesEn       String @default("") @map("values_en")
+
+  @@map("home_content")
 }

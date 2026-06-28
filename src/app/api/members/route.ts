@@ -25,7 +25,7 @@ export async function PATCH(req: Request) {
   const session = await getSession();
   if (!isAdmin(session?.role)) return NextResponse.json({ error: "Forbidden" }, { status: 403 });
 
-  const { id, action, membershipTier, paymentStatus } = await req.json();
+  const { id, action, paymentStatus } = await req.json();
   if (!id) return NextResponse.json({ error: "Thiếu id." }, { status: 400 });
 
   let data: Record<string, unknown> = {};
@@ -38,7 +38,6 @@ export async function PATCH(req: Request) {
     newExpiry.setFullYear(newExpiry.getFullYear() + 1);
     data = { expirationDate: newExpiry, paymentStatus: "paid" };
   } else {
-    if (membershipTier) data.membershipTier = membershipTier;
     if (paymentStatus) data.paymentStatus = paymentStatus;
   }
 
