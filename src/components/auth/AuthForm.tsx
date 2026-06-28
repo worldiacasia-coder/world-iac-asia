@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useTranslations } from "next-intl";
 import { useRouter } from "@/i18n/navigation";
 import { mapApiError, SITE } from "@/lib/constants";
+import { readJsonResponse } from "@/lib/api-client";
 import { getPostLoginPath } from "@/lib/roles";
 import type { Role } from "@prisma/client";
 
@@ -33,11 +34,18 @@ export default function AuthForm({ redirectTo = "/" }: { redirectTo?: string }) 
       body: JSON.stringify({ email: form.email, password: form.password }),
     });
 
-    const data = await res.json();
+    let data: { error?: string; user?: { role: string } };
+    try {
+      data = await readJsonResponse(res);
+    } catch (e: unknown) {
+      setLoading(false);
+      setError(e instanceof Error ? e.message : t("loginFailed"));
+      return;
+    }
     setLoading(false);
 
-    if (!res.ok) {
-      setError(translateError(data.error, t("loginFailed")));
+    if (!res.ok || !data.user) {
+      setError(translateError(data.error ?? "", t("loginFailed")));
       return;
     }
 

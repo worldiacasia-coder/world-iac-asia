@@ -1,4 +1,4 @@
-import { PrismaClient, Role } from "@prisma/client";
+import { JudgeLevel, PrismaClient, Role } from "@prisma/client";
 import bcrypt from "bcryptjs";
 import { HOME_CONTENT_DEFAULTS } from "../src/lib/home-content";
 
@@ -154,6 +154,8 @@ async function main() {
         title: "World Associazione Italiana Cuochi President",
         country: "Italy",
         stars: 5,
+        level: JudgeLevel.chief,
+        sortOrder: 0,
         phone: "+39 02 1234 5678",
         email: "simone.falcin@iac.org",
         certifications: "Michelin Star Consultant, GCU Certified Judge",
@@ -165,6 +167,8 @@ async function main() {
         title: "Global Chefs Union President",
         country: "Singapore",
         stars: 5,
+        level: JudgeLevel.chief,
+        sortOrder: 1,
         phone: "+65 6123 4567",
         email: "arthur.lim@gcu.org",
         certifications: "GCU Master Judge, ASEAN Culinary Board",
@@ -176,6 +180,8 @@ async function main() {
         title: "Food Expert",
         country: "Vietnam",
         stars: 4,
+        level: JudgeLevel.trainee,
+        sortOrder: 0,
         phone: "+84 90 123 4567",
         email: "duy.thinh@worldiacasia.com",
         certifications: "Vietnamese Culinary Heritage Specialist",
@@ -187,6 +193,8 @@ async function main() {
         title: "International Judge / Chef",
         country: "Malaysia",
         stars: 4,
+        level: JudgeLevel.trainee,
+        sortOrder: 1,
         phone: "+60 12 345 6789",
         email: "judy.koh@worldiacasia.com",
         certifications: "ASEAN Master Chef, IAC Senior Judge",
@@ -198,6 +206,8 @@ async function main() {
         title: "International Judge / Chef",
         country: "Australia",
         stars: 3,
+        level: JudgeLevel.trainee,
+        sortOrder: 2,
         phone: "+61 2 9876 5432",
         email: "mike.fleming@worldiacasia.com",
         certifications: "Culinary Arts Diploma, IAC Judge Certification",

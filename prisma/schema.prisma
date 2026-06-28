@@ -20,6 +20,11 @@ enum PaymentStatus {
   unpaid
 }
 
+enum JudgeLevel {
+  chief
+  trainee
+}
+
 model User {
   id           String   @id @default(cuid())
   email        String   @unique
@@ -38,7 +43,9 @@ model Judge {
   avatarUrl      String @map("avatar_url")
   title          String
   country        String
-  stars          Int    @default(1)
+  stars          Int        @default(1)
+  level          JudgeLevel @default(chief) @map("judge_level")
+  sortOrder      Int        @default(0) @map("sort_order")
   phone          String
   email          String
   certifications String

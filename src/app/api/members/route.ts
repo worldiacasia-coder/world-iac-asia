@@ -25,20 +25,34 @@ export async function PATCH(req: Request) {
   const session = await getSession();
   if (!isAdmin(session?.role)) return NextResponse.json({ error: "Forbidden" }, { status: 403 });
 
-  const { id, action, paymentStatus } = await req.json();
+  const { id, action, paymentStatus, name, country, jobTitle, avatarUrl } = await req.json();
   if (!id) return NextResponse.json({ error: "Thiếu id." }, { status: 400 });
+
+  const current = await prisma.member.findUnique({ where: { id } });
+  if (!current) return NextResponse.json({ error: "Không tìm thấy." }, { status: 404 });
 
   let data: Record<string, unknown> = {};
 
   if (action === "renew") {
-    const current = await prisma.member.findUnique({ where: { id } });
-    if (!current) return NextResponse.json({ error: "Không tìm thấy." }, { status: 404 });
     const base = current.expirationDate > new Date() ? current.expirationDate : new Date();
     const newExpiry = new Date(base);
     newExpiry.setFullYear(newExpiry.getFullYear() + 1);
     data = { expirationDate: newExpiry, paymentStatus: "paid" };
   } else {
     if (paymentStatus) data.paymentStatus = paymentStatus;
+    if (name !== undefined) data.name = String(name).trim();
+    if (country !== undefined) data.country = String(country).trim();
+    if (jobTitle !== undefined) data.jobTitle = String(jobTitle).trim();
+    if (avatarUrl !== undefined) {
+      const nextUrl = String(avatarUrl).trim();
+      if (
+        current.avatarUrl.includes("cloudinary.com") &&
+        nextUrl !== current.avatarUrl
+      ) {
+        await deleteFileByUrl(current.avatarUrl);
+      }
+      data.avatarUrl = nextUrl;
+    }
   }
 
   const member = await prisma.member.update({ where: { id }, data });

@@ -15,42 +15,42 @@ export default async function Footer() {
           src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1920&q=60"
           alt=""
           fill
-          className="object-cover object-center"
+          className="object-cover object-center brightness-[0.35]"
           sizes="100vw"
           aria-hidden="true"
         />
-        <div className="absolute inset-0 bg-gray-950/88 backdrop-blur-sm" />
+        <div className="absolute inset-0 bg-gray-950/95 backdrop-blur-sm" />
       </div>
 
       <div className="relative z-10">
         <div className="container-main grid gap-12 py-16 md:grid-cols-4">
-          <div className="md:col-span-2">
+          <div className="md:col-span-2 min-w-0">
             <div className="flex flex-col items-start gap-4">
-              <div className="flex flex-wrap items-center gap-4 sm:gap-5">
+              <div className="flex flex-nowrap items-center gap-3 sm:gap-4">
                 <Image
                   src="/images/world-iac-asia-logo.png"
                   alt="WORLD IAC ASIA"
                   width={144}
                   height={144}
-                  className="h-32 w-auto object-contain sm:h-36"
+                  className="h-36 w-auto shrink-0 object-contain sm:h-40"
                 />
                 <Image
                   src="/images/logos/5-gold-stars-of-the-kitchen.png"
                   alt="5 Gold Stars of the Kitchen"
                   width={1507}
                   height={621}
-                  className="h-32 w-auto object-contain sm:h-36"
+                  className="h-16 w-auto max-w-[170px] shrink-0 object-contain object-left sm:h-[4.75rem] sm:max-w-[200px]"
                 />
               </div>
               <div>
                 <p className="font-display text-sm font-semibold uppercase tracking-wide text-white md:text-base">
                   {SITE.name}
                 </p>
-                <p className="mt-1 text-sm text-white/50">{SITE.org}</p>
+                <p className="mt-1 text-sm text-white/65">{SITE.org}</p>
               </div>
             </div>
             <div className="mt-5 h-px w-10 bg-brand-gold" />
-            <p className="mt-4 max-w-sm text-sm leading-relaxed text-white/60">
+            <p className="mt-4 max-w-sm text-sm leading-relaxed text-white/75">
               {t("addressLabel")}: {SITE.address}
             </p>
           </div>

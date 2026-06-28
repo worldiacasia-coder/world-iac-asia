@@ -4,6 +4,8 @@ import { useState } from "react";
 import { useTranslations } from "next-intl";
 import Image from "next/image";
 import StarRating from "@/components/ui/StarRating";
+import { JudgeLevelAvatarBadge, JudgeLevelLabel } from "@/components/judges/JudgeLevelBadge";
+import type { JudgeLevel } from "@/lib/judge-level";
 
 export type JudgeData = {
   id: string;
@@ -12,6 +14,7 @@ export type JudgeData = {
   title: string;
   country: string;
   stars: number;
+  level: JudgeLevel;
   phone?: string;
   email?: string;
   certifications?: string;
@@ -29,20 +32,33 @@ export default function JudgeCard({ judge, canViewSensitive }: Props) {
   const [expanded, setExpanded] = useState(false);
 
   return (
-    <article className="rounded-2xl border border-white/70 bg-white/90 p-4 shadow-sm transition-shadow hover:shadow-md sm:p-5">
-      <div className="flex items-start gap-4">
-        <div className="relative h-16 w-16 shrink-0 overflow-hidden rounded-full ring-2 ring-brand-gold/30 sm:h-[72px] sm:w-[72px] md:h-20 md:w-20">
-          <Image
-            src={judge.avatarUrl}
-            alt={judge.name}
-            fill
-            className="object-cover object-top"
-            sizes="80px"
-          />
+    <article
+      className={`rounded-2xl border bg-white/90 p-4 shadow-sm transition-shadow hover:shadow-md sm:p-5 ${
+        judge.level === "chief" ? "border-brand-gold/35" : "border-white/70"
+      }`}
+    >
+      <div className="flex flex-col items-center text-center">
+        <div className="relative shrink-0">
+          <div
+            className={`relative h-24 w-24 overflow-hidden rounded-full sm:h-28 sm:w-28 md:h-32 md:w-32 ${
+              judge.level === "chief" ? "ring-2 ring-brand-gold/50" : "ring-2 ring-slate-300/80"
+            }`}
+          >
+            <Image
+              src={judge.avatarUrl}
+              alt={judge.name}
+              fill
+              className="object-cover object-top"
+              sizes="128px"
+            />
+          </div>
+          <div className="absolute -right-0.5 -top-0.5">
+            <JudgeLevelAvatarBadge level={judge.level} />
+          </div>
         </div>
 
-        <div className="min-w-0 flex-1">
-          <div className="flex flex-wrap items-start justify-between gap-2">
+        <div className="mt-4 w-full min-w-0">
+          <div className="flex flex-col items-center gap-2">
             <div className="min-w-0">
               <h3 className="font-display text-base font-semibold leading-snug text-gray-900 sm:text-lg">
                 {judge.name}
@@ -52,9 +68,12 @@ export default function JudgeCard({ judge, canViewSensitive }: Props) {
             <StarRating stars={judge.stars} readOnly size="sm" />
           </div>
 
-          <p className="mt-2 inline-flex rounded-full border border-gray-200 bg-gray-50 px-2.5 py-0.5 text-xs font-medium text-gray-600">
-            {judge.country}
-          </p>
+          <div className="mt-2 flex flex-wrap items-center justify-center gap-2">
+            <JudgeLevelLabel level={judge.level} />
+            <p className="inline-flex rounded-full border border-gray-200 bg-gray-50 px-2.5 py-0.5 text-xs font-medium text-gray-600">
+              {judge.country}
+            </p>
+          </div>
         </div>
       </div>
 

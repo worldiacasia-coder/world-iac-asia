@@ -6,7 +6,7 @@ import { getAdminNewsItems } from "@/lib/news-defaults";
 import { getHomeContent } from "@/lib/home-content";
 import prisma from "@/lib/prisma";
 import AdminHomeContent from "@/components/admin/AdminHomeContent";
-import AdminJudgePanel from "@/components/admin/AdminJudgePanel";
+import AdminJudgeManager from "@/components/admin/AdminJudgeManager";
 import AdminPartnerCards from "@/components/admin/AdminPartnerCards";
 import AdminApplications from "@/components/admin/AdminApplications";
 import AdminCreateUser from "@/components/admin/AdminCreateUser";
@@ -15,6 +15,7 @@ import AdminMembersPanel from "@/components/admin/AdminMembersPanel";
 import AdminContactMessages from "@/components/admin/AdminContactMessages";
 import AdminTrainingRegistrations from "@/components/admin/AdminTrainingRegistrations";
 import AdminMemberProfiles from "@/components/admin/AdminMemberProfiles";
+import { sortJudges } from "@/lib/judge-sort";
 
 type Props = { params: { locale: string } };
 
@@ -33,7 +34,7 @@ export default async function AdminPage({ params: { locale } }: Props) {
   }
 
   const [judges, messages, training, partnerCards, applications, newsItems, allMembers, homeContent] = await Promise.all([
-    prisma.judge.findMany({ orderBy: { name: "asc" } }),
+    sortJudges(await prisma.judge.findMany()),
     prisma.contactMessage.findMany({ orderBy: { createdAt: "desc" } }),
     prisma.trainingRegistration.findMany({ orderBy: { createdAt: "desc" } }),
     prisma.partnerCard.findMany({ orderBy: { sortOrder: "asc" } }),
@@ -71,12 +72,20 @@ export default async function AdminPage({ params: { locale } }: Props) {
           <AdminHomeContent initial={homeContent} />
 
           {/* Judge ratings panel */}
-          <AdminJudgePanel
-            judges={judges.map((j) => ({
+          <AdminJudgeManager
+            initial={judges.map((j) => ({
               id: j.id,
               name: j.name,
+              avatarUrl: j.avatarUrl,
+              title: j.title,
               country: j.country,
               stars: j.stars,
+              level: j.level,
+              sortOrder: j.sortOrder,
+              phone: j.phone,
+              email: j.email,
+              certifications: j.certifications,
+              history: j.history,
             }))}
           />
 
@@ -101,6 +110,7 @@ export default async function AdminPage({ params: { locale } }: Props) {
             name: m.name,
             avatarUrl: m.avatarUrl,
             country: m.country,
+            jobTitle: m.jobTitle,
             expirationDate: m.expirationDate.toISOString(),
             paymentStatus: m.paymentStatus as "paid" | "unpaid",
           }))} />

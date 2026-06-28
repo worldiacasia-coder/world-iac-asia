@@ -48,7 +48,7 @@ export default function MapNetworkHero({ title, subtitle }: Props) {
               style={{ left: pos.left, top: pos.top }}
             >
               <div
-                className="relative h-7 w-10 overflow-hidden rounded-sm opacity-35 shadow-sm ring-1 ring-black/5 sm:h-9 sm:w-12 md:h-10 md:w-14 lg:h-11 lg:w-16"
+                className="relative h-7 w-10 overflow-hidden rounded-sm opacity-45 shadow-sm ring-1 ring-black/5 sm:h-9 sm:w-12 md:h-10 md:w-14 lg:h-11 lg:w-16"
                 style={{ transform: `rotate(${pos.rotate})` }}
               >
                 <Image
