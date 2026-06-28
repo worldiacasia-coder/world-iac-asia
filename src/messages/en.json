@@ -213,6 +213,7 @@
     "searchPlaceholder": "Search by name or member code...",
     "allCountries": "All countries",
     "notFound": "No members found.",
+    "memberCount": "{count} members",
     "expired": "Expired",
     "expires": "Expires",
     "jobTitle": "Current Title"

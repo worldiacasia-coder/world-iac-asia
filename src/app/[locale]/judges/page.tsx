@@ -31,7 +31,7 @@ export default async function JudgesPage({ params: { locale } }: Props) {
 
       <section className="section">
         <div className="container-main space-y-12">
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
             {judges.map((judge) => (
               <JudgeCard
                 key={judge.id}

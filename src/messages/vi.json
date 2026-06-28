@@ -213,6 +213,7 @@
     "searchPlaceholder": "Tìm theo tên hoặc mã hội viên...",
     "allCountries": "Tất cả quốc gia",
     "notFound": "Không tìm thấy hội viên.",
+    "memberCount": "{count} hội viên",
     "expired": "Đã hết hạn",
     "expires": "Hết hạn",
     "jobTitle": "Chức danh"

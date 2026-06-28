@@ -54,11 +54,16 @@ export default function MembersDirectory() {
       ) : members.length === 0 ? (
         <p className="text-center text-gray-500">{t("notFound")}</p>
       ) : (
-        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-          {members.map((member) => (
-            <MemberCard key={member.id} member={member} />
-          ))}
-        </div>
+        <>
+          <p className="mb-4 text-sm text-gray-500">
+            {t("memberCount", { count: members.length })}
+          </p>
+          <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+            {members.map((member) => (
+              <MemberCard key={member.id} member={member} />
+            ))}
+          </div>
+        </>
       )}
     </div>
   );

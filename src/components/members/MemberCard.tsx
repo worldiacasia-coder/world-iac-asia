@@ -20,41 +20,43 @@ export default function MemberCard({ member }: { member: MemberData }) {
   const dateLocale = locale === "vi" ? "vi-VN" : "en-US";
 
   return (
-    <article className={`group glass-panel overflow-hidden p-0 ${expired ? "opacity-60" : ""}`}>
-      {/* Photo */}
-      <div className="img-zoom relative aspect-[1/1] w-full overflow-hidden">
+    <article
+      className={`flex items-start gap-3 rounded-xl border border-white/70 bg-white/90 p-3 shadow-sm transition-shadow hover:shadow-md sm:gap-3.5 sm:p-4 ${
+        expired ? "opacity-60" : ""
+      }`}
+    >
+      <div className="relative h-11 w-11 shrink-0 overflow-hidden rounded-full ring-2 ring-brand-gold/25 sm:h-12 sm:w-12">
         <Image
           src={member.avatarUrl}
           alt={member.name}
           fill
-          className={`object-cover object-top transition-transform duration-700 group-hover:scale-105 ${expired ? "grayscale" : ""}`}
-          sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
+          className={`object-cover object-top ${expired ? "grayscale" : ""}`}
+          sizes="48px"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
-
-        {/* Expired badge */}
-        {expired && (
-          <div className="absolute right-3 top-3 rounded-md bg-red-600 px-2 py-0.5 text-xs font-semibold uppercase tracking-wide text-white">
-            {t("expired")}
-          </div>
-        )}
       </div>
 
-      {/* Info */}
-      <div className="p-4">
-        <h3 className="font-display text-base font-semibold text-gray-900 leading-tight">
-          {member.name}
-        </h3>
-        <p className="mt-0.5 font-mono text-xs text-gray-400">{member.memberCode}</p>
-        {member.jobTitle && (
-          <p className="mt-1 text-sm font-medium text-brand-gold">{member.jobTitle}</p>
-        )}
-        <div className="mt-2 flex items-center justify-between gap-2">
-          <p className="text-xs text-gray-500">{member.country}</p>
-          <p className="text-xs text-gray-400">
-            {t("expires")}: {formatDate(member.expirationDate, dateLocale)}
-          </p>
+      <div className="min-w-0 flex-1">
+        <div className="flex items-start justify-between gap-2">
+          <h3 className="font-display text-sm font-semibold leading-snug text-gray-900 sm:text-[15px]">
+            {member.name}
+          </h3>
+          {expired && (
+            <span className="shrink-0 rounded bg-red-600 px-1.5 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-white">
+              {t("expired")}
+            </span>
+          )}
         </div>
+
+        {member.jobTitle && (
+          <p className="mt-0.5 text-xs font-medium text-brand-gold sm:text-sm">{member.jobTitle}</p>
+        )}
+
+        <p className="mt-0.5 truncate text-xs text-gray-500">{member.country}</p>
+
+        <p className="mt-1 font-mono text-[10px] text-gray-400">{member.memberCode}</p>
+        <p className="text-[10px] text-gray-400">
+          {t("expires")}: {formatDate(member.expirationDate, dateLocale)}
+        </p>
       </div>
     </article>
   );

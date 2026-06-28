@@ -26,13 +26,20 @@ export default async function Footer() {
         <div className="container-main grid gap-12 py-16 md:grid-cols-4">
           <div className="md:col-span-2">
             <div className="flex flex-col items-start gap-4">
-              <div className="relative h-32 w-32 shrink-0 sm:h-36 sm:w-36">
+              <div className="flex flex-wrap items-center gap-4 sm:gap-5">
                 <Image
                   src="/images/world-iac-asia-logo.png"
                   alt="WORLD IAC ASIA"
-                  fill
-                  sizes="144px"
-                  className="object-contain"
+                  width={144}
+                  height={144}
+                  className="h-32 w-auto object-contain sm:h-36"
+                />
+                <Image
+                  src="/images/logos/5-gold-stars-of-the-kitchen.png"
+                  alt="5 Gold Stars of the Kitchen"
+                  width={1507}
+                  height={621}
+                  className="h-32 w-auto object-contain sm:h-36"
                 />
               </div>
               <div>
