@@ -86,6 +86,8 @@ export default async function AdminPage({ params: { locale } }: Props) {
               email: j.email,
               certifications: j.certifications,
               history: j.history,
+              expirationDate: j.expirationDate.toISOString(),
+              paymentStatus: j.paymentStatus,
             }))}
           />
 

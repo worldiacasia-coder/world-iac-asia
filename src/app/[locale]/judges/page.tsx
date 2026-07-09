@@ -2,12 +2,11 @@ import { getTranslations, setRequestLocale } from "next-intl/server";
 import prisma from "@/lib/prisma";
 import { getSession, canViewSensitiveData, isAdmin } from "@/lib/auth";
 import { isCountryRep } from "@/lib/roles";
-import JudgeCard from "@/components/judges/JudgeCard";
-import { JudgeLevelLegend } from "@/components/judges/JudgeLevelBadge";
 import JudgesHero from "@/components/judges/JudgesHero";
 import JudgeCourseRegistrationForm from "@/components/judges/JudgeCourseRegistrationForm";
+import JudgesDirectory from "@/components/judges/JudgesDirectory";
 import { sortJudges } from "@/lib/judge-sort";
-import AdminJudgePanel from "@/components/admin/AdminJudgePanel";
+import type { JudgeLevel } from "@/lib/judge-level";
 
 type Props = { params: { locale: string } };
 
@@ -24,6 +23,22 @@ export default async function JudgesPage({ params: { locale } }: Props) {
   const admin = isAdmin(session?.role);
   const judges = sortJudges(await prisma.judge.findMany());
 
+  const judgeCards = judges.map((judge) => ({
+    id: judge.id,
+    name: judge.name,
+    avatarUrl: judge.avatarUrl,
+    title: judge.title,
+    country: judge.country,
+    stars: judge.stars,
+    level: judge.level as JudgeLevel,
+    phone: judge.phone,
+    email: judge.email,
+    certifications: judge.certifications,
+    history: judge.history,
+    expirationDate: judge.expirationDate,
+    paymentStatus: judge.paymentStatus as "paid" | "unpaid",
+  }));
+
   return (
     <>
       <JudgesHero
@@ -32,43 +47,18 @@ export default async function JudgesPage({ params: { locale } }: Props) {
       />
 
       <section className="section">
-        <div className="container-main space-y-12">
-          <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-            <p className="text-sm text-gray-500">{t("judgeCount", { count: judges.length })}</p>
-            <JudgeLevelLegend />
-          </div>
-          <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
-            {judges.map((judge) => (
-              <JudgeCard
-                key={judge.id}
-                judge={{
-                  id: judge.id,
-                  name: judge.name,
-                  avatarUrl: judge.avatarUrl,
-                  title: judge.title,
-                  country: judge.country,
-                  stars: judge.stars,
-                  level: judge.level,
-                  phone: judge.phone,
-                  email: judge.email,
-                  certifications: judge.certifications,
-                  history: judge.history,
-                }}
-                canViewSensitive={canView}
-              />
-            ))}
-          </div>
-
-          {admin && (
-            <AdminJudgePanel
-              judges={judges.map((j) => ({
-                id: j.id,
-                name: j.name,
-                country: j.country,
-                stars: j.stars,
-              }))}
-            />
-          )}
+        <div className="container-main">
+          <JudgesDirectory
+            judges={judgeCards}
+            canViewSensitive={canView}
+            admin={admin}
+            adminStars={judges.map((j) => ({
+              id: j.id,
+              name: j.name,
+              country: j.country,
+              stars: j.stars,
+            }))}
+          />
         </div>
       </section>
 

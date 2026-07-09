@@ -18,18 +18,65 @@ export const SITE = {
   memberShirtFormUrl: "https://forms.gle/knbEiLjBTr4fnzLX8",
 } as const;
 
-export const MEMBER_COUNTRIES = [
-  "Vietnam",
-  "Singapore",
-  "Korea",
-  "Thailand",
-  "Philippines",
-  "India",
-  "Malaysia",
+/** Danh sách quốc gia châu Á (dùng cho hội viên & giám khảo). */
+export const ASIA_COUNTRIES = [
+  "Afghanistan",
+  "Armenia",
+  "Azerbaijan",
+  "Bahrain",
+  "Bangladesh",
+  "Bhutan",
+  "Brunei",
   "Cambodia",
+  "China",
+  "Cyprus",
+  "Georgia",
+  "India",
   "Indonesia",
+  "Iran",
+  "Iraq",
+  "Israel",
+  "Japan",
+  "Jordan",
+  "Kazakhstan",
+  "Kuwait",
+  "Kyrgyzstan",
+  "Laos",
+  "Lebanon",
+  "Malaysia",
+  "Maldives",
+  "Mongolia",
+  "Myanmar",
+  "Nepal",
+  "North Korea",
+  "Oman",
+  "Pakistan",
+  "Palestine",
+  "Philippines",
+  "Qatar",
+  "Saudi Arabia",
+  "Singapore",
+  "South Korea",
+  "Sri Lanka",
+  "Syria",
   "Taiwan",
+  "Tajikistan",
+  "Thailand",
+  "Timor-Leste",
+  "Turkey",
+  "Turkmenistan",
+  "United Arab Emirates",
+  "Uzbekistan",
+  "Vietnam",
+  "Yemen",
 ] as const;
+
+export const MEMBER_COUNTRIES = ASIA_COUNTRIES;
+
+/** Quốc gia cho form giám khảo: châu Á đầy đủ + Italy (khu vực Ý). */
+export const JUDGE_COUNTRIES = [...ASIA_COUNTRIES, "Italy"].sort((a, b) =>
+  a.localeCompare(b)
+) as readonly string[];
 
 const ERROR_KEY_MAP: Record<string, string> = {
   "Email không hợp lệ": "invalidEmail",

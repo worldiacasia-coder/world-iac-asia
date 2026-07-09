@@ -146,6 +146,12 @@ async function main() {
     await prisma.organization.create({ data: org });
   }
 
+  const now = new Date();
+  const inThreeYears = new Date(now);
+  inThreeYears.setFullYear(inThreeYears.getFullYear() + 3);
+  const lastMonth = new Date(now);
+  lastMonth.setMonth(lastMonth.getMonth() - 1);
+
   await prisma.judge.createMany({
     data: [
       {
@@ -154,12 +160,14 @@ async function main() {
         title: "World Associazione Italiana Cuochi President",
         country: "Italy",
         stars: 5,
-        level: JudgeLevel.chief,
+        level: JudgeLevel.international,
         sortOrder: 0,
         phone: "+39 02 1234 5678",
         email: "simone.falcin@iac.org",
         certifications: "Michelin Star Consultant, GCU Certified Judge",
         history: "30+ years in culinary excellence across Europe and Asia.",
+        expirationDate: inThreeYears,
+        paymentStatus: "paid",
       },
       {
         name: "Arthur Lim",
@@ -167,12 +175,14 @@ async function main() {
         title: "Global Chefs Union President",
         country: "Singapore",
         stars: 5,
-        level: JudgeLevel.chief,
+        level: JudgeLevel.international,
         sortOrder: 1,
         phone: "+65 6123 4567",
         email: "arthur.lim@gcu.org",
         certifications: "GCU Master Judge, ASEAN Culinary Board",
         history: "Leading culinary standards across Asia-Pacific region.",
+        expirationDate: inThreeYears,
+        paymentStatus: "paid",
       },
       {
         name: "Nguyen Duy Thinh",
@@ -180,12 +190,14 @@ async function main() {
         title: "Food Expert",
         country: "Vietnam",
         stars: 4,
-        level: JudgeLevel.trainee,
+        level: JudgeLevel.national,
         sortOrder: 0,
         phone: "+84 90 123 4567",
         email: "duy.thinh@worldiacasia.com",
         certifications: "Vietnamese Culinary Heritage Specialist",
         history: "Expert in traditional and modern Vietnamese cuisine.",
+        expirationDate: inThreeYears,
+        paymentStatus: "paid",
       },
       {
         name: "Judy Koh",
@@ -193,12 +205,14 @@ async function main() {
         title: "International Judge / Chef",
         country: "Malaysia",
         stars: 4,
-        level: JudgeLevel.trainee,
-        sortOrder: 1,
+        level: JudgeLevel.asia_regional,
+        sortOrder: 0,
         phone: "+60 12 345 6789",
         email: "judy.koh@worldiacasia.com",
         certifications: "ASEAN Master Chef, IAC Senior Judge",
         history: "Specialist in fusion and traditional Asian cuisines.",
+        expirationDate: inThreeYears,
+        paymentStatus: "paid",
       },
       {
         name: "Mike Fleming",
@@ -207,20 +221,19 @@ async function main() {
         country: "Australia",
         stars: 3,
         level: JudgeLevel.trainee,
-        sortOrder: 2,
+        sortOrder: 0,
         phone: "+61 2 9876 5432",
         email: "mike.fleming@worldiacasia.com",
         certifications: "Culinary Arts Diploma, IAC Judge Certification",
         history: "Decades of experience in hotel and restaurant kitchens.",
+        expirationDate: lastMonth,
+        paymentStatus: "unpaid",
       },
     ],
   });
 
-  const now = new Date();
   const nextYear = new Date(now);
   nextYear.setFullYear(nextYear.getFullYear() + 1);
-  const lastMonth = new Date(now);
-  lastMonth.setMonth(lastMonth.getMonth() - 1);
 
   await prisma.member.createMany({
     data: [

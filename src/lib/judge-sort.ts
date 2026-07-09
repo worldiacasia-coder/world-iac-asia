@@ -1,4 +1,4 @@
-import type { JudgeLevel } from "@/lib/judge-level";
+import { JUDGE_LEVELS, type JudgeLevel } from "@/lib/judge-level";
 
 export type JudgeSortable = {
   level: JudgeLevel;
@@ -6,7 +6,12 @@ export type JudgeSortable = {
   name: string;
 };
 
-const levelRank: Record<JudgeLevel, number> = { chief: 0, trainee: 1 };
+const levelRank: Record<JudgeLevel, number> = {
+  international: 0,
+  asia_regional: 1,
+  national: 2,
+  trainee: 3,
+};
 
 export function compareJudges(a: JudgeSortable, b: JudgeSortable): number {
   const levelDiff = levelRank[a.level] - levelRank[b.level];
@@ -20,12 +25,13 @@ export function sortJudges<T extends JudgeSortable>(judges: T[]): T[] {
   return [...judges].sort(compareJudges);
 }
 
+export type JudgesByLevel<T> = Record<JudgeLevel, T[]>;
+
 export function groupJudgesByLevel<T extends JudgeSortable & { id: string }>(
   judges: T[]
-): { chief: T[]; trainee: T[] } {
+): JudgesByLevel<T> {
   const sorted = sortJudges(judges);
-  return {
-    chief: sorted.filter((j) => j.level === "chief"),
-    trainee: sorted.filter((j) => j.level === "trainee"),
-  };
+  return Object.fromEntries(
+    JUDGE_LEVELS.map((level) => [level, sorted.filter((j) => j.level === level)])
+  ) as JudgesByLevel<T>;
 }

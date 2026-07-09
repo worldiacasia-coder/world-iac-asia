@@ -2,7 +2,12 @@ import { NextResponse } from "next/server";
 import prisma from "@/lib/prisma";
 import { getSession, isAdmin } from "@/lib/auth";
 import { deleteFileByUrl } from "@/lib/cloudinary";
-import { parseJudgeLevel, type JudgeLevel } from "@/lib/judge-level";
+import {
+  addJudgeYears,
+  defaultJudgeExpiration,
+  parseJudgeLevel,
+  type JudgeLevel,
+} from "@/lib/judge-level";
 
 async function nextSortOrder(level: JudgeLevel) {
   const max = await prisma.judge.aggregate({
@@ -23,6 +28,8 @@ type JudgeInput = {
   email?: string;
   certifications?: string;
   history?: string;
+  expirationDate?: string;
+  paymentStatus?: "paid" | "unpaid";
 };
 
 function validateJudge(body: Partial<JudgeInput>) {
@@ -31,6 +38,11 @@ function validateJudge(body: Partial<JudgeInput>) {
   if (!body.title?.trim()) return "Thiếu chức danh.";
   if (!body.country?.trim()) return "Thiếu quốc gia.";
   return null;
+}
+
+function parsePaymentStatus(value: unknown): "paid" | "unpaid" | undefined {
+  if (value === "paid" || value === "unpaid") return value;
+  return undefined;
 }
 
 export async function POST(req: Request) {
@@ -42,6 +54,11 @@ export async function POST(req: Request) {
   if (err) return NextResponse.json({ error: err }, { status: 400 });
 
   const level = parseJudgeLevel(body.level);
+  const expirationDate = body.expirationDate
+    ? new Date(body.expirationDate)
+    : defaultJudgeExpiration();
+  const paymentStatus = parsePaymentStatus(body.paymentStatus) ?? "unpaid";
+
   const judge = await prisma.judge.create({
     data: {
       name: body.name.trim(),
@@ -55,6 +72,8 @@ export async function POST(req: Request) {
       email: body.email?.trim() ?? "",
       certifications: body.certifications?.trim() ?? "",
       history: body.history?.trim() ?? "",
+      expirationDate,
+      paymentStatus,
     },
   });
 
@@ -83,6 +102,7 @@ export async function PUT(req: Request) {
 
   const newLevel = body.level !== undefined ? parseJudgeLevel(body.level) : existing.level;
   const levelChanged = newLevel !== existing.level;
+  const paymentStatus = parsePaymentStatus(body.paymentStatus);
 
   const judge = await prisma.judge.update({
     where: { id: body.id },
@@ -98,9 +118,47 @@ export async function PUT(req: Request) {
       email: body.email?.trim() ?? "",
       certifications: body.certifications?.trim() ?? "",
       history: body.history?.trim() ?? "",
+      expirationDate: body.expirationDate ? new Date(body.expirationDate) : undefined,
+      paymentStatus,
     },
   });
 
+  return NextResponse.json({ judge });
+}
+
+/* PATCH — admin gia hạn (+3 năm) hoặc cập nhật thanh toán */
+export async function PATCH(req: Request) {
+  const session = await getSession();
+  if (!isAdmin(session?.role)) return NextResponse.json({ error: "Forbidden" }, { status: 403 });
+
+  const body = await req.json();
+  const { id, action, paymentStatus, expirationDate } = body as {
+    id?: string;
+    action?: string;
+    paymentStatus?: "paid" | "unpaid";
+    expirationDate?: string;
+  };
+
+  if (!id) return NextResponse.json({ error: "Thiếu id." }, { status: 400 });
+
+  const current = await prisma.judge.findUnique({ where: { id } });
+  if (!current) return NextResponse.json({ error: "Không tìm thấy." }, { status: 404 });
+
+  let data: Record<string, unknown> = {};
+
+  if (action === "renew") {
+    const base = current.expirationDate > new Date() ? current.expirationDate : new Date();
+    data = {
+      expirationDate: addJudgeYears(base, 3),
+      paymentStatus: "paid",
+    };
+  } else {
+    const status = parsePaymentStatus(paymentStatus);
+    if (status) data.paymentStatus = status;
+    if (expirationDate) data.expirationDate = new Date(expirationDate);
+  }
+
+  const judge = await prisma.judge.update({ where: { id }, data });
   return NextResponse.json({ judge });
 }
 

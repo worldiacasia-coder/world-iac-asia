@@ -21,7 +21,9 @@ enum PaymentStatus {
 }
 
 enum JudgeLevel {
-  chief
+  international
+  national
+  asia_regional
   trainee
 }
 
@@ -38,20 +40,22 @@ model User {
 }
 
 model Judge {
-  id             String @id @default(cuid())
-  name           String
-  avatarUrl      String @map("avatar_url")
-  title          String
-  country        String
-  stars          Int        @default(1)
-  level          JudgeLevel @default(chief) @map("judge_level")
-  sortOrder      Int        @default(0) @map("sort_order")
-  phone          String
-  email          String
-  certifications String
-  history        String
-  createdAt      DateTime @default(now()) @map("created_at")
-  updatedAt      DateTime @updatedAt @map("updated_at")
+  id              String        @id @default(cuid())
+  name            String
+  avatarUrl       String        @map("avatar_url")
+  title           String
+  country         String
+  stars           Int           @default(1)
+  level           JudgeLevel    @default(international) @map("judge_level")
+  sortOrder       Int           @default(0) @map("sort_order")
+  phone           String
+  email           String
+  certifications  String
+  history         String
+  expirationDate  DateTime      @map("expiration_date")
+  paymentStatus   PaymentStatus @default(unpaid) @map("payment_status")
+  createdAt       DateTime      @default(now()) @map("created_at")
+  updatedAt       DateTime      @updatedAt @map("updated_at")
 
   @@map("judges")
 }
