@@ -7,7 +7,7 @@ import StarRating from "@/components/ui/StarRating";
 import type { JudgeLevel } from "@/lib/judge-level";
 import { JudgeLevelAvatarBadge, JudgeLevelLabel } from "@/components/judges/JudgeLevelBadge";
 import type { JudgeRecord } from "@/components/admin/AdminJudgeManager";
-import { formatDate } from "@/lib/utils";
+import { formatDate, isJudgeExpired } from "@/lib/utils";
 
 function reorderById<T extends { id: string }>(list: T[], fromId: string, toId: string): T[] {
   const fromIdx = list.findIndex((item) => item.id === fromId);
@@ -62,15 +62,12 @@ export default function JudgeOrderList({
     onReorder(next.map((j) => j.id));
   }
 
-  const now = new Date();
-
   return (
     <div className="space-y-3">
       {localItems.map((judge) => {
         const isDragging = draggingId === judge.id;
         const isDropTarget = dropTargetId === judge.id && draggingId && draggingId !== judge.id;
-        const expired =
-          new Date(judge.expirationDate) < now || judge.paymentStatus === "unpaid";
+        const expired = isJudgeExpired(judge.expirationDate, judge.paymentStatus);
 
         return (
           <div

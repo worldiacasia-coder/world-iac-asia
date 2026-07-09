@@ -9,6 +9,7 @@ import { JUDGE_COUNTRIES } from "@/lib/constants";
 import { JUDGE_LEVELS, type JudgeLevel } from "@/lib/judge-level";
 import { groupJudgesByLevel, sortJudges } from "@/lib/judge-sort";
 import { readJsonResponse } from "@/lib/api-client";
+import { isJudgeExpired } from "@/lib/utils";
 import JudgeOrderList from "@/components/admin/JudgeOrderList";
 import { JudgeLevelLabel } from "@/components/judges/JudgeLevelBadge";
 
@@ -83,9 +84,8 @@ export default function AdminJudgeManager({ initial }: { initial: JudgeRecord[] 
   const [filter, setFilter] = useState<"all" | "expired" | "active">("all");
   const [msg, setMsg] = useState("");
 
-  const now = new Date();
   const isAdminExpired = (j: JudgeRecord) =>
-    new Date(j.expirationDate) < now || j.paymentStatus === "unpaid";
+    isJudgeExpired(j.expirationDate, j.paymentStatus);
 
   const expiredCount = judges.filter(isAdminExpired).length;
   const filteredJudges =

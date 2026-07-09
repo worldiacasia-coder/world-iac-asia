@@ -51,13 +51,15 @@ export default function JudgeCard({ judge, canViewSensitive }: Props) {
       <div className="flex flex-col items-center text-center">
         <div className="relative shrink-0">
           <div
-            className={`relative h-24 w-24 overflow-hidden rounded-full sm:h-28 sm:w-28 md:h-32 md:w-32 ${accent.ring} ring-2`}
+            className={`relative h-24 w-24 overflow-hidden rounded-full sm:h-28 sm:w-28 md:h-32 md:w-32 ${accent.ring} ring-2 ${
+              expired ? "opacity-60 grayscale" : ""
+            }`}
           >
             <Image
               src={judge.avatarUrl}
               alt={judge.name}
               fill
-              className={`object-cover object-top ${expired ? "grayscale" : ""}`}
+              className="object-cover object-top"
               sizes="128px"
             />
           </div>
